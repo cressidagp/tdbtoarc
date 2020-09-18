@@ -8,6 +8,8 @@
 	
 ==============================================
 */
+DROP TABLE IF EXISTS `creature_names`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(10) unsigned NOT NULL DEFAULT '0';
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_1`;

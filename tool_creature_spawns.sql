@@ -8,6 +8,8 @@
 	
 ==============================================
 */
+DROP TABLE IF EXISTS `creature_spawns`;
+
 -- Unload all transports:
 DELETE FROM `creature` WHERE `map` = 582;
 DELETE FROM `creature` WHERE `map` = 584;

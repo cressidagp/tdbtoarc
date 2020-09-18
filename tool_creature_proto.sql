@@ -7,6 +7,8 @@
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 ==============================================
 */
+DROP TABLE IF EXISTS `creature_proto`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(30) unsigned NOT NULL DEFAULT '0';
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_1`;

@@ -12,6 +12,8 @@
 
 ===========================================================
 */
+DROP TABLE IF EXISTS `creature_waypoints`;
+
 -- ALTER TABLE `waypoint_data` DISABLE KEYS;
 
 ALTER TABLE `waypoint_data` ADD COLUMN `guid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `id`;
