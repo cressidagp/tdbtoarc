@@ -54,6 +54,7 @@ ALTER TABLE `creature_template` CHANGE COLUMN `npcflag` `npcflags` int(30) unsig
 -- speed_run: do nothing for now, will return later (B)
 
 ALTER TABLE `creature_template` CHANGE COLUMN `BaseAttackTime` `attacktime` int(30) unsigned NOT NULL DEFAULT '0' AFTER `npcflags`;
+UPDATE `creature_template` SET `attacktime` =  `attacktime` * `BaseVariance`;
 
 ALTER TABLE `creature_template` DROP COLUMN `rank`;
 
@@ -61,16 +62,15 @@ ALTER TABLE `creature_template` CHANGE COLUMN `dmgschool` `attacktype` int(4) NO
 
 -- Will be filled with precious info in (III):
 ALTER TABLE `creature_template` ADD COLUMN `mindamage` float NOT NULL DEFAULT '0' AFTER `attacktype`;
-
--- Will be filled with precious info in (IV):
 ALTER TABLE `creature_template` ADD COLUMN `maxdamage` float NOT NULL DEFAULT '0' AFTER `mindamage`;
 
 -- Will be filled with precious info in (V):
 ALTER TABLE `creature_template` ADD COLUMN `can_ranged` int(11) unsigned NOT NULL DEFAULT '0' AFTER `maxdamage`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RangeAttackTime` `rangedattacktime` int(30) unsigned NOT NULL DEFAULT '0';
+UPDATE `creature_template` SET `rangedattacktime` =  `rangedattacktime` * `RangeVariance`;
 
--- Will be filled with precious info in (VI):
+-- Will be filled with precious info in (IV):
 ALTER TABLE `creature_template` ADD COLUMN `rangedmindamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedattacktime`;
 ALTER TABLE `creature_template` ADD COLUMN `rangedmaxdamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedmindamage`;
 
@@ -104,7 +104,7 @@ ALTER TABLE `creature_template` DROP COLUMN `BaseVariance`;
 
 ALTER TABLE `creature_template` DROP COLUMN `RangeVariance`;
 
---ALTER TABLE `creature_template` DROP COLUMN `unit_class`; -- testing....
+--ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
 
 ALTER TABLE `creature_template` DROP COLUMN `unit_flags`;
 
@@ -268,6 +268,26 @@ SET creature_template.temp_maxattackpower = creature_classlevelstats.attackpower
 WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.maxlevel = creature_classlevelstats.level);
 
 UPDATE `creature_template` SET `maxdamage` =  `temp_maxattackpower` * `DamageModifier`;
+
+-- (IV): `rangedmindamage`
+
+-- ALTER TABLE `creature_template` ADD COLUMN `temp_minrangedattackpower` float NOT NULL DEFAULT '0' AFTER `temp_maxattackpower`;
+
+UPDATE creature_template, creature_classlevelstats
+SET creature_template.rangedmindamage = creature_classlevelstats.rangedattackpower
+WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.minlevel = creature_classlevelstats.level);
+
+-- (IV): `rangedmaxdamage`
+
+-- ALTER TABLE `creature_template` ADD COLUMN `temp_maxrangedattackpower` float NOT NULL DEFAULT '0' AFTER `temp_minrangedattackpower`;
+
+UPDATE creature_template, creature_classlevelstats
+SET creature_template.rangedmaxdamage = creature_classlevelstats.rangedattackpower
+WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.maxlevel = creature_classlevelstats.level);
+
+-- (V): `can_ranged`
+UPDATE `creature_template` SET `can_ranged` = 1 WHERE `rangedmindamage` != 0;
+UPDATE `creature_template` SET `can_ranged` = 1 WHERE `rangedmaxdamage` != 0;
 
 -- Cleanups:
 
