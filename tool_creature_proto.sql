@@ -178,7 +178,7 @@ ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 
 ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 
-ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
+-- ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 
 ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
 
@@ -230,9 +230,11 @@ UPDATE `creature_template` SET `maxhealth` =  `temp_maxhealth` * `HealthModifier
 ALTER TABLE `creature_template` ADD COLUMN `temp_mana` float NOT NULL DEFAULT '0' AFTER `temp_maxhealth`;
 
 -- For Warriors or Rogues:
+
 UPDATE `creature_template` SET `mana` = 0 WHERE `unit_class` = 1 OR `unit_class` = 4;
 
 -- For Paladins (will use min level for them):
+
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.temp_mana = creature_classlevelstats.basemana
 WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.unit_class = 2 AND creature_template.minlevel = creature_classlevelstats.level);
@@ -245,13 +247,36 @@ WHERE (creature_template.unit_class = creature_classlevelstats.class AND creatur
 
 UPDATE `creature_template` SET `mana` =  `temp_mana` * `ManaModifier`;
 
+-- (III): `mindamage`
+
+ALTER TABLE `creature_template` ADD COLUMN `temp_minattackpower` float NOT NULL DEFAULT '0' AFTER `temp_mana`;
+
+UPDATE creature_template, creature_classlevelstats
+SET creature_template.temp_minattackpower = creature_classlevelstats.attackpower
+WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.minlevel = creature_classlevelstats.level);
+
+UPDATE `creature_template` SET `mindamage` =  `temp_minattackpower` * `DamageModifier`;
+
+-- (III): `maxdamage`
+
+ALTER TABLE `creature_template` ADD COLUMN `temp_maxattackpower` float NOT NULL DEFAULT '0' AFTER `temp_minattackpower`;
+
+UPDATE creature_template, creature_classlevelstats
+SET creature_template.temp_maxattackpower = creature_classlevelstats.attackpower
+WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.maxlevel = creature_classlevelstats.level);
+
+UPDATE `creature_template` SET `maxdamage` =  `temp_maxattackpower` * `DamageModifier`;
+
 -- Cleanups:
 
 ALTER TABLE `creature_template` DROP COLUMN `temp_minhealth`;
 ALTER TABLE `creature_template` DROP COLUMN `temp_maxhealth`;
 ALTER TABLE `creature_template` DROP COLUMN `temp_mana`;
+ALTER TABLE `creature_template` DROP COLUMN `temp_minattackpower`;
+ALTER TABLE `creature_template` DROP COLUMN `temp_maxattackpower`;
 ALTER TABLE `creature_template` DROP COLUMN `HealthModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ManaModifier`;
+ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 
 -- The End: rename to kickass way
 RENAME TABLE `creature_template` TO `creature_proto`;
