@@ -153,12 +153,15 @@ ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `walk_speed` float NO
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `run_speed` float NOT NULL DEFAULT '8' AFTER `walk_speed`;
 
 -- And again... return to this in (XIV)
+
 ALTER TABLE `creature_template` ADD COLUMN `fly_speed` float NOT NULL DEFAULT '14' AFTER `run_speed`;
 
 -- More pain... return to this in (XV)
+
 ALTER TABLE `creature_template` ADD COLUMN `extra_a9_flags` int(30) NOT NULL DEFAULT '0' AFTER `fly_speed`;
 
 -- And yet... (XVI)
+
 ALTER TABLE `creature_template` ADD COLUMN `spell1` int(30) unsigned NOT NULL DEFAULT '0' AFTER `extra_a9_flags`;
 ALTER TABLE `creature_template` ADD COLUMN `spell2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell1`;
 ALTER TABLE `creature_template` ADD COLUMN `spell3` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell2`;
@@ -169,16 +172,13 @@ ALTER TABLE `creature_template` ADD COLUMN `spell7` int(30) unsigned NOT NULL DE
 ALTER TABLE `creature_template` ADD COLUMN `spell8` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell7`;
 ALTER TABLE `creature_template` ADD COLUMN `spell_flags` int(30) NOT NULL DEFAULT '0' AFTER `spell8`;
 
--- OMG... (XVIII)
-ALTER TABLE `creature_template` ADD COLUMN `modImmunities` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell_flags`;
+-- JESUS... (XVIII)
+ALTER TABLE `creature_template` ADD COLUMN `isTrainingDummy` int(10) unsigned NOT NULL DEFAULT '0' AFTER `spell_flags`;
 
--- JESUS... (XIX)
-ALTER TABLE `creature_template` ADD COLUMN `isTrainingDummy` int(10) unsigned NOT NULL DEFAULT '0' AFTER `modImmunities`;
-
--- Light save my soul... (XX)
+-- Light save my soul... (XIX)
 ALTER TABLE `creature_template` ADD COLUMN `guardtype` int(10) unsigned NOT NULL DEFAULT '0' AFTER `isTrainingDummy`;
 
--- Almost there (XXI)
+-- Almost there (XX)
 ALTER TABLE `creature_template` ADD COLUMN `summonguard` int(10) unsigned NOT NULL DEFAULT '0' AFTER `guardtype`;
 
 ALTER TABLE `creature_template` DROP COLUMN `AIName`;
@@ -203,13 +203,13 @@ ALTER TABLE `creature_template` DROP COLUMN `movementId`;
 
 ALTER TABLE `creature_template` DROP COLUMN `RegenHealth`;
 
-ALTER TABLE `creature_template` DROP COLUMN `mechanic_immune_mask`;
+-- ALTER TABLE `creature_template` DROP COLUMN `mechanic_immune_mask`;
 
 ALTER TABLE `creature_template` DROP COLUMN `spell_school_immune_mask`;
 
 ALTER TABLE `creature_template` DROP COLUMN `flags_extra`;
 
--- Last one (XXII)
+-- Last one (XXI)
 ALTER TABLE `creature_template` ADD COLUMN `rooted` int(10) unsigned NOT NULL DEFAULT '0' AFTER `summonguard`;
 
 -- ScriptName: leave it be, it wont harm
@@ -421,6 +421,28 @@ UPDATE creature_template, creature_template_spell
 SET creature_template.spell8 = creature_template_spell.Spell
 WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 7);
 
+-- (XVII): `modImmunities`
+
+ALTER TABLE `creature_template` CHANGE COLUMN `mechanic_immune_mask` `modImmunities` int(10) unsigned NOT NULL DEFAULT '0' AFTER `spell_flags`;
+
+-- (XVIII): `isTrainingDummy`
+-- TDB seems to dont have this
+
+-- (XIX): `guardtype`
+-- ArcEmu = { none, city, neutral }
+-- TDB seems to dont have this
+
+-- (XX): `summonguard`
+-- TDB seems to dont have this
+
+-- (XXI): `rooted`
+
+UPDATE creature_template, creature_template_movement
+SET creature_template.rooted = creature_template_movement.Rooted
+WHERE creature_template.entry = creature_template_movement.CreatureId;
+
+-- TODO: port to lua rooted of creature_movement_override?
+
 -- Cleanups:
 
 ALTER TABLE `creature_template` DROP COLUMN `temp_minhealth`;
@@ -435,6 +457,7 @@ ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
 ALTER TABLE `creature_template` DROP COLUMN `rank`;
+ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
 
 -- The End: rename to kickass emu way
 
