@@ -72,7 +72,7 @@ ALTER TABLE `creature_template` ADD COLUMN `maxdamage` float NOT NULL DEFAULT '0
 ALTER TABLE `creature_template` ADD COLUMN `can_ranged` int(11) unsigned NOT NULL DEFAULT '0' AFTER `maxdamage`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RangeAttackTime` `rangedattacktime` int(30) unsigned NOT NULL DEFAULT '0';
-UPDATE `creature_template` SET `rangedattacktime` =  `rangedattacktime` * `RangeVariance`;
+UPDATE `creature_template` SET `rangedattacktime` = `rangedattacktime` * `RangeVariance`;
 
 -- Will be filled with precious info in (IV):
 
@@ -143,20 +143,22 @@ ALTER TABLE `creature_template` DROP COLUMN `mingold`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `maxgold` `money` int(30) NOT NULL DEFAULT '0' AFTER `boss`;
 
--- Again... return to this in (XIV)
+-- Again... return to this in (XIII)
+
 ALTER TABLE `creature_template` ADD COLUMN `invisibility_type` int(30) unsigned NOT NULL AFTER `money`;
 
 -- Now lets take care of (A) and (B):
+
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `walk_speed` float NOT NULL DEFAULT '2.5' AFTER `invisibility_type`;
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `run_speed` float NOT NULL DEFAULT '8' AFTER `walk_speed`;
 
--- And again... return to this in (XV)
+-- And again... return to this in (XIV)
 ALTER TABLE `creature_template` ADD COLUMN `fly_speed` float NOT NULL DEFAULT '14' AFTER `run_speed`;
 
--- More pain... return to this in (XVI)
-ALTER TABLE `creature_template` ADD COLUMN `extra_a9_flags`  int(30) NOT NULL DEFAULT '0' AFTER `fly_speed`;
+-- More pain... return to this in (XV)
+ALTER TABLE `creature_template` ADD COLUMN `extra_a9_flags` int(30) NOT NULL DEFAULT '0' AFTER `fly_speed`;
 
--- And yet... (XVII)
+-- And yet... (XVI)
 ALTER TABLE `creature_template` ADD COLUMN `spell1` int(30) unsigned NOT NULL DEFAULT '0' AFTER `extra_a9_flags`;
 ALTER TABLE `creature_template` ADD COLUMN `spell2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell1`;
 ALTER TABLE `creature_template` ADD COLUMN `spell3` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell2`;
@@ -375,6 +377,49 @@ WHERE creature_template.modelid1 = creature_model_info.DisplayID;
 -- TDB = { normal, elite, rare elite, boss, rare }
 
 UPDATE `creature_template` SET `boss` = 1 WHERE `rank` = 3;
+
+-- (XIII): `invisibility_type` ( TODO )
+-- Aparantly TDB didnt have this
+
+-- (XIV): `fly_speed` ( TODO )
+-- Aparantly TDB didnt have this
+
+-- (XV): `extra_a9_flags`
+-- Seems its not used by arcemu at the moment
+
+-- (XVI): spell
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell1 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 0);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell2 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 1);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell3 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 2);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell4 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 3);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell5 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 4);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell6 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 5);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell7 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 6);
+
+UPDATE creature_template, creature_template_spell
+SET creature_template.spell8 = creature_template_spell.Spell
+WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 7);
 
 -- Cleanups:
 
