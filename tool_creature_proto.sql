@@ -74,10 +74,10 @@ UPDATE `creature_template` SET `rangedattacktime` =  `rangedattacktime` * `Range
 ALTER TABLE `creature_template` ADD COLUMN `rangedmindamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedattacktime`;
 ALTER TABLE `creature_template` ADD COLUMN `rangedmaxdamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedmindamage`;
 
--- Will be filled with precious info in (VII):
+-- Will be filled with precious info in (VI):
 ALTER TABLE `creature_template` ADD COLUMN `respawntime` int(30) unsigned NOT NULL DEFAULT '0' AFTER `rangedmaxdamage`;
 
--- Will be filled with precious info in (VIII):
+-- Will be filled with precious info in (VII):
 ALTER TABLE `creature_template` ADD COLUMN `armor` int(30) unsigned NOT NULL DEFAULT '0' AFTER `respawntime`;
 
 -- Lets add kick ass emu wonderfull columns: will return to this in (IX)
@@ -178,7 +178,7 @@ ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 
 -- ALTER TABLE `creature_template` DROP COLUMN `ManaModifier`;
 
-ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
+-- ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 
 -- ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 
@@ -271,23 +271,36 @@ UPDATE `creature_template` SET `maxdamage` =  `temp_maxattackpower` * `DamageMod
 
 -- (IV): `rangedmindamage`
 
--- ALTER TABLE `creature_template` ADD COLUMN `temp_minrangedattackpower` float NOT NULL DEFAULT '0' AFTER `temp_maxattackpower`;
-
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.rangedmindamage = creature_classlevelstats.rangedattackpower
 WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.minlevel = creature_classlevelstats.level);
 
 -- (IV): `rangedmaxdamage`
 
--- ALTER TABLE `creature_template` ADD COLUMN `temp_maxrangedattackpower` float NOT NULL DEFAULT '0' AFTER `temp_minrangedattackpower`;
-
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.rangedmaxdamage = creature_classlevelstats.rangedattackpower
 WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.maxlevel = creature_classlevelstats.level);
 
 -- (V): `can_ranged`
+
 UPDATE `creature_template` SET `can_ranged` = 1 WHERE `rangedmindamage` != 0;
 UPDATE `creature_template` SET `can_ranged` = 1 WHERE `rangedmaxdamage` != 0;
+
+-- (VI): `respawntime`
+
+UPDATE creature_template, creature
+SET creature_template.respawntime = creature.spawntimesecs
+WHERE creature_template.entry = creature.id;
+
+-- (VII): `armor`
+
+ALTER TABLE `creature_template` ADD COLUMN `temp_basearmor` int(5) unsigned NOT NULL DEFAULT '1' AFTER `temp_maxattackpower`;
+
+UPDATE creature_template, creature_classlevelstats
+SET creature_template.temp_basearmor = creature_classlevelstats.basearmor
+WHERE (creature_template.unit_class = creature_classlevelstats.class AND creature_template.maxlevel = creature_classlevelstats.level);
+
+UPDATE `creature_template` SET `armor` = `temp_basearmor` * `ArmorModifier`;
 
 -- Cleanups:
 
@@ -296,9 +309,12 @@ ALTER TABLE `creature_template` DROP COLUMN `temp_maxhealth`;
 ALTER TABLE `creature_template` DROP COLUMN `temp_mana`;
 ALTER TABLE `creature_template` DROP COLUMN `temp_minattackpower`;
 ALTER TABLE `creature_template` DROP COLUMN `temp_maxattackpower`;
+ALTER TABLE `creature_template` DROP COLUMN `temp_basearmor`;
 ALTER TABLE `creature_template` DROP COLUMN `HealthModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ManaModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
+ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 
 -- The End: rename to kickass way
+
 RENAME TABLE `creature_template` TO `creature_proto`;
