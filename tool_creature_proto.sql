@@ -80,7 +80,8 @@ ALTER TABLE `creature_template` ADD COLUMN `respawntime` int(30) unsigned NOT NU
 -- Will be filled with precious info in (VII):
 ALTER TABLE `creature_template` ADD COLUMN `armor` int(30) unsigned NOT NULL DEFAULT '0' AFTER `respawntime`;
 
--- Lets add kick ass emu wonderfull columns: will return to this in (IX)
+-- Lets add kick ass emu wonderfull columns: will return to this in (VIII)
+
 ALTER TABLE `creature_template` ADD COLUMN `resistance1` int(30) unsigned NOT NULL DEFAULT '0' AFTER `armor`;
 ALTER TABLE `creature_template` ADD COLUMN `resistance2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance1`;
 ALTER TABLE `creature_template` ADD COLUMN `resistance3` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance2`;
@@ -302,6 +303,34 @@ WHERE (creature_template.unit_class = creature_classlevelstats.class AND creatur
 
 UPDATE `creature_template` SET `armor` = `temp_basearmor` * `ArmorModifier`;
 
+-- (VIII): resistance
+-- ArcEmu = { Holy, Fire, Nature, Frost, Shadow, Arcane }
+-- TDB same enum?
+
+UPDATE creature_template, creature_template_resistance
+SET creature_template.resistance1 = creature_template_resistance.Resistance
+WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 1);
+
+UPDATE creature_template, creature_template_resistance
+SET creature_template.resistance2 = creature_template_resistance.Resistance
+WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 2);
+
+UPDATE creature_template, creature_template_resistance
+SET creature_template.resistance3 = creature_template_resistance.Resistance
+WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 3);
+
+UPDATE creature_template, creature_template_resistance
+SET creature_template.resistance4 = creature_template_resistance.Resistance
+WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 4);
+
+UPDATE creature_template, creature_template_resistance
+SET creature_template.resistance5 = creature_template_resistance.Resistance
+WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 5);
+
+UPDATE creature_template, creature_template_resistance
+SET creature_template.resistance6 = creature_template_resistance.Resistance
+WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 6);
+
 -- Cleanups:
 
 ALTER TABLE `creature_template` DROP COLUMN `temp_minhealth`;
@@ -315,6 +344,6 @@ ALTER TABLE `creature_template` DROP COLUMN `ManaModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 
--- The End: rename to kickass way
+-- The End: rename to kickass emu way
 
 RENAME TABLE `creature_template` TO `creature_proto`;
