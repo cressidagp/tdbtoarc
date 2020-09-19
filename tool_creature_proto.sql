@@ -38,12 +38,12 @@ ALTER TABLE `creature_template` DROP COLUMN `exp`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `faction` `faction` int(30) unsigned NOT NULL DEFAULT '0';
 
--- Will be filled with precious data in (I):
+-- Will be filled with precious data in (I)
 
 ALTER TABLE `creature_template` ADD COLUMN `minhealth` int(30) unsigned NOT NULL AFTER `faction`;
 ALTER TABLE `creature_template` ADD COLUMN `maxhealth` int(30) unsigned NOT NULL AFTER `minhealth`;
 
--- Will be filled with precious data in (II):
+-- Will be filled with precious data in (II)
 
 ALTER TABLE `creature_template` ADD COLUMN `mana` int(30) unsigned NOT NULL DEFAULT '0' AFTER `maxhealth`;
 
@@ -62,28 +62,28 @@ UPDATE `creature_template` SET `attacktime` =  `attacktime` * `BaseVariance`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `dmgschool` `attacktype` int(4) NOT NULL DEFAULT '0' AFTER `attacktime`;
 
--- Will be filled with precious info in (III):
+-- Will be filled with precious info in (III)
 
 ALTER TABLE `creature_template` ADD COLUMN `mindamage` float NOT NULL DEFAULT '0' AFTER `attacktype`;
 ALTER TABLE `creature_template` ADD COLUMN `maxdamage` float NOT NULL DEFAULT '0' AFTER `mindamage`;
 
--- Will be filled with precious info in (V):
+-- Will be filled with precious info in (V)
 
 ALTER TABLE `creature_template` ADD COLUMN `can_ranged` int(11) unsigned NOT NULL DEFAULT '0' AFTER `maxdamage`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RangeAttackTime` `rangedattacktime` int(30) unsigned NOT NULL DEFAULT '0';
 UPDATE `creature_template` SET `rangedattacktime` = `rangedattacktime` * `RangeVariance`;
 
--- Will be filled with precious info in (IV):
+-- Will be filled with precious info in (IV)
 
 ALTER TABLE `creature_template` ADD COLUMN `rangedmindamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedattacktime`;
 ALTER TABLE `creature_template` ADD COLUMN `rangedmaxdamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedmindamage`;
 
--- Will be filled with precious info in (VI):
+-- Will be filled with precious info in (VI)
 
 ALTER TABLE `creature_template` ADD COLUMN `respawntime` int(30) unsigned NOT NULL DEFAULT '0' AFTER `rangedmaxdamage`;
 
--- Will be filled with precious info in (VII):
+-- Will be filled with precious info in (VII)
 
 ALTER TABLE `creature_template` ADD COLUMN `armor` int(30) unsigned NOT NULL DEFAULT '0' AFTER `respawntime`;
 
@@ -96,19 +96,20 @@ ALTER TABLE `creature_template` ADD COLUMN `resistance4` int(30) unsigned NOT NU
 ALTER TABLE `creature_template` ADD COLUMN `resistance5` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance4`;
 ALTER TABLE `creature_template` ADD COLUMN `resistance6` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance5`;
 
--- More kick ass emu column: return to this in (IX):
+-- More kick ass emu column: return to this in (IX)
 
 ALTER TABLE `creature_template` ADD COLUMN `combat_reach` float NOT NULL DEFAULT '0' AFTER `resistance6`;
 
--- And more kick ass emu column: return to this in (X):
+-- And more kick ass emu column: return to this in (X)
 
 ALTER TABLE `creature_template` ADD COLUMN `bounding_radius` float NOT NULL DEFAULT '0' AFTER `combat_reach`;
 
--- Even more kick ass emu column: return to this in (XI):
+-- Even more kick ass emu column: return to this in (XI)
 
 ALTER TABLE `creature_template` ADD COLUMN `auras` longtext NOT NULL AFTER `bounding_radius`;
 
 -- Never ending story: return to this in (XII)
+
 ALTER TABLE `creature_template` ADD COLUMN `boss` int(11) unsigned NOT NULL DEFAULT '0' AFTER `auras`;
 
 ALTER TABLE `creature_template` DROP COLUMN `BaseVariance`;
@@ -172,13 +173,13 @@ ALTER TABLE `creature_template` ADD COLUMN `spell7` int(30) unsigned NOT NULL DE
 ALTER TABLE `creature_template` ADD COLUMN `spell8` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell7`;
 ALTER TABLE `creature_template` ADD COLUMN `spell_flags` int(30) NOT NULL DEFAULT '0' AFTER `spell8`;
 
--- JESUS... (XVIII)
+-- JESUS... (XVII)
 ALTER TABLE `creature_template` ADD COLUMN `isTrainingDummy` int(10) unsigned NOT NULL DEFAULT '0' AFTER `spell_flags`;
 
--- Light save my soul... (XIX)
+-- Light save my soul... (XIII)
 ALTER TABLE `creature_template` ADD COLUMN `guardtype` int(10) unsigned NOT NULL DEFAULT '0' AFTER `isTrainingDummy`;
 
--- Almost there (XX)
+-- Almost there (XIX)
 ALTER TABLE `creature_template` ADD COLUMN `summonguard` int(10) unsigned NOT NULL DEFAULT '0' AFTER `guardtype`;
 
 ALTER TABLE `creature_template` DROP COLUMN `AIName`;
@@ -209,7 +210,7 @@ ALTER TABLE `creature_template` DROP COLUMN `spell_school_immune_mask`;
 
 ALTER TABLE `creature_template` DROP COLUMN `flags_extra`;
 
--- Last one (XXI)
+-- Last one (XX)
 ALTER TABLE `creature_template` ADD COLUMN `rooted` int(10) unsigned NOT NULL DEFAULT '0' AFTER `summonguard`;
 
 -- ScriptName: leave it be, it wont harm
@@ -222,7 +223,7 @@ ALTER TABLE `creature_template` CHANGE COLUMN `VehicleId` `vehicleid` int(10) un
 
 -- (I): Fill `minhealth` with data:
 
-ALTER TABLE `creature_template` ADD COLUMN `temp_minhealth` float NOT NULL DEFAULT '0' AFTER `VerifiedBuild`;
+ALTER TABLE `creature_template` ADD COLUMN `temp_minhealth` int(5) unsigned NOT NULL DEFAULT '1' AFTER `VerifiedBuild`;
 
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.temp_minhealth = creature_classlevelstats.basehp0
@@ -232,7 +233,7 @@ UPDATE `creature_template` SET `minhealth` =  `temp_minhealth` * `HealthModifier
 
 -- (I): Fill `maxhealth` with data:
 
-ALTER TABLE `creature_template` ADD COLUMN `temp_maxhealth` float NOT NULL DEFAULT '0' AFTER `temp_minhealth`;
+ALTER TABLE `creature_template` ADD COLUMN `temp_maxhealth` int(5) unsigned NOT NULL DEFAULT '1' AFTER `temp_minhealth`;
 
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.temp_maxhealth = creature_classlevelstats.basehp0
@@ -242,7 +243,7 @@ UPDATE `creature_template` SET `maxhealth` =  `temp_maxhealth` * `HealthModifier
 
 -- (II): Fill `mana` with data:
 
-ALTER TABLE `creature_template` ADD COLUMN `temp_mana` float NOT NULL DEFAULT '0' AFTER `temp_maxhealth`;
+ALTER TABLE `creature_template` ADD COLUMN `temp_mana` int(5) unsigned NOT NULL DEFAULT '0' AFTER `temp_maxhealth`;
 
 -- For Warriors or Rogues:
 
@@ -264,7 +265,7 @@ UPDATE `creature_template` SET `mana` =  `temp_mana` * `ManaModifier`;
 
 -- (III): `mindamage`
 
-ALTER TABLE `creature_template` ADD COLUMN `temp_minattackpower` float NOT NULL DEFAULT '0' AFTER `temp_mana`;
+ALTER TABLE `creature_template` ADD COLUMN `temp_minattackpower` int(5) unsigned NOT NULL DEFAULT '0' AFTER `temp_mana`;
 
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.temp_minattackpower = creature_classlevelstats.attackpower
@@ -274,7 +275,7 @@ UPDATE `creature_template` SET `mindamage` =  `temp_minattackpower` * `DamageMod
 
 -- (III): `maxdamage`
 
-ALTER TABLE `creature_template` ADD COLUMN `temp_maxattackpower` float NOT NULL DEFAULT '0' AFTER `temp_minattackpower`;
+ALTER TABLE `creature_template` ADD COLUMN `temp_maxattackpower` int(5) unsigned NOT NULL DEFAULT '0' AFTER `temp_minattackpower`;
 
 UPDATE creature_template, creature_classlevelstats
 SET creature_template.temp_maxattackpower = creature_classlevelstats.attackpower
@@ -368,9 +369,13 @@ WHERE creature_template.modelid1 = creature_model_info.DisplayID;
 
 -- (XI): `auras`
 
--- UPDATE creature_template, creature_template_addon
--- SET creature_template.auras = creature_template_addon.auras
--- WHERE creature_template.entry = creature_template_addon.entry;
+UPDATE creature_template_addon SET `auras` = '' WHERE `auras` IS NULL;
+
+UPDATE creature_template, creature_template_addon
+SET creature_template.auras = creature_template_addon.auras
+WHERE creature_template.entry = creature_template_addon.entry;
+
+-- TODO: set auras on spawnid (arcemu dont have this... go in lua?)
 
 -- (XII): `boss`
 -- ArcEmu = { normal, boss }
@@ -421,21 +426,21 @@ UPDATE creature_template, creature_template_spell
 SET creature_template.spell8 = creature_template_spell.Spell
 WHERE (creature_template.entry = creature_template_spell.CreatureID AND creature_template_spell.Index = 7);
 
--- (XVII): `modImmunities`
+-- `modImmunities`
 
 ALTER TABLE `creature_template` CHANGE COLUMN `mechanic_immune_mask` `modImmunities` int(10) unsigned NOT NULL DEFAULT '0' AFTER `spell_flags`;
 
--- (XVIII): `isTrainingDummy`
+-- (XVII): `isTrainingDummy`
 -- TDB seems to dont have this
 
--- (XIX): `guardtype`
+-- (XIII): `guardtype`
 -- ArcEmu = { none, city, neutral }
 -- TDB seems to dont have this
 
--- (XX): `summonguard`
+-- (XIX): `summonguard`
 -- TDB seems to dont have this
 
--- (XXI): `rooted`
+-- (XX): `rooted`
 
 UPDATE creature_template, creature_template_movement
 SET creature_template.rooted = creature_template_movement.Rooted
