@@ -18,7 +18,7 @@ ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_3`;
 ALTER TABLE `creature_template` DROP COLUMN `KillCredit1`;
 ALTER TABLE `creature_template` DROP COLUMN `KillCredit2`;
 
-ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
+-- ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid2`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid3`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid4`;
@@ -38,11 +38,13 @@ ALTER TABLE `creature_template` DROP COLUMN `exp`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `faction` `faction` int(30) unsigned NOT NULL DEFAULT '0';
 
--- Will be filled with precious data in (I)
+-- Will be filled with precious data in (I):
+
 ALTER TABLE `creature_template` ADD COLUMN `minhealth` int(30) unsigned NOT NULL AFTER `faction`;
 ALTER TABLE `creature_template` ADD COLUMN `maxhealth` int(30) unsigned NOT NULL AFTER `minhealth`;
 
 -- Will be filled with precious data in (II):
+
 ALTER TABLE `creature_template` ADD COLUMN `mana` int(30) unsigned NOT NULL DEFAULT '0' AFTER `maxhealth`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `scale` `scale` float NOT NULL DEFAULT '0' AFTER `mana`;
@@ -56,28 +58,33 @@ ALTER TABLE `creature_template` CHANGE COLUMN `npcflag` `npcflags` int(30) unsig
 ALTER TABLE `creature_template` CHANGE COLUMN `BaseAttackTime` `attacktime` int(30) unsigned NOT NULL DEFAULT '0' AFTER `npcflags`;
 UPDATE `creature_template` SET `attacktime` =  `attacktime` * `BaseVariance`;
 
-ALTER TABLE `creature_template` DROP COLUMN `rank`;
+-- ALTER TABLE `creature_template` DROP COLUMN `rank`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `dmgschool` `attacktype` int(4) NOT NULL DEFAULT '0' AFTER `attacktime`;
 
 -- Will be filled with precious info in (III):
+
 ALTER TABLE `creature_template` ADD COLUMN `mindamage` float NOT NULL DEFAULT '0' AFTER `attacktype`;
 ALTER TABLE `creature_template` ADD COLUMN `maxdamage` float NOT NULL DEFAULT '0' AFTER `mindamage`;
 
 -- Will be filled with precious info in (V):
+
 ALTER TABLE `creature_template` ADD COLUMN `can_ranged` int(11) unsigned NOT NULL DEFAULT '0' AFTER `maxdamage`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RangeAttackTime` `rangedattacktime` int(30) unsigned NOT NULL DEFAULT '0';
 UPDATE `creature_template` SET `rangedattacktime` =  `rangedattacktime` * `RangeVariance`;
 
 -- Will be filled with precious info in (IV):
+
 ALTER TABLE `creature_template` ADD COLUMN `rangedmindamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedattacktime`;
 ALTER TABLE `creature_template` ADD COLUMN `rangedmaxdamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedmindamage`;
 
 -- Will be filled with precious info in (VI):
+
 ALTER TABLE `creature_template` ADD COLUMN `respawntime` int(30) unsigned NOT NULL DEFAULT '0' AFTER `rangedmaxdamage`;
 
 -- Will be filled with precious info in (VII):
+
 ALTER TABLE `creature_template` ADD COLUMN `armor` int(30) unsigned NOT NULL DEFAULT '0' AFTER `respawntime`;
 
 -- Lets add kick ass emu wonderfull columns: will return to this in (VIII)
@@ -89,16 +96,19 @@ ALTER TABLE `creature_template` ADD COLUMN `resistance4` int(30) unsigned NOT NU
 ALTER TABLE `creature_template` ADD COLUMN `resistance5` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance4`;
 ALTER TABLE `creature_template` ADD COLUMN `resistance6` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance5`;
 
--- More kick ass emu column: return to this in (X)
+-- More kick ass emu column: return to this in (IX):
+
 ALTER TABLE `creature_template` ADD COLUMN `combat_reach` float NOT NULL DEFAULT '0' AFTER `resistance6`;
 
--- And more kick ass emu column: return to this in (XI)
+-- And more kick ass emu column: return to this in (X):
+
 ALTER TABLE `creature_template` ADD COLUMN `bounding_radius` float NOT NULL DEFAULT '0' AFTER `combat_reach`;
 
--- Even more kick ass emu column: return to this in (XII)
+-- Even more kick ass emu column: return to this in (XI):
+
 ALTER TABLE `creature_template` ADD COLUMN `auras` longtext NOT NULL AFTER `bounding_radius`;
 
--- Never ending story: return to this in (XIII)
+-- Never ending story: return to this in (XII)
 ALTER TABLE `creature_template` ADD COLUMN `boss` int(11) unsigned NOT NULL DEFAULT '0' AFTER `auras`;
 
 ALTER TABLE `creature_template` DROP COLUMN `BaseVariance`;
@@ -315,6 +325,17 @@ UPDATE creature_template, creature_template_resistance
 SET creature_template.resistance2 = creature_template_resistance.Resistance
 WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 2);
 
+-- TEMPORARY BYPASS (TDB BUG???)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11664 AND `School` = 3); -- (-93)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 12265 AND `School` = 4); -- (-186)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11666 AND `School` = 4); -- (-93)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11667 AND `School` = 4); -- (-93)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11668 AND `School` = 4); -- (-93)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11664 AND `School` = 4); -- (-93)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 8909 AND `School` = 4); -- (-52)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11664 AND `School` = 5); -- (-93)
+UPDATE `creature_template_resistance` SET `Resistance` = 0 WHERE (`CreatureID` = 11664 AND `School` = 6); -- (-93)
+
 UPDATE creature_template, creature_template_resistance
 SET creature_template.resistance3 = creature_template_resistance.Resistance
 WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 3);
@@ -331,6 +352,30 @@ UPDATE creature_template, creature_template_resistance
 SET creature_template.resistance6 = creature_template_resistance.Resistance
 WHERE (creature_template.entry = creature_template_resistance.CreatureID AND creature_template_resistance.School = 6);
 
+-- (IX): `combat_reach`
+
+UPDATE creature_template, creature_model_info
+SET creature_template.combat_reach = creature_model_info.CombatReach
+WHERE creature_template.modelid1 = creature_model_info.DisplayID;
+
+-- (X): `bounding_radius`
+
+UPDATE creature_template, creature_model_info
+SET creature_template.bounding_radius = creature_model_info.BoundingRadius
+WHERE creature_template.modelid1 = creature_model_info.DisplayID;
+
+-- (XI): `auras`
+
+-- UPDATE creature_template, creature_template_addon
+-- SET creature_template.auras = creature_template_addon.auras
+-- WHERE creature_template.entry = creature_template_addon.entry;
+
+-- (XII): `boss`
+-- ArcEmu = { normal, boss }
+-- TDB = { normal, elite, rare elite, boss, rare }
+
+UPDATE `creature_template` SET `boss` = 1 WHERE `rank` = 3;
+
 -- Cleanups:
 
 ALTER TABLE `creature_template` DROP COLUMN `temp_minhealth`;
@@ -343,6 +388,8 @@ ALTER TABLE `creature_template` DROP COLUMN `HealthModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ManaModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
+ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
+ALTER TABLE `creature_template` DROP COLUMN `rank`;
 
 -- The End: rename to kickass emu way
 
