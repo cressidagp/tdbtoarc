@@ -153,6 +153,8 @@ ALTER TABLE `creature_template` ADD COLUMN `invisibility_type` int(30) unsigned 
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `walk_speed` float NOT NULL DEFAULT '2.5' AFTER `invisibility_type`;
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `run_speed` float NOT NULL DEFAULT '8' AFTER `walk_speed`;
 
+UPDATE `creature_template` SET `walk_speed` = '2.5' WHERE `walk_speed` = 1;
+
 -- And again... return to this in (XIV)
 
 ALTER TABLE `creature_template` ADD COLUMN `fly_speed` float NOT NULL DEFAULT '14' AFTER `run_speed`;
@@ -448,7 +450,9 @@ WHERE creature_template.entry = creature_template_movement.CreatureId;
 
 -- TODO: port to lua rooted of creature_movement_override?
 
+--
 -- Cleanups:
+--
 
 ALTER TABLE `creature_template` DROP COLUMN `temp_minhealth`;
 ALTER TABLE `creature_template` DROP COLUMN `temp_maxhealth`;
@@ -463,6 +467,8 @@ ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
 ALTER TABLE `creature_template` DROP COLUMN `rank`;
 ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
+ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
+ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 -- The End: rename to kickass emu way
 
