@@ -110,7 +110,10 @@ ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RacialLeader` `leader` tinyint(3) unsigned NOT NULL DEFAULT '0';
 
+--
 -- Now lets add kickass emu wonderfull columns:
+--
+
 ALTER TABLE `creature_template` ADD COLUMN `questitem1` int(11) unsigned NOT NULL DEFAULT '0' AFTER `leader`;
 ALTER TABLE `creature_template` ADD COLUMN `questitem2` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem1`;
 ALTER TABLE `creature_template` ADD COLUMN `questitem3` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem2`;
@@ -151,5 +154,21 @@ ALTER TABLE `creature_template` CHANGE COLUMN `modelid2` `female_displayid` int(
 ALTER TABLE `creature_template` CHANGE COLUMN `modelid3` `male_displayid2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `female_displayid`;
 ALTER TABLE `creature_template` CHANGE COLUMN `modelid4` `female_displayid2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `male_displayid2`;
 
+--
+-- Cleanups:
+--
+
+ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
+ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
+
+UPDATE `creature_template` SET `subname` = '' WHERE `subname` IS NULL;
+UPDATE `creature_template` SET `info_str` = '' WHERE `info_str` IS NULL;
+
+ALTER TABLE `creature_template` CHANGE COLUMN `subname` `subname` varchar(100) NOT NULL;
+ALTER TABLE `creature_template` CHANGE COLUMN `info_str` `info_str` varchar(500) NOT NULL;
+
+--
 -- The End: rename to kickass way
+--
+
 RENAME TABLE `creature_template` TO `creature_names`;
