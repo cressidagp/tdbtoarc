@@ -66,7 +66,7 @@ ALTER TABLE `npc_text` CHANGE COLUMN `EmoteDelay0_2` `temp_EmoteDelay0_4` int(10
 ALTER TABLE `npc_text` CHANGE COLUMN `Emote0_2` `temp_Emote0_5` int(10) unsigned NOT NULL DEFAULT '0' AFTER `temp_EmoteDelay0_4`;
 
 
-ALTER TABLE `npc_text` CHANGE COLUMN `Probability1` `prob1` float NOT NULL DEFAULT '0' AFTER `temp_EmoteDelay0_4`;
+ALTER TABLE `npc_text` CHANGE COLUMN `Probability1` `prob1` float NOT NULL DEFAULT '0' AFTER `temp_Emote0_5`;
 
 ALTER TABLE `npc_text` CHANGE COLUMN `text1_0` `text1_0` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `prob1`;
 
