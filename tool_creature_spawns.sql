@@ -2,15 +2,19 @@
 ==============================================
 	Title: creature to creature_spawns
 	
-	From TDB: 335.20082
+	From TDB: 335.20091
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
 ==============================================
 */
+
 DROP TABLE IF EXISTS `creature_spawns`;
 
+--
 -- Unload all transports:
+--
+
 DELETE FROM `creature` WHERE `map` = 582;
 DELETE FROM `creature` WHERE `map` = 584;
 DELETE FROM `creature` WHERE `map` = 586;
@@ -30,8 +34,12 @@ DELETE FROM `creature` WHERE `map` = 622;
 DELETE FROM `creature` WHERE `map` = 623;
 DELETE FROM `creature` WHERE `map` = 647;
 
+--
 -- Goodbay events:
+--
+
 DELETE FROM `game_event_creature` WHERE `eventEntry` = 25; -- Lets keep night for now
+
 DELETE FROM `game_event_creature` WHERE `eventEntry` = -25; -- Lets keep night for now
 
 ALTER TABLE `creature` ADD COLUMN `eventEntry` int(4) NOT NULL DEFAULT '0' AFTER `map`;
@@ -40,23 +48,33 @@ SET creature.eventEntry = game_event_creature.eventEntry
 WHERE creature.guid = game_event_creature.guid;
 
 DELETE FROM `creature` WHERE `eventEntry` != 0;
+
 ALTER TABLE `creature` DROP COLUMN `eventEntry`;
 
 -- guid: gona change this to id later (A)
+
 -- id: change this to entry later (B)
--- map: OK!
+
+ALTER TABLE `creature` CHANGE COLUMN `map` `map` int(30) NOT NULL;
+
 ALTER TABLE `creature` DROP COLUMN `zoneId`;
+
 ALTER TABLE `creature` DROP COLUMN `areaId`;
+
 ALTER TABLE `creature` DROP COLUMN `spawnMask`; -- Not implemented by arcemu
+
 -- phaseMask: change this to phase later (C)
+
 -- modelid: change this to displayid later (D)
+
 -- equipment_id: do nothing for now (E)
+
 ALTER TABLE `creature` CHANGE COLUMN `position_x` `position_x` float NOT NULL AFTER `map`;
 ALTER TABLE `creature` CHANGE COLUMN `position_y` `position_y` float NOT NULL AFTER `position_x`;
 ALTER TABLE `creature` CHANGE COLUMN `position_z` `position_z` float NOT NULL AFTER `position_y`;
 ALTER TABLE `creature` CHANGE COLUMN `orientation` `orientation` float NOT NULL AFTER `position_z`;
 ALTER TABLE `creature` DROP COLUMN `spawntimesecs`; -- The respawn time, in seconds, of the creature (not implemented by arcemu)
--- ALTER TABLE `creature` DROP COLUMN `wander_distance`; -- If creature has random waypoints how far he can walk from spawnpoint (not implemented by arcemu)
+ALTER TABLE `creature` DROP COLUMN `wander_distance`; -- If creature has random waypoints how far he can walk from spawnpoint (not implemented by arcemu)
 ALTER TABLE `creature` DROP COLUMN `currentwaypoint`; -- The current waypoint that the creature is on, if any (not implemented by arcemu)
 ALTER TABLE `creature` DROP COLUMN `curhealth`; -- The health that the creature will spawn with (not implemented by arcemu, however we have lua)
 ALTER TABLE `creature` DROP COLUMN `curmana`; -- The mana that the creature will spawn with (not implemented by arcemu, however we have lua)
@@ -64,6 +82,14 @@ ALTER TABLE `creature` CHANGE COLUMN `MovementType` `movetype` int(30) NOT NULL 
 
 -- Now take care of (D)
 ALTER TABLE `creature` CHANGE COLUMN  `modelid` `displayid` int(30) unsigned NOT NULL DEFAULT '0' AFTER `movetype`;
+
+UPDATE creature, creature_model_info
+SET creature.displayid = creature_model_info.DisplayID 
+WHERE (creature.displayid = creature_model_info.displayid and creature_model_info.gender = 0);
+
+UPDATE creature, creature_model_info
+SET creature.displayid = creature_model_info.DisplayID_Other_Gender
+WHERE (creature.displayid = creature_model_info.displayid and creature_model_info.gender = 1);
 
 -- Kickass emu have this here, goin to fill it in (*)
 ALTER TABLE `creature` ADD COLUMN `faction` int(30) NOT NULL DEFAULT '14' AFTER `displayid`;
@@ -91,10 +117,8 @@ ALTER TABLE `creature` ADD COLUMN `CanFly` smallint(3) NOT NULL DEFAULT '0' AFTE
 -- Now take care of (C)
 ALTER TABLE `creature` CHANGE COLUMN  `phaseMask` `phase` int(10) unsigned NOT NULL DEFAULT '1' AFTER `CanFly`;
 
--- I will keep this since i will try to use it (could be trough core or lua)
-ALTER TABLE `creature` CHANGE COLUMN  `wander_distance` `wander_distance` int(10) unsigned NOT NULL DEFAULT '1' AFTER `phase`;
--- ScriptName: leave it be, it wont harm
--- VerifiedBuild: leave it be, it wont harm
+ALTER TABLE `creature` DROP COLUMN `ScriptName`;
+ALTER TABLE `creature` DROP COLUMN `VerifiedBuild`;
 
 -- Lets fill (*)
 UPDATE creature, creature_template
@@ -180,5 +204,8 @@ ALTER TABLE `creature` CHANGE COLUMN `id` `entry` int(30) NOT NULL;
 -- Take care of (A)
 ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
+--
 -- The End: rename to kickass way
+--
+
 RENAME TABLE `creature` TO `creature_spawns`;
