@@ -22,7 +22,6 @@ DELETE FROM `npc_text_locale` WHERE `Locale` = 'zhTW';
 
 DELETE FROM `npc_text_locale` WHERE `Locale` = 'ruRU';
 
-
 --
 -- Remove Data truncated for column...
 --
@@ -90,6 +89,8 @@ ALTER TABLE `npc_text_locale` CHANGE COLUMN `Text6_1` `text6_1` varchar(500) CHA
 ALTER TABLE `npc_text_locale` CHANGE COLUMN `Text7_0` `text7` varchar(500) CHARACTER SET latin1 NOT NULL;
 
 ALTER TABLE `npc_text_locale` CHANGE COLUMN `Text7_1` `text7_1` varchar(500) CHARACTER SET latin1 NOT NULL;
+
+-- TODO: Seems to TDB dont have all the info. Found this one missing 13441
 
 --
 -- The End: rename to kickass emu way
