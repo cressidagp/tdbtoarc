@@ -2,6 +2,8 @@
 ==============================================
 	Title: creature to creature_spawns
 	
+	WARNING: this one is very slow
+	
 	From TDB: 335.20091
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `creature_spawns`;
 
 --
--- Unload all transports:
+-- Unload all transports
 --
 
 DELETE FROM `creature` WHERE `map` = 582;
@@ -35,7 +37,7 @@ DELETE FROM `creature` WHERE `map` = 623;
 DELETE FROM `creature` WHERE `map` = 647;
 
 --
--- Goodbay events:
+-- Goodbay events
 --
 
 DELETE FROM `game_event_creature` WHERE `eventEntry` = 25; -- Lets keep night for now
@@ -83,13 +85,27 @@ ALTER TABLE `creature` CHANGE COLUMN `MovementType` `movetype` int(30) NOT NULL 
 -- Now take care of (D)
 ALTER TABLE `creature` CHANGE COLUMN  `modelid` `displayid` int(30) unsigned NOT NULL DEFAULT '0' AFTER `movetype`;
 
-UPDATE creature, creature_model_info
-SET creature.displayid = creature_model_info.DisplayID 
-WHERE (creature.displayid = creature_model_info.displayid and creature_model_info.gender = 0);
+UPDATE creature, creature_template
+SET creature.displayid = creature_template.modelid1
+WHERE creature.id = creature_template.entry 
+AND (creature.displayid = 0 and creature_template.modelid1 != 0 and creature_template.modelid2 = 0 and creature_template.modelid3 = 0 and creature_template.modelid4 = 0);
 
-UPDATE creature, creature_model_info
-SET creature.displayid = creature_model_info.DisplayID_Other_Gender
-WHERE (creature.displayid = creature_model_info.displayid and creature_model_info.gender = 1);
+UPDATE creature, creature_template
+SET creature.displayid = creature_template.modelid2
+WHERE creature.id = creature_template.entry 
+AND (creature.displayid = 0 and creature_template.modelid1 = 0 and creature_template.modelid2 != 0 and creature_template.modelid3 = 0 and creature_template.modelid4 = 0);
+
+UPDATE creature, creature_template
+SET creature.displayid = creature_template.modelid3
+WHERE creature.id = creature_template.entry 
+AND (creature.displayid = 0 and creature_template.modelid1 = 0 and creature_template.modelid2 = 0 and creature_template.modelid3 != 0 and creature_template.modelid4 = 0);
+
+UPDATE creature, creature_template
+SET creature.displayid = creature_template.modelid4
+WHERE creature.id = creature_template.entry 
+AND (creature.displayid = 0 and creature_template.modelid1 = 0 and creature_template.modelid2 = 0 and creature_template.modelid3 = 0 and creature_template.modelid4 != 0);
+
+-- TODO: fill 32000 displayid
 
 -- Kickass emu have this here, goin to fill it in (*)
 ALTER TABLE `creature` ADD COLUMN `faction` int(30) NOT NULL DEFAULT '14' AFTER `displayid`;
