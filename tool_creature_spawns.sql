@@ -14,6 +14,12 @@
 DROP TABLE IF EXISTS `creature_spawns`;
 
 --
+-- Create a backup of original table...
+--
+
+CREATE TABLE `creature2` SELECT * FROM `creature`;
+
+--
 -- Unload all transports
 --
 
@@ -52,6 +58,10 @@ WHERE creature.guid = game_event_creature.guid;
 DELETE FROM `creature` WHERE `eventEntry` != 0;
 
 ALTER TABLE `creature` DROP COLUMN `eventEntry`;
+
+--
+-- Here we go...
+--
 
 -- guid: gona change this to id later (A)
 
@@ -221,7 +231,13 @@ ALTER TABLE `creature` CHANGE COLUMN `id` `entry` int(30) NOT NULL;
 ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
 --
--- The End: rename to kickass way
+-- Rename to kickass way
 --
 
 RENAME TABLE `creature` TO `creature_spawns`;
+
+--
+-- Rename our backup table
+--
+
+RENAME TABLE `creature2` TO `creature`;
