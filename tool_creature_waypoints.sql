@@ -67,6 +67,14 @@ ALTER TABLE `waypoint_data` ADD COLUMN `backwardskinid` int(10) unsigned NOT NUL
 -- ALTER TABLE waypoint_data ENABLE KEYS;
 
 DELETE FROM `waypoint_data` WHERE `guid` = 0;
+
+ALTER TABLE `waypoint_data` CHANGE COLUMN `guid` `spawnid` int(10) unsigned NOT NULL DEFAULT '0';
+
+ALTER TABLE `waypoint_data` DROP PRIMARY KEY;
+
+ALTER TABLE `waypoint_data` DROP COLUMN `id`;
+
+ALTER TABLE `waypoint_data` ADD PRIMARY KEY (spawnid, waypointid);
  
 --
 -- Rename to kickass way
