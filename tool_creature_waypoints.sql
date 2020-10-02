@@ -2,7 +2,7 @@
 ===========================================================
 	Title: waypoint_data to creature_waypoints
 	
-	From TDB: 335.20082
+	From TDB: 335.20091
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -12,7 +12,18 @@
 
 ===========================================================
 */
+
 DROP TABLE IF EXISTS `creature_waypoints`;
+
+--
+-- Create a backup of original table...
+--
+
+CREATE TABLE `waypoint_data2` SELECT * FROM `waypoint_data`;
+
+--
+-- Here we go...
+--
 
 -- ALTER TABLE `waypoint_data` DISABLE KEYS;
 
@@ -54,5 +65,17 @@ ALTER TABLE `waypoint_data` ADD COLUMN `backwardskinid` int(10) unsigned NOT NUL
 -- TODO: fill `forwardskinid`
 
 -- ALTER TABLE waypoint_data ENABLE KEYS;
+
+DELETE FROM `waypoint_data` WHERE `guid` = 0;
  
+--
+-- Rename to kickass way
+--
+
 RENAME TABLE `waypoint_data` TO `creature_waypoints`;
+
+--
+-- Rename our backup table
+--
+
+RENAME TABLE `waypoint_data2` TO `waypoint_data`;
