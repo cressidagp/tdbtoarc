@@ -19,6 +19,8 @@ DROP TABLE IF EXISTS `creature_spawns`;
 
 CREATE TABLE `creature2` SELECT * FROM `creature`;
 
+CREATE TABLE `game_event_creature2` SELECT * FROM `game_event_creature`;
+
 --
 -- Unload all transports
 --
@@ -58,6 +60,8 @@ WHERE creature.guid = game_event_creature.guid;
 DELETE FROM `creature` WHERE `eventEntry` != 0;
 
 ALTER TABLE `creature` DROP COLUMN `eventEntry`;
+
+DROP TABLE IF EXISTS `game_event_creature`;
 
 --
 -- Here we go...
@@ -241,3 +245,5 @@ RENAME TABLE `creature` TO `creature_spawns`;
 --
 
 RENAME TABLE `creature2` TO `creature`;
+
+RENAME TABLE `game_event_creature2` TO `game_event_creature`;
