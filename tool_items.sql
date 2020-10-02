@@ -18,6 +18,38 @@ DROP TABLE IF EXISTS `items`;
 CREATE TABLE `item_template2` SELECT * FROM `item_template`;
 
 --
+-- Drop not supported columns
+--
+
+ALTER TABLE `item_template` DROP COLUMN `BuyCount`;
+
+ALTER TABLE `item_template` DROP COLUMN `stackable`;
+
+ALTER TABLE `item_template` DROP COLUMN `spellppmRate_1`; 
+
+ALTER TABLE `item_template` DROP COLUMN `spellppmRate_2`;
+
+ALTER TABLE `item_template` DROP COLUMN `spellppmRate_3`;
+
+ALTER TABLE `item_template` DROP COLUMN `spellppmRate_4`;
+
+ALTER TABLE `item_template` DROP COLUMN `spellppmRate_5`;
+
+ALTER TABLE `item_template` DROP COLUMN `ScriptName`;
+
+ALTER TABLE `item_template` DROP COLUMN `DisenchantID`;
+
+ALTER TABLE `item_template` DROP COLUMN `FoodType`;
+
+ALTER TABLE `item_template` DROP COLUMN `minMoneyLoot`;
+
+ALTER TABLE `item_template` DROP COLUMN `maxMoneyLoot`;
+
+ALTER TABLE `item_template` DROP COLUMN `flagsCustom`;
+
+ALTER TABLE `item_template` DROP COLUMN `VerifiedBuild`;
+
+--
 -- Here we go...
 --
 
@@ -35,11 +67,11 @@ ALTER TABLE `item_template` CHANGE COLUMN `displayid` `displayid` int(70) unsign
 
 ALTER TABLE `item_template` CHANGE COLUMN `Quality` `quality` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` CHANGE COLUMN `Flags` `flags` int(30) NOT NULL DEFAULT '0';
+ALTER TABLE `item_template` CHANGE COLUMN `Flags` `flags` int(30) unsigned NOT NULL DEFAULT '0'; -- TODO: unsigned
 
 ALTER TABLE `item_template` CHANGE COLUMN `FlagsExtra` `flags2` int(11) unsigned NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `BuyCount`;
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `BuyPrice` `buyprice` int(30) NOT NULL DEFAULT '0';
 
@@ -75,7 +107,7 @@ ALTER TABLE `item_template` ADD COLUMN `Unique` int(30) NOT NULL DEFAULT '0' AFT
 
 ALTER TABLE `item_template` CHANGE COLUMN `maxcount` `maxcount` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `stackable`; -- how do this arcemu?
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `ContainerSlots` `ContainerSlots` int(30) NOT NULL DEFAULT '0';
 
@@ -161,7 +193,7 @@ ALTER TABLE `item_template` CHANGE COLUMN `spelltrigger_1` `spelltrigger_1` int(
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcharges_1` `spellcharges_1` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `spellppmRate_1`; 
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcooldown_1` `spellcooldown_1` int(30) NOT NULL DEFAULT '0';
 
@@ -175,7 +207,7 @@ ALTER TABLE `item_template` CHANGE COLUMN `spelltrigger_2` `spelltrigger_2` int(
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcharges_2` `spellcharges_2` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `spellppmRate_2`;
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcooldown_2` `spellcooldown_2` int(30) NOT NULL DEFAULT '0';
 
@@ -189,7 +221,7 @@ ALTER TABLE `item_template` CHANGE COLUMN `spelltrigger_3` `spelltrigger_3` int(
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcharges_3` `spellcharges_3` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `spellppmRate_3`;
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcooldown_3` `spellcooldown_3` int(30) NOT NULL DEFAULT '0';
 
@@ -203,7 +235,7 @@ ALTER TABLE `item_template` CHANGE COLUMN `spelltrigger_4` `spelltrigger_4` int(
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcharges_4` `spellcharges_4` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `spellppmRate_4`;
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcooldown_4` `spellcooldown_4` int(30) NOT NULL DEFAULT '0';
 
@@ -217,7 +249,7 @@ ALTER TABLE `item_template` CHANGE COLUMN `spelltrigger_5` `spelltrigger_5` int(
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcharges_5` `spellcharges_5` int(30) NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP COLUMN `spellppmRate_5`;
+
 
 ALTER TABLE `item_template` CHANGE COLUMN `spellcooldown_5` `spellcooldown_5` int(30) NOT NULL DEFAULT '0';
 
@@ -253,6 +285,44 @@ ALTER TABLE `item_template` CHANGE COLUMN `itemset` `itemset` int(30) NOT NULL D
 
 ALTER TABLE `item_template` CHANGE COLUMN `MaxDurability` `MaxDurability` int(30) NOT NULL DEFAULT '0';
 
+ALTER TABLE `item_template` CHANGE COLUMN `area` `ZoneNameID` int(30) NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `Map` `mapid` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `BagFamily` `bagfamily` int(30) NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `TotemCategory` `TotemCategory` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketColor_1` `socket_color_1` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketContent_1` `unk201_3` int(30) NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketColor_2` `socket_color_2` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketContent_2` `unk201_5` int(30) NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketColor_3` `socket_color_3` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketContent_3` `unk201_7` int(30) NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `socketBonus` `socket_bonus` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `GemProperties` `GemProperties` int(30) DEFAULT NULL;
+
+ALTER TABLE `item_template` CHANGE COLUMN `RequiredDisenchantSkill` `ReqDisenchantSkill` int(30) NOT NULL DEFAULT '-1';
+
+ALTER TABLE `item_template` CHANGE COLUMN `ArmorDamageModifier` `ArmorDamageModifier` int(30) NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `duration` `existingduration` int(10) unsigned NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `ItemLimitCategory` `ItemLimitCategoryId` int(32) unsigned NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` CHANGE COLUMN `HolidayId` `HolidayId` int(32) unsigned NOT NULL DEFAULT '0';
+
+ALTER TABLE `item_template` DROP KEY;
+
+ALTER TABLE `item_template` ADD PRIMARY KEY (entry);
+
 --
 -- The End: rename to kickass way
 --
@@ -264,6 +334,3 @@ RENAME TABLE `item_template` TO `items`;
 --
 
 RENAME TABLE `item_template2` TO `item_template`;
-
-
-
