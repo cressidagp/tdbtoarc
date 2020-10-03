@@ -6,6 +6,23 @@
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
+	TODO:
+	
+	*) ReqCastSpellId1-4
+	*) ReqEmoteId1-4
+	*) RewRepFaction6
+	*) RewRepLimit
+	*) RewXP
+	*) MailSendItem
+	*) ExploreTrigger1-4
+	*) RequiredOneOfQuest
+	*) RequiredQuest1-4
+	*) ReceiveItemId2-4
+	*) ReceiveItemCount2-4
+	*) IsRepeatable
+	*) bonushonor
+	*) bonusarenapoints
+	
 ==============================================
 */
 
@@ -74,7 +91,6 @@ ALTER TABLE `quest_template` CHANGE COLUMN `RequiredFactionValue1` `RequiredRepV
 -- Will be filled in (E)
 
 ALTER TABLE `quest_template` ADD COLUMN `LimitTime` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRepValue`;
-
 
 ALTER TABLE `quest_template` ADD COLUMN `SpecialFlags` int(10) unsigned NOT NULL DEFAULT '0' AFTER `LimitTime`;
 
@@ -172,6 +188,241 @@ ALTER TABLE `quest_template` CHANGE COLUMN `RequiredNpcOrGoCount3` `ReqKillMobOr
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RequiredNpcOrGoCount4` `ReqKillMobOrGOCount4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReqKillMobOrGOCount3`;
 
+ALTER TABLE `quest_template` ADD COLUMN `ReqCastSpellId1` int(11) NOT NULL DEFAULT '0' AFTER `ReqKillMobOrGOCount4`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqCastSpellId2` int(11) NOT NULL DEFAULT '0' AFTER `ReqCastSpellId1`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqCastSpellId3` int(11) NOT NULL DEFAULT '0' AFTER `ReqCastSpellId2`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqCastSpellId4` int(11) NOT NULL DEFAULT '0' AFTER `ReqCastSpellId3`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqEmoteId1` int(10) unsigned DEFAULT '0' AFTER `ReqCastSpellId4`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqEmoteId2` int(10) unsigned DEFAULT '0' AFTER `ReqEmoteId1`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqEmoteId3` int(10) unsigned DEFAULT '0' AFTER `ReqEmoteId2`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReqEmoteId4` int(10) unsigned DEFAULT '0' AFTER `ReqEmoteId3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemID1` `RewChoiceItemId1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReqEmoteId4`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemID2` `RewChoiceItemId2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemId1`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemID3` `RewChoiceItemId3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemId2`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemID4` `RewChoiceItemId4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemId3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemID5` `RewChoiceItemId5` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemId4`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemID6` `RewChoiceItemId6` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemId5`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemQuantity1` `RewChoiceItemCount1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemId6`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemQuantity2` `RewChoiceItemCount2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemCount1`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemQuantity3` `RewChoiceItemCount3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemCount2`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemQuantity4` `RewChoiceItemCount4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemCount3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemQuantity5` `RewChoiceItemCount5` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemCount4`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardChoiceItemQuantity6` `RewChoiceItemCount6` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemCount5`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardItem1` `RewItemId1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewChoiceItemCount6`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardItem2` `RewItemId2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemId1`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardItem3` `RewItemId3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemId2`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardItem4` `RewItemId4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemId3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardAmount1` `RewItemCount1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemId4`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardAmount2` `RewItemCount2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemCount1`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardAmount3` `RewItemCount3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemCount2`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardAmount4` `RewItemCount4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemCount3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionID1` `RewRepFaction1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewItemCount4`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionID2` `RewRepFaction2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepFaction1`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionID3` `RewRepFaction3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepFaction2`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionID4` `RewRepFaction4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepFaction3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionID5` `RewRepFaction5` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepFaction4`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RewRepFaction6` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepFaction5`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionValue1` `RewRepValue1` int(10) NOT NULL DEFAULT '0' AFTER `RewRepFaction6`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionValue2` `RewRepValue2` int(10) NOT NULL DEFAULT '0' AFTER `RewRepValue1`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionValue3` `RewRepValue3` int(10) NOT NULL DEFAULT '0' AFTER `RewRepValue2`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionValue4` `RewRepValue4` int(10) NOT NULL DEFAULT '0' AFTER `RewRepValue3`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardFactionValue5` `RewRepValue5` int(10) NOT NULL DEFAULT '0' AFTER `RewRepValue4`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RewRepValue6` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepValue5`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RewRepLimit` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewRepValue6`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardMoney` `RewMoney` int(10) NOT NULL DEFAULT '0' AFTER `RewRepLimit`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RewXP` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewMoney`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardDisplaySpell` `RewSpell` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewXP`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardSpell` `CastSpell` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewSpell`;
+
+ALTER TABLE `quest_template` ADD COLUMN `MailTemplateId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `CastSpell`;
+
+UPDATE quest_template, quest_template_addon
+SET quest_template.MailTemplateId = quest_template_addon.RewardMailTemplateID
+WHERE quest_template.ID = quest_template_addon.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `MailDelaySecs` int(10) unsigned NOT NULL DEFAULT '0' AFTER `MailTemplateId`;
+
+UPDATE quest_template, quest_template_addon
+SET quest_template.MailDelaySecs = quest_template_addon.RewardMailDelay
+WHERE quest_template.ID = quest_template_addon.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `MailSendItem` int(10) unsigned NOT NULL DEFAULT '0' AFTER `MailDelaySecs`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `POIContinent` `PointMapId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `MailSendItem`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `POIx` `PointX` float NOT NULL DEFAULT '0' AFTER `PointMapId`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `POIy` `PointY` float NOT NULL DEFAULT '0' AFTER `PointX`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `POIPriority` `PointOpt` int(10) unsigned NOT NULL DEFAULT '0' AFTER `PointY`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardBonusMoney` `RewardMoneyAtMaxLevel` int(10) unsigned NOT NULL DEFAULT '0' AFTER `PointOpt`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ExploreTrigger1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewardMoneyAtMaxLevel`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ExploreTrigger2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ExploreTrigger1`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ExploreTrigger3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ExploreTrigger2`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ExploreTrigger4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ExploreTrigger3`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RequiredOneOfQuest` longtext NOT NULL AFTER `ExploreTrigger4`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RequiredQuest1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredOneOfQuest`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RequiredQuest2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredQuest1`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RequiredQuest3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredQuest2`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RequiredQuest4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredQuest3`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RemoveQuests` longtext NOT NULL AFTER `RequiredQuest4`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `StartItem` `ReceiveItemId1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RemoveQuests`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId1`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId2`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId3`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId4`;
+
+UPDATE quest_template, quest_template_addon
+SET quest_template.ReceiveItemCount1 = quest_template_addon.ProvidedItemCount
+WHERE quest_template.ID = quest_template_addon.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemCount1`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemCount2`;
+
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemCount3`;
+
+ALTER TABLE `quest_template` ADD COLUMN `IsRepeatable` int(11) NOT NULL DEFAULT '0' AFTER `ReceiveItemCount4`;
+
+ALTER TABLE `quest_template` ADD COLUMN `bonushonor` int(10) unsigned NOT NULL DEFAULT '0' AFTER `IsRepeatable`;
+
+ALTER TABLE `quest_template` ADD COLUMN `bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardTitle` `rewardtitleid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonusarenapoints`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardTalents` `rewardtalents` int(10) unsigned NOT NULL DEFAULT '0' AFTER `rewardtitleid`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `SuggestedGroupNum` `suggestedplayers` int(10) unsigned NOT NULL DEFAULT '0' AFTER `rewardtalents`;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemotecount` int(10) unsigned NOT NULL DEFAULT '0' AFTER `suggestedplayers`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotecount = 1
+WHERE quest_template.ID = quest_details.ID 
+AND (quest_details.Emote1 != 0 and quest_details.Emote2 = 0 and quest_details.Emote3 = 0 and quest_details.Emote4 = 0);
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotecount = 2
+WHERE quest_template.ID = quest_details.ID 
+AND (quest_details.Emote1 != 0 and quest_details.Emote2 != 0 and quest_details.Emote3 = 0 and quest_details.Emote4 = 0);
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotecount = 3
+WHERE quest_template.ID = quest_details.ID 
+AND (quest_details.Emote1 != 0 and quest_details.Emote2 != 0 and quest_details.Emote3 != 0 and quest_details.Emote4 = 0);
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotecount = 4
+WHERE quest_template.ID = quest_details.ID 
+AND (quest_details.Emote1 != 0 and quest_details.Emote2 != 0 and quest_details.Emote3 != 0 and quest_details.Emote4 != 0);
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotecount`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemote1 = quest_details.Emote1
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemote2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote1`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemote2 = quest_details.Emote2
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemote3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote2`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemote3 = quest_details.Emote3
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemote4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote3`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemote4 = quest_details.Emote4
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote4`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotedelay1 = quest_details.EmoteDelay1
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay1`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotedelay2 = quest_details.EmoteDelay2
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay2`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotedelay3 = quest_details.EmoteDelay3
+WHERE quest_template.ID = quest_details.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay3`;
+
+UPDATE quest_template, quest_details
+SET quest_template.detailemotedelay4 = quest_details.EmoteDelay4
+WHERE quest_template.ID = quest_details.ID;
 
 -- TODO...............
 
@@ -194,6 +445,16 @@ ALTER TABLE `quest_template` DROP COLUMN `QuestSortID`;
 ALTER TABLE `quest_template` DROP COLUMN `Flags`;
 
 ALTER TABLE `quest_template` DROP COLUMN `TimeAllowed`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride1`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride2`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride3`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride4`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
 
 --
 -- The End: rename to kickass way
