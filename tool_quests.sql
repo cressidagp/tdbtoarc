@@ -6,6 +6,8 @@
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
+	Note: completeemote is not working i should report to arcemu
+	
 	TODO:
 	
 	*) ReqCastSpellId1-4
@@ -17,11 +19,13 @@
 	*) ExploreTrigger1-4
 	*) RequiredOneOfQuest
 	*) RequiredQuest1-4
-	*) ReceiveItemId2-4
-	*) ReceiveItemCount2-4
+	*) ReceiveItemId1-4
+	*) ReceiveItemCount1-4
 	*) IsRepeatable
 	*) bonushonor
 	*) bonusarenapoints
+	*) iscompletedbyspelleffect
+	*) RewXPId
 	
 ==============================================
 */
@@ -42,21 +46,27 @@ ALTER TABLE `quest_template` DROP COLUMN `RequiredFactionId2`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RequiredFactionValue2`;
 
+ALTER TABLE `quest_template` DROP COLUMN `RewardNextQuest`;
+
+ALTER TABLE `quest_template` DROP COLUMN `Unknown0`;
+
+ALTER TABLE `quest_template` DROP COLUMN `QuestCompletionLog`;
+
 --
 -- Here we go...
 --
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ID` `entry` int(10) unsigned NOT NULL DEFAULT '0';
 
--- Will be filled in (A)
-
 ALTER TABLE `quest_template` ADD COLUMN `ZoneId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `entry`;
 
--- Will be filled in (B)
+UPDATE `quest_template` SET `ZoneId` = `QuestSortID` WHERE `QuestSortID` > 0;
 
 ALTER TABLE `quest_template` ADD COLUMN `sort` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ZoneId`;
 
--- Will be filled in (C)
+UPDATE `quest_template` SET `sort` = `QuestSortID` WHERE `QuestSortID` < 0;
+
+-- Will be filled in (A)
 
 ALTER TABLE `quest_template` ADD COLUMN `flags` int(10) unsigned NOT NULL DEFAULT '0' AFTER `sort`;
 
@@ -68,7 +78,7 @@ ALTER TABLE `quest_template` CHANGE COLUMN `QuestInfoID` `Type` int(10) unsigned
 
 ALTER TABLE `quest_template` CHANGE COLUMN `AllowableRaces` `RequiredRaces` int(10) unsigned NOT NULL DEFAULT '0' AFTER `Type`;
 
--- Will be filled in (D)
+-- Will be filled in (B)
 
 ALTER TABLE `quest_template` ADD COLUMN `RequiredClass` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRaces`;
 
@@ -88,7 +98,7 @@ ALTER TABLE `quest_template` CHANGE COLUMN `RequiredFactionId1` `RequiredRepFact
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RequiredFactionValue1` `RequiredRepValue` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRepFaction`;
 
--- Will be filled in (E)
+-- Will be filled in (C)
 
 ALTER TABLE `quest_template` ADD COLUMN `LimitTime` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRepValue`;
 
@@ -136,9 +146,7 @@ UPDATE quest_template, quest_request_items
 SET quest_template.IncompleteText = quest_request_items.CompletionText
 WHERE quest_template.ID = quest_request_items.ID;
 
--- Will be filled in (F)
-
-ALTER TABLE `quest_template` ADD COLUMN `EndText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `IncompleteText`;
+ALTER TABLE `quest_template` CHANGE COLUMN `AreaDescription` `EndText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL  AFTER `IncompleteText`;
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText1` `ObjectiveText1` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `EndText`;
 
@@ -322,7 +330,7 @@ ALTER TABLE `quest_template` ADD COLUMN `RequiredQuest4` int(10) unsigned NOT NU
 
 ALTER TABLE `quest_template` ADD COLUMN `RemoveQuests` longtext NOT NULL AFTER `RequiredQuest4`;
 
-ALTER TABLE `quest_template` CHANGE COLUMN `StartItem` `ReceiveItemId1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RemoveQuests`;
+ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RemoveQuests`;
 
 ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId1`;
 
@@ -331,10 +339,6 @@ ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId3` int(10) unsigned NOT NU
 ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemId4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId3`;
 
 ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemId4`;
-
-UPDATE quest_template, quest_template_addon
-SET quest_template.ReceiveItemCount1 = quest_template_addon.ProvidedItemCount
-WHERE quest_template.ID = quest_template_addon.ID;
 
 ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ReceiveItemCount1`;
 
@@ -424,17 +428,95 @@ UPDATE quest_template, quest_details
 SET quest_template.detailemotedelay4 = quest_details.EmoteDelay4
 WHERE quest_template.ID = quest_details.ID;
 
--- TODO...............
+ALTER TABLE `quest_template` ADD COLUMN `completionemotecnt` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay4`;
 
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotecnt = 1
+WHERE quest_template.ID = quest_offer_reward.ID;
+AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 = 0 and quest_offer_reward.Emote3 = 0 and quest_offer_reward.Emote4 = 0);
 
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotecnt = 2
+WHERE quest_template.ID = quest_offer_reward.ID;
+AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 = 0 and quest_offer_reward.Emote4 = 0);
 
--- Lets take care of (A):
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotecnt = 3
+WHERE quest_template.ID = quest_offer_reward.ID;
+AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 != 0 and quest_offer_reward.Emote4 = 0);
 
-UPDATE `quest_template` SET `ZoneId` = `QuestSortID` WHERE `QuestSortID` > 0;
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotecnt = 4
+WHERE quest_template.ID = quest_offer_reward.ID;
+AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 != 0 and quest_offer_reward.Emote4 != 0);
 
--- Lets take care of (B):
+ALTER TABLE `quest_template` ADD COLUMN `completionemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotecnt`;
 
-UPDATE `quest_template` SET `sort` = `QuestSortID` WHERE `QuestSortID` < 0;
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemote1 = quest_offer_reward.Emote1
+WHERE quest_template.ID = quest_offer_reward.ID; 
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemote2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote1`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemote2 = quest_offer_reward.Emote2
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemote3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote2`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemote3 = quest_offer_reward.Emote3
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemote4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote3`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemote4 = quest_offer_reward.Emote4
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote4`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotedelay1 = quest_offer_reward.EmoteDelay1
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay1`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotedelay2 = quest_offer_reward.EmoteDelay2
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay2`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotedelay3 = quest_offer_reward.EmoteDelay3
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay3`;
+
+UPDATE quest_template, quest_offer_reward
+SET quest_template.completionemotedelay4 = quest_offer_reward.EmoteDelay4
+WHERE quest_template.ID = quest_offer_reward.ID;
+
+-- research tdb vermien quest has EmoteOnComplete = 1(talk), EmoteOnIncomplete = 6(question)
+
+-- in game with arcdb on click (quest marked complete false) he question, 
+
+ALTER TABLE `quest_template` ADD COLUMN `completeemote` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay4`;
+
+UPDATE quest_template, quest_request_items
+SET quest_template.completeemote = quest_request_items.EmoteOnComplete
+WHERE quest_template.ID = quest_request_items.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `incompleteemote` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completeemote`;
+
+UPDATE quest_template, quest_request_items
+SET quest_template.incompleteemote = quest_request_items.EmoteOnIncomplete
+WHERE quest_template.ID = quest_request_items.ID;
+
+ALTER TABLE `quest_template` ADD COLUMN `iscompletedbyspelleffect` int(10) unsigned NOT NULL DEFAULT '0' AFTER `incompleteemote`;
+
+ALTER TABLE `quest_template` ADD COLUMN `RewXPId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `iscompletedbyspelleffect`;
 
 --
 -- Remove columns no more needed
@@ -455,6 +537,22 @@ ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride3`;
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride4`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo1`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo2`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo3`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo4`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount1`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount2`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount3`;
+
+ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount4`;
 
 --
 -- The End: rename to kickass way
