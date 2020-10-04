@@ -65,7 +65,7 @@ ALTER TABLE `quest_template_locale` CHANGE COLUMN `ObjectiveText3` `ObjectiveTex
 
 ALTER TABLE `quest_template_locale` CHANGE COLUMN `ObjectiveText4` `ObjectiveText4` text CHARACTER SET latin1 NOT NULL AFTER `ObjectiveText3`;
 
--- VerifiedBuild: leave it be for now
+-- VerifiedBuild: leave it be for now, it wont harm.
 
 --
 -- The End: rename to kickass way
