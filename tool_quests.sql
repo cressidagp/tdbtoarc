@@ -6,6 +6,8 @@
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
+	WARNING: this one its extremly slow... go take a nap or something
+	
 	Note: completeemote is not working i should report to arcemu
 		  money not displayed on quest gossip when ready to complete
 	
@@ -38,6 +40,10 @@ DROP TABLE IF EXISTS `quests`;
 --
 
 CREATE TABLE `quest_template2` SELECT * FROM `quest_template`;
+
+CREATE TABLE `quest_offer_reward2` SELECT * FROM `quest_offer_reward`;
+
+CREATE TABLE `quest_request_items2` SELECT * FROM `quest_request_items`;
 
 --
 -- Drop not supported columns
@@ -118,20 +124,28 @@ SET quest_template.SpecialFlags = quest_template_addon.SpecialFlags
 WHERE quest_template.entry = quest_template_addon.ID;
 
 -- if value > 0: Contains the previous quest id, that must be completed before this quest can be started.
-
 -- If value < 0: Contains the parent quest id, that must be active before this quest can be started.
 
-ALTER TABLE `quest_template` ADD COLUMN `PrevQuestId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `SpecialFlags`;
+ALTER TABLE `quest_template` ADD COLUMN `PrevQuestId` int(10) NOT NULL DEFAULT '0' AFTER `SpecialFlags`; -- should be unsigned
 
 UPDATE quest_template, quest_template_addon
 SET quest_template.PrevQuestId = quest_template_addon.PrevQuestID
-WHERE quest_template.entry = quest_template_addon.ID;
+WHERE quest_template.entry = quest_template_addon.ID and quest_template_addon.PrevQuestID > 0;
 
-ALTER TABLE `quest_template` ADD COLUMN `NextQuestId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `PrevQuestId`;
+-- TODO: NextQuestID < 0
+
+-- If value > 0: Contains the next quest id, if PrevQuestId of that quest is not sufficient.
+-- If value < 0: Contains the sub quest id, if PrevQuestId of that quest is not sufficient. 
+-- If quest have many alternative next quests (class specific quests lead from single not class specific quest) 
+-- field PrevQuestId in next quests can used for setting this dependence.
+
+ALTER TABLE `quest_template` ADD COLUMN `NextQuestId` int(10) NOT NULL DEFAULT '0' AFTER `PrevQuestId`; -- should be unsigned
 
 UPDATE quest_template, quest_template_addon
 SET quest_template.NextQuestId = quest_template_addon.NextQuestID
-WHERE quest_template.entry = quest_template_addon.ID;
+WHERE quest_template.entry = quest_template_addon.ID and quest_template_addon.NextQuestID > 0;
+
+-- TODO: NextQuestID < 0
 
 ALTER TABLE `quest_template` CHANGE COLUMN `StartItem` `srcItem` int(10) unsigned NOT NULL DEFAULT '0' AFTER `NextQuestId`;
 
@@ -149,23 +163,37 @@ ALTER TABLE `quest_template` CHANGE COLUMN `LogDescription` `Objectives` text CH
 
 ALTER TABLE `quest_template` ADD COLUMN `CompletionText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `Objectives`;
 
+UPDATE `quest_offer_reward` SET `RewardText` = '' WHERE `RewardText` IS NULL;
+
 UPDATE quest_template, quest_offer_reward
 SET quest_template.CompletionText = quest_offer_reward.RewardText
 WHERE quest_template.entry = quest_offer_reward.ID;
 
 ALTER TABLE `quest_template` ADD COLUMN `IncompleteText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `CompletionText`;
 
+UPDATE `quest_request_items` SET `CompletionText` = '' WHERE `CompletionText` IS NULL;
+
 UPDATE quest_template, quest_request_items
 SET quest_template.IncompleteText = quest_request_items.CompletionText
 WHERE quest_template.entry = quest_request_items.ID;
 
+UPDATE `quest_template` SET `AreaDescription` = '' WHERE `AreaDescription` IS NULL;
+
 ALTER TABLE `quest_template` CHANGE COLUMN `AreaDescription` `EndText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL  AFTER `IncompleteText`;
+
+UPDATE `quest_template` SET `ObjectiveText1` = '' WHERE `ObjectiveText1` IS NULL;
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText1` `ObjectiveText1` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `EndText`;
 
+UPDATE `quest_template` SET `ObjectiveText2` = '' WHERE `ObjectiveText2` IS NULL;
+
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText2` `ObjectiveText2` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `ObjectiveText1`;
 
+UPDATE `quest_template` SET `ObjectiveText3` = '' WHERE `ObjectiveText3` IS NULL;
+
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText3` `ObjectiveText3` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `ObjectiveText2`;
+
+UPDATE `quest_template` SET `ObjectiveText4` = '' WHERE `ObjectiveText4` IS NULL;
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText4` `ObjectiveText4` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `ObjectiveText3`;
 
@@ -295,11 +323,11 @@ ALTER TABLE `quest_template` CHANGE COLUMN `RewardMoney` `RewMoney` int(10) NOT 
 
 ALTER TABLE `quest_template` ADD COLUMN `RewXP` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewMoney`;
 
-ALTER TABLE `quest_template` CHANGE COLUMN `RewardDisplaySpell` `RewSpell` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewXP`;
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardDisplaySpell` `RewSpell` int(10) NOT NULL DEFAULT '0' AFTER `RewXP`; -- should be unsigned
 
-ALTER TABLE `quest_template` CHANGE COLUMN `RewardSpell` `CastSpell` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewSpell`;
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardSpell` `CastSpell` int(10) NOT NULL DEFAULT '0' AFTER `RewSpell`; -- should be unsigned
 
-ALTER TABLE `quest_template` ADD COLUMN `MailTemplateId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `CastSpell`;
+ALTER TABLE `quest_template` ADD COLUMN `MailTemplateId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `CastSpell`; 
 
 UPDATE quest_template, quest_template_addon
 SET quest_template.MailTemplateId = quest_template_addon.RewardMailTemplateID
@@ -445,22 +473,22 @@ ALTER TABLE `quest_template` ADD COLUMN `completionemotecnt` int(10) unsigned NO
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotecnt = 1
-WHERE quest_template.entry = quest_offer_reward.ID;
+WHERE quest_template.entry = quest_offer_reward.ID
 AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 = 0 and quest_offer_reward.Emote3 = 0 and quest_offer_reward.Emote4 = 0);
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotecnt = 2
-WHERE quest_template.entry = quest_offer_reward.ID;
+WHERE quest_template.entry = quest_offer_reward.ID
 AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 = 0 and quest_offer_reward.Emote4 = 0);
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotecnt = 3
-WHERE quest_template.entry = quest_offer_reward.ID;
+WHERE quest_template.entry = quest_offer_reward.ID
 AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 != 0 and quest_offer_reward.Emote4 = 0);
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotecnt = 4
-WHERE quest_template.entry = quest_offer_reward.ID;
+WHERE quest_template.entry = quest_offer_reward.ID
 AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 != 0 and quest_offer_reward.Emote4 != 0);
 
 ALTER TABLE `quest_template` ADD COLUMN `completionemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotecnt`;
@@ -551,21 +579,6 @@ ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride4`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
 
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo1`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo2`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo3`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGo4`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount1`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount2`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount3`;
-
-ALTER TABLE `quest_template` DROP COLUMN `RequiredNpcOrGoCount4`;
 
 --
 -- The End: rename to kickass way
@@ -578,3 +591,7 @@ RENAME TABLE `quest_template` TO `quests`;
 --
 
 RENAME TABLE `quest_template2` TO `quest_template`;
+
+RENAME TABLE `quest_offer_reward2` TO `quest_offer_reward`;
+
+RENAME TABLE `quest_request_items2` TO `quest_request_items`;
