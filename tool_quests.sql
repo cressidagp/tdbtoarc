@@ -55,8 +55,6 @@ ALTER TABLE `quest_template` DROP COLUMN `RequiredFactionValue2`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RewardNextQuest`;
 
-ALTER TABLE `quest_template` DROP COLUMN `RewardHonorMultiplier`;
-
 ALTER TABLE `quest_template` DROP COLUMN `Unknown0`;
 
 ALTER TABLE `quest_template` DROP COLUMN `QuestCompletionLog`;
@@ -81,9 +79,9 @@ UPDATE `quest_template` SET `sort` = `sort`* (-1);
 
 ALTER TABLE `quest_template` CHANGE COLUMN `sort` `sort` int(10) unsigned NOT NULL DEFAULT '0';
 
--- Will be filled in (A)
-
+-- This will be filled later:
 ALTER TABLE `quest_template` ADD COLUMN `new_flags` int(10) unsigned NOT NULL DEFAULT '0' AFTER `sort`;
+--
 
 ALTER TABLE `quest_template` CHANGE COLUMN `MinLevel` `MinLevel` int(10) unsigned NOT NULL DEFAULT '0' AFTER `new_flags`; 
 
@@ -97,9 +95,11 @@ ALTER TABLE `quest_template` CHANGE COLUMN `QuestInfoID` `Type` int(10) unsigned
 
 ALTER TABLE `quest_template` CHANGE COLUMN `AllowableRaces` `RequiredRaces` int(10) unsigned NOT NULL DEFAULT '0' AFTER `Type`;
 
--- Will be filled in (B)
-
 ALTER TABLE `quest_template` ADD COLUMN `RequiredClass` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRaces`;
+
+UPDATE quest_template, quest_template_addon
+SET quest_template.RequiredClass = quest_template_addon.AllowableClasses
+WHERE quest_template.entry = quest_template_addon.ID;
 
 ALTER TABLE `quest_template` ADD COLUMN `RequiredTradeskill` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredClass`;
 
@@ -117,9 +117,9 @@ ALTER TABLE `quest_template` CHANGE COLUMN `RequiredFactionId1` `RequiredRepFact
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RequiredFactionValue1` `RequiredRepValue` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRepFaction`;
 
--- Will be filled in (C)
-
 ALTER TABLE `quest_template` ADD COLUMN `LimitTime` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredRepValue`;
+
+UPDATE `quest_template` SET `LimitTime` = `TimeAllowed` * 1000 WHERE `TimeAllowed` != 0;
 
 ALTER TABLE `quest_template` ADD COLUMN `SpecialFlags` int(10) unsigned NOT NULL DEFAULT '0' AFTER `LimitTime`;
 
@@ -393,13 +393,9 @@ ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount4` int(10) unsigned NOT
 
 ALTER TABLE `quest_template` ADD COLUMN `IsRepeatable` int(11) NOT NULL DEFAULT '0' AFTER `ReceiveItemCount4`;
 
--- ALTER TABLE `quest_template` ADD COLUMN `bonushonor` int(10) unsigned NOT NULL DEFAULT '0' AFTER `IsRepeatable`;
-
 ALTER TABLE `quest_template` CHANGE COLUMN `RewardHonor` `bonushonor` int(10) unsigned NOT NULL DEFAULT '0' AFTER `IsRepeatable`;
 
--- ALTER TABLE `quest_template` ADD COLUMN `bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
-
-ALTER TABLE `quest_template` CHANGE COLUMN `RewardArenaPoints` bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardArenaPoints` `bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RewardTitle` `rewardtitleid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonusarenapoints`;
 
@@ -573,8 +569,6 @@ ALTER TABLE `quest_template` ADD COLUMN `RewXPId` int(10) unsigned NOT NULL DEFA
 
 ALTER TABLE `quest_template` DROP COLUMN `QuestSortID`;
 
--- ALTER TABLE `quest_template` DROP COLUMN `Flags`;
-
 ALTER TABLE `quest_template` DROP COLUMN `TimeAllowed`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride1`;
@@ -592,6 +586,14 @@ ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
 --
 
 RENAME TABLE `quest_template` TO `quests`;
+
+--
+-- Remove pillaged tables...
+--
+
+DROP TABLE IF EXISTS `quest_offer_reward`;
+
+DROP TABLE IF EXISTS `quest_request_items`;
 
 --
 -- Rename our backup table
