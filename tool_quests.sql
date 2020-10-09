@@ -25,8 +25,6 @@
 	*) ReceiveItemId1-4
 	*) ReceiveItemCount1-4
 	*) IsRepeatable
-	*) bonushonor
-	*) bonusarenapoints
 	*) iscompletedbyspelleffect
 	*) RewXPId
 	
@@ -49,15 +47,21 @@ CREATE TABLE `quest_request_items2` SELECT * FROM `quest_request_items`;
 -- Drop not supported columns
 --
 
+ALTER TABLE `quest_template` DROP COLUMN `QuestType`; -- not needed arcemu always set 2 in the packet
+
 ALTER TABLE `quest_template` DROP COLUMN `RequiredFactionId2`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RequiredFactionValue2`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RewardNextQuest`;
 
+ALTER TABLE `quest_template` DROP COLUMN `RewardHonorMultiplier`;
+
 ALTER TABLE `quest_template` DROP COLUMN `Unknown0`;
 
 ALTER TABLE `quest_template` DROP COLUMN `QuestCompletionLog`;
+
+ALTER TABLE `quest_template` DROP COLUMN `VerifiedBuild`;
 
 --
 -- Here we go...
@@ -389,9 +393,13 @@ ALTER TABLE `quest_template` ADD COLUMN `ReceiveItemCount4` int(10) unsigned NOT
 
 ALTER TABLE `quest_template` ADD COLUMN `IsRepeatable` int(11) NOT NULL DEFAULT '0' AFTER `ReceiveItemCount4`;
 
-ALTER TABLE `quest_template` ADD COLUMN `bonushonor` int(10) unsigned NOT NULL DEFAULT '0' AFTER `IsRepeatable`;
+-- ALTER TABLE `quest_template` ADD COLUMN `bonushonor` int(10) unsigned NOT NULL DEFAULT '0' AFTER `IsRepeatable`;
 
-ALTER TABLE `quest_template` ADD COLUMN `bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardHonor` `bonushonor` int(10) unsigned NOT NULL DEFAULT '0' AFTER `IsRepeatable`;
+
+-- ALTER TABLE `quest_template` ADD COLUMN `bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
+
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardArenaPoints` bonusarenapoints` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonushonor`;
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RewardTitle` `rewardtitleid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `bonusarenapoints`;
 
@@ -565,7 +573,7 @@ ALTER TABLE `quest_template` ADD COLUMN `RewXPId` int(10) unsigned NOT NULL DEFA
 
 ALTER TABLE `quest_template` DROP COLUMN `QuestSortID`;
 
-ALTER TABLE `quest_template` DROP COLUMN `Flags`;
+-- ALTER TABLE `quest_template` DROP COLUMN `Flags`;
 
 ALTER TABLE `quest_template` DROP COLUMN `TimeAllowed`;
 
@@ -578,7 +586,6 @@ ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride3`;
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride4`;
 
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
-
 
 --
 -- The End: rename to kickass way
