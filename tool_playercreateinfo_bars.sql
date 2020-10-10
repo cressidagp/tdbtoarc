@@ -37,6 +37,10 @@ ALTER TABLE `playercreateinfo_action` ADD COLUMN `misc` int(10) unsigned DEFAULT
 
 UPDATE `playercreateinfo_action` SET `misc` = '0' WHERE `misc` IS NULL;
 
+-- HACKFIX: For some reason Every man for Himselft its not being added in slot 11 for mages...
+
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 8);
+
 --
 -- The End: rename to kickass way
 --
