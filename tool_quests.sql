@@ -26,7 +26,6 @@
 	*) ReceiveItemCount1-4
 	*) IsRepeatable
 	*) iscompletedbyspelleffect
-	*) RewXPId
 	
 ==============================================
 */
@@ -325,7 +324,7 @@ ALTER TABLE `quest_template` ADD COLUMN `RewRepLimit` int(10) unsigned NOT NULL 
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RewardMoney` `RewMoney` int(10) NOT NULL DEFAULT '0' AFTER `RewRepLimit`;
 
-ALTER TABLE `quest_template` ADD COLUMN `RewXP` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewMoney`;
+ALTER TABLE `quest_template` ADD COLUMN `RewXP` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RewMoney`; -- remember use this for custom quests.
 
 ALTER TABLE `quest_template` CHANGE COLUMN `RewardDisplaySpell` `RewSpell` int(10) NOT NULL DEFAULT '0' AFTER `RewXP`; -- should be unsigned
 
@@ -561,7 +560,9 @@ WHERE quest_template.entry = quest_request_items.ID;
 
 ALTER TABLE `quest_template` ADD COLUMN `iscompletedbyspelleffect` int(10) unsigned NOT NULL DEFAULT '0' AFTER `incompleteemote`;
 
-ALTER TABLE `quest_template` ADD COLUMN `RewXPId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `iscompletedbyspelleffect`;
+ALTER TABLE `quest_template` CHANGE COLUMN `RewardXPDifficulty` `RewXPId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `iscompletedbyspelleffect`;
+
+
 
 --
 -- Remove columns no more needed
