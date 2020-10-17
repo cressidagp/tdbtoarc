@@ -2,7 +2,7 @@
 ==============================================
 	Title: creature_template to creature_names
 	
-	From TDB: 335.20091
+	From TDB: 335.20101
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -18,16 +18,20 @@ DROP TABLE IF EXISTS `creature_names`;
 CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
 
 --
--- Here we go...
+-- Drop not supported columns
 --
-
-ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(10) unsigned NOT NULL DEFAULT '0';
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_1`;
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_2`;
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_3`;
+
+--
+-- Here we go...
+--
+
+ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(10) unsigned NOT NULL DEFAULT '0';
 
 -- KillCredit1: gona change this to killcredit1 later (A)
 
@@ -57,7 +61,7 @@ ALTER TABLE `creature_template` DROP COLUMN `exp`;
 
 ALTER TABLE `creature_template` DROP COLUMN `faction`;
 
-ALTER TABLE `creature_template` CHANGE COLUMN `npcflag` `flags1` int(10) unsigned NOT NULL DEFAULT '0';
+ALTER TABLE `creature_template` DROP COLUMN `npcflag`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `unknown_float1` float NOT NULL DEFAULT '1';
 
@@ -89,7 +93,7 @@ ALTER TABLE `creature_template` DROP COLUMN `dynamicflags`;
 
 -- type: return to this later (I)
 
-ALTER TABLE `creature_template` DROP COLUMN `type_flags`;
+ALTER TABLE `creature_template` CHANGE COLUMN `type_flags` `flags1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `info_str`;
 
 ALTER TABLE `creature_template` DROP COLUMN `lootid`;
 
