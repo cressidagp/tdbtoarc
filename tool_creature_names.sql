@@ -6,6 +6,11 @@
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
+	TODO:
+	
+	*) killcredit1-2
+	*) questitem1-6
+	
 ==============================================
 */
 
@@ -132,10 +137,15 @@ ALTER TABLE `creature_template` CHANGE COLUMN `RacialLeader` `leader` tinyint(3)
 --
 
 ALTER TABLE `creature_template` ADD COLUMN `questitem1` int(11) unsigned NOT NULL DEFAULT '0' AFTER `leader`;
+
 ALTER TABLE `creature_template` ADD COLUMN `questitem2` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem1`;
+
 ALTER TABLE `creature_template` ADD COLUMN `questitem3` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem2`;
+
 ALTER TABLE `creature_template` ADD COLUMN `questitem4` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem3`;
+
 ALTER TABLE `creature_template` ADD COLUMN `questitem5` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem4`;
+
 ALTER TABLE `creature_template` ADD COLUMN `questitem6` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem5`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `movementId` `waypointid` int(10) unsigned NOT NULL DEFAULT '0';
@@ -161,7 +171,13 @@ ALTER TABLE `creature_template` CHANGE COLUMN `family` `family` int(10) unsigned
 -- Lets take care of (G):
 ALTER TABLE `creature_template` CHANGE COLUMN `rank` `rank` int(10) unsigned NOT NULL DEFAULT '0' AFTER `family`;
 
--- Lets take care of (A) and (B):
+/* Lets take care of (A) and (B):
+
+	fixed all quests like http://www.wowhead.com/?quest=10702 
+	creatures KillCredit 1 and 2 in db set, when killing a mob it count it as kill of that creature 
+	and all creatures from KillCredit fields (these values are in retail SMSG_CREATURE_QUERY_RESPONSE)
+*/
+
 ALTER TABLE `creature_template` CHANGE COLUMN `KillCredit1` `killcredit1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `rank`;
 ALTER TABLE `creature_template` CHANGE COLUMN `KillCredit2` `killcredit2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `killcredit1`;
 
@@ -176,12 +192,15 @@ ALTER TABLE `creature_template` CHANGE COLUMN `modelid4` `female_displayid2` int
 --
 
 ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
+
 ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 UPDATE `creature_template` SET `subname` = '' WHERE `subname` IS NULL;
+
 UPDATE `creature_template` SET `info_str` = '' WHERE `info_str` IS NULL;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `subname` `subname` varchar(100) NOT NULL;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `info_str` `info_str` varchar(500) NOT NULL;
 
 --
