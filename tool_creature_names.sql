@@ -2,37 +2,50 @@
 ==============================================
 	Title: creature_template to creature_names
 	
-	From TDB: 335.20092
+	From TDB: 335.20091
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
 ==============================================
 */
+
 DROP TABLE IF EXISTS `creature_names`;
+
+--
+-- Create a backup of original table...
+--
+
+CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
+
+--
+-- Here we go...
+--
 
 ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(10) unsigned NOT NULL DEFAULT '0';
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_1`;
+
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_2`;
+
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_3`;
 
 -- KillCredit1: gona change this to killcredit1 later (A)
+
 -- KillCredit2: change this to killcredit2 later (B)
 
 -- modelid1: will change to male_displayid later (C)
+
 -- modelid2: will change to female_displayid (D)
+
 -- modelid3: will change to male_displayid2 (E)
+
 -- modelid4: will change to female_displayid2 (F)
 
 ALTER TABLE `creature_template` CHANGE COLUMN `name` `name` varchar(100) NOT NULL;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `subname` `subname` varchar(100); -- NOT NULL
 
--- TODO: how to set NULL VALUES TO = ''
-
 ALTER TABLE `creature_template` CHANGE COLUMN `IconName` `info_str` varchar(500); -- NOT NULL
-
--- TODO: how to set NULL VALUES TO = ''
 
 ALTER TABLE `creature_template` DROP COLUMN `gossip_menu_id`;
 
@@ -172,3 +185,9 @@ ALTER TABLE `creature_template` CHANGE COLUMN `info_str` `info_str` varchar(500)
 --
 
 RENAME TABLE `creature_template` TO `creature_names`;
+
+--
+-- Rename our backup table
+--
+
+RENAME TABLE `creature_template2` TO `creature_template`;
