@@ -2,12 +2,23 @@
 ==============================================
 	Title: creature_template to creature_proto
 	
-	From TDB: 335.20092
+	From TDB: 335.20091
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 ==============================================
 */
+
 DROP TABLE IF EXISTS `creature_proto`;
+
+--
+-- Create a backup of original table...
+--
+
+CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
+
+--
+-- Here we go...
+--
 
 ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(30) unsigned NOT NULL DEFAULT '0';
 
@@ -470,6 +481,14 @@ ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
 ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
 ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
--- The End: rename to kickass emu way
+--
+-- The End: rename to kickass way
+--
 
 RENAME TABLE `creature_template` TO `creature_proto`;
+
+--
+-- Rename our backup table
+--
+
+RENAME TABLE `creature_template2` TO `creature_template`;
