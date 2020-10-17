@@ -2,11 +2,14 @@
 ==============================================
 	Title: gossip_menu to npc_gossip_textid
 	
-	From TDB: 335.20092
+	From TDB: 335.20101
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
+	
+	WARNING: this one its slow.
 ==============================================
 */
+
 DROP TABLE IF EXISTS `npc_gossip_textid`;
 
 --
@@ -30,14 +33,14 @@ ALTER TABLE `gossip_menu` ADD COLUMN `temp_entry` int(8) unsigned NOT NULL DEFAU
 --
 
 CREATE TABLE `gossip_menu2` LIKE `gossip_menu`;
+
 ALTER TABLE `gossip_menu2` DISABLE KEYS;
+
 INSERT INTO `gossip_menu2` SELECT * FROM `gossip_menu`;
+
 ALTER TABLE `gossip_menu2` ENABLE KEYS;
 	
-DELETE FROM `gossip_menu` WHERE `id` NOT IN (
-SELECT MAX(id)
-FROM `gossip_menu2`
-GROUP BY creatureid);	
+DELETE FROM `gossip_menu` WHERE `id` NOT IN ( SELECT MAX(`id`) FROM `gossip_menu2` GROUP BY `creatureid` );	
 
 --
 -- Fill `temp_entry` with precious data then set creatureid
@@ -54,14 +57,17 @@ UPDATE `gossip_menu` SET `creatureid` = `temp_entry`;
 --
 
 ALTER TABLE `gossip_menu` DROP COLUMN `id`;
+
 ALTER TABLE `gossip_menu` DROP COLUMN `temp_entry`;
 
 DROP TABLE IF EXISTS `gossip_menu2`;
 
 --
--- Alter table to math arcemu ways
+-- Alter table to match arcemu ways
 --
+
 DELETE FROM `gossip_menu` WHERE `creatureid` = 0;
+
 ALTER TABLE `gossip_menu` ADD PRIMARY KEY (`creatureid`);
 
 --
