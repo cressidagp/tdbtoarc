@@ -31,6 +31,12 @@ ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_2`;
 
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_3`;
 
+ALTER TABLE `creature_template` DROP COLUMN `AIName`;
+
+ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
+
+ALTER TABLE `creature_template` DROP COLUMN `RegenHealth`;
+
 --
 -- Here we go...
 --
@@ -113,11 +119,7 @@ ALTER TABLE `creature_template` DROP COLUMN `mingold`;
 
 ALTER TABLE `creature_template` DROP COLUMN `maxgold`;
 
-ALTER TABLE `creature_template` DROP COLUMN `AIName`;
-
 ALTER TABLE `creature_template` DROP COLUMN `MovementType`;
-
-ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 
 ALTER TABLE `creature_template` DROP COLUMN `HealthModifier`;
 
@@ -148,8 +150,6 @@ ALTER TABLE `creature_template` ADD COLUMN `questitem5` int(11) unsigned NOT NUL
 ALTER TABLE `creature_template` ADD COLUMN `questitem6` int(11) unsigned NOT NULL DEFAULT '0' AFTER `questitem5`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `movementId` `waypointid` int(10) unsigned NOT NULL DEFAULT '0';
-
-ALTER TABLE `creature_template` DROP COLUMN `RegenHealth`;
 
 ALTER TABLE `creature_template` DROP COLUMN `mechanic_immune_mask`;
 
