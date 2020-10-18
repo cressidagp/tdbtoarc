@@ -8,7 +8,6 @@
 	
 	TODO:
 	
-	*) killcredit1-2
 	*) questitem1-6
 	
 ==============================================
@@ -158,17 +157,16 @@ ALTER TABLE `creature_template` DROP COLUMN `spell_school_immune_mask`;
 
 ALTER TABLE `creature_template` DROP COLUMN `flags_extra`;
  
--- ScriptName: leave it be, it wont harm
-
--- VerifiedBuild: leave it be, it wont harm
-
 -- Lets take care of (I):
+
 ALTER TABLE `creature_template` CHANGE COLUMN `type` `type` int(10) unsigned NOT NULL DEFAULT '0' AFTER `flags1`;
 
 -- Lets take care of (H):
+
 ALTER TABLE `creature_template` CHANGE COLUMN `family` `family` int(10) unsigned NOT NULL DEFAULT '0' AFTER `type`;
 
 -- Lets take care of (G):
+
 ALTER TABLE `creature_template` CHANGE COLUMN `rank` `rank` int(10) unsigned NOT NULL DEFAULT '0' AFTER `family`;
 
 /* Lets take care of (A) and (B):
@@ -176,15 +174,21 @@ ALTER TABLE `creature_template` CHANGE COLUMN `rank` `rank` int(10) unsigned NOT
 	fixed all quests like http://www.wowhead.com/?quest=10702 
 	creatures KillCredit 1 and 2 in db set, when killing a mob it count it as kill of that creature 
 	and all creatures from KillCredit fields (these values are in retail SMSG_CREATURE_QUERY_RESPONSE)
+	example: add killcredit = 6 to kobold laborer, and then when you kill a laborer it will count as a vermin.
 */
 
 ALTER TABLE `creature_template` CHANGE COLUMN `KillCredit1` `killcredit1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `rank`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `KillCredit2` `killcredit2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `killcredit1`;
 
 -- Now lets do (C), (D), (E) and (F):
+
 ALTER TABLE `creature_template` CHANGE COLUMN `modelid1` `male_displayid` int(30) unsigned NOT NULL DEFAULT '0' AFTER `killcredit2`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `modelid2` `female_displayid` int(30) unsigned NOT NULL DEFAULT '0' AFTER `male_displayid`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `modelid3` `male_displayid2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `female_displayid`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `modelid4` `female_displayid2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `male_displayid2`;
 
 --
