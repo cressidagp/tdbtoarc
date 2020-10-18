@@ -2,9 +2,17 @@
 ==============================================
 	Title: creature_template to creature_proto
 	
-	From TDB: 335.20091
+	From TDB: 335.20101
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
+
+	TODO:
+	
+	*) extra_a9_flags (not working in arcemu)
+	*) isTrainingDummy
+	*) guardtype
+	*) summonguard
+
 ==============================================
 */
 
@@ -17,21 +25,41 @@ DROP TABLE IF EXISTS `creature_proto`;
 CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
 
 --
--- Here we go...
+-- Drop not supported columns
 --
 
-ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(30) unsigned NOT NULL DEFAULT '0';
-
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_1`;
+
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_2`;
+
 ALTER TABLE `creature_template` DROP COLUMN `difficulty_entry_3`;
 
+ALTER TABLE `creature_template` DROP COLUMN `exp`;
+
+ALTER TABLE `creature_template` DROP COLUMN `RegenHealth`;
+
+ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
+
+ALTER TABLE `creature_template` DROP COLUMN `AIName`;
+
+ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
+
+ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
+
+ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
+
+--
+-- Drop creature_names stuff
+--
+
 ALTER TABLE `creature_template` DROP COLUMN `KillCredit1`;
+
 ALTER TABLE `creature_template` DROP COLUMN `KillCredit2`;
 
--- ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid2`;
+
 ALTER TABLE `creature_template` DROP COLUMN `modelid3`;
+
 ALTER TABLE `creature_template` DROP COLUMN `modelid4`;
 
 ALTER TABLE `creature_template` DROP COLUMN `name`;
@@ -40,18 +68,36 @@ ALTER TABLE `creature_template` DROP COLUMN `subname`;
 
 ALTER TABLE `creature_template` DROP COLUMN `IconName`;
 
+ALTER TABLE `creature_template` DROP COLUMN `family`;
+
+ALTER TABLE `creature_template` DROP COLUMN `RacialLeader`;
+
+ALTER TABLE `creature_template` DROP COLUMN `type_flags`;
+
+ALTER TABLE `creature_template` DROP COLUMN `type`;
+
+ALTER TABLE `creature_template` DROP COLUMN `movementId`;
+
+--
+-- Here we go...
+--
+
+ALTER TABLE `creature_template` CHANGE COLUMN `entry` `entry` int(30) unsigned NOT NULL DEFAULT '0';
+
+-- modelid1: leave it be for now, will be used.
+
 ALTER TABLE `creature_template` DROP COLUMN `gossip_menu_id`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `minlevel` `minlevel` int(30) unsigned NOT NULL;
-ALTER TABLE `creature_template` CHANGE COLUMN `maxlevel` `maxlevel` int(30) unsigned NOT NULL;
 
-ALTER TABLE `creature_template` DROP COLUMN `exp`;
+ALTER TABLE `creature_template` CHANGE COLUMN `maxlevel` `maxlevel` int(30) unsigned NOT NULL;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `faction` `faction` int(30) unsigned NOT NULL DEFAULT '0';
 
 -- Will be filled with precious data in (I)
 
 ALTER TABLE `creature_template` ADD COLUMN `minhealth` int(30) unsigned NOT NULL AFTER `faction`;
+
 ALTER TABLE `creature_template` ADD COLUMN `maxhealth` int(30) unsigned NOT NULL AFTER `minhealth`;
 
 -- Will be filled with precious data in (II)
@@ -67,15 +113,17 @@ ALTER TABLE `creature_template` CHANGE COLUMN `npcflag` `npcflags` int(30) unsig
 -- speed_run: do nothing for now, will return later (B)
 
 ALTER TABLE `creature_template` CHANGE COLUMN `BaseAttackTime` `attacktime` int(30) unsigned NOT NULL DEFAULT '0' AFTER `npcflags`;
+
 UPDATE `creature_template` SET `attacktime` =  `attacktime` * `BaseVariance`;
 
--- ALTER TABLE `creature_template` DROP COLUMN `rank`;
+-- rank: do nothing for now, will be used. 
 
 ALTER TABLE `creature_template` CHANGE COLUMN `dmgschool` `attacktype` int(4) NOT NULL DEFAULT '0' AFTER `attacktime`;
 
 -- Will be filled with precious info in (III)
 
 ALTER TABLE `creature_template` ADD COLUMN `mindamage` float NOT NULL DEFAULT '0' AFTER `attacktype`;
+
 ALTER TABLE `creature_template` ADD COLUMN `maxdamage` float NOT NULL DEFAULT '0' AFTER `mindamage`;
 
 -- Will be filled with precious info in (V)
@@ -83,11 +131,13 @@ ALTER TABLE `creature_template` ADD COLUMN `maxdamage` float NOT NULL DEFAULT '0
 ALTER TABLE `creature_template` ADD COLUMN `can_ranged` int(11) unsigned NOT NULL DEFAULT '0' AFTER `maxdamage`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RangeAttackTime` `rangedattacktime` int(30) unsigned NOT NULL DEFAULT '0';
+
 UPDATE `creature_template` SET `rangedattacktime` = `rangedattacktime` * `RangeVariance`;
 
 -- Will be filled with precious info in (IV)
 
 ALTER TABLE `creature_template` ADD COLUMN `rangedmindamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedattacktime`;
+
 ALTER TABLE `creature_template` ADD COLUMN `rangedmaxdamage` float unsigned NOT NULL DEFAULT '0' AFTER `rangedmindamage`;
 
 -- Will be filled with precious info in (VI)
@@ -119,9 +169,15 @@ ALTER TABLE `creature_template` ADD COLUMN `bounding_radius` float NOT NULL DEFA
 
 ALTER TABLE `creature_template` ADD COLUMN `auras` longtext NOT NULL AFTER `bounding_radius`;
 
--- Never ending story: return to this in (XII)
+/* Boss:
+
+	Normal = 0
+	Boss = 1
+*/
 
 ALTER TABLE `creature_template` ADD COLUMN `boss` int(11) unsigned NOT NULL DEFAULT '0' AFTER `auras`;
+
+UPDATE `creature_template` SET `boss` = 1 WHERE `rank` = 3;
 
 ALTER TABLE `creature_template` DROP COLUMN `BaseVariance`;
 
@@ -134,12 +190,6 @@ ALTER TABLE `creature_template` DROP COLUMN `unit_flags`;
 ALTER TABLE `creature_template` DROP COLUMN `unit_flags2`;
 
 ALTER TABLE `creature_template` DROP COLUMN `dynamicflags`;
-
-ALTER TABLE `creature_template` DROP COLUMN `family`;
-
-ALTER TABLE `creature_template` DROP COLUMN `type`;
-
-ALTER TABLE `creature_template` DROP COLUMN `type_flags`;
 
 ALTER TABLE `creature_template` DROP COLUMN `lootid`;
 
@@ -162,6 +212,7 @@ ALTER TABLE `creature_template` ADD COLUMN `invisibility_type` int(30) unsigned 
 -- Now lets take care of (A) and (B):
 
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `walk_speed` float NOT NULL DEFAULT '2.5' AFTER `invisibility_type`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `run_speed` float NOT NULL DEFAULT '8' AFTER `walk_speed`;
 
 UPDATE `creature_template` SET `walk_speed` = '2.5' WHERE `walk_speed` = 1;
@@ -169,8 +220,6 @@ UPDATE `creature_template` SET `walk_speed` = '2.5' WHERE `walk_speed` = 1;
 -- And again... return to this in (XIV)
 
 ALTER TABLE `creature_template` ADD COLUMN `fly_speed` float NOT NULL DEFAULT '14' AFTER `run_speed`;
-
--- More pain... return to this in (XV)
 
 ALTER TABLE `creature_template` ADD COLUMN `extra_a9_flags` int(30) NOT NULL DEFAULT '0' AFTER `fly_speed`;
 
@@ -195,11 +244,7 @@ ALTER TABLE `creature_template` ADD COLUMN `guardtype` int(10) unsigned NOT NULL
 -- Almost there (XIX)
 ALTER TABLE `creature_template` ADD COLUMN `summonguard` int(10) unsigned NOT NULL DEFAULT '0' AFTER `guardtype`;
 
-ALTER TABLE `creature_template` DROP COLUMN `AIName`;
-
 ALTER TABLE `creature_template` DROP COLUMN `MovementType`;
-
-ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 
 -- ALTER TABLE `creature_template` DROP COLUMN `HealthModifier`;
 
@@ -209,14 +254,6 @@ ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 
 -- ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
 
-ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
-
-ALTER TABLE `creature_template` DROP COLUMN `RacialLeader`;
-
-ALTER TABLE `creature_template` DROP COLUMN `movementId`;
-
-ALTER TABLE `creature_template` DROP COLUMN `RegenHealth`;
-
 -- ALTER TABLE `creature_template` DROP COLUMN `mechanic_immune_mask`;
 
 ALTER TABLE `creature_template` DROP COLUMN `spell_school_immune_mask`;
@@ -225,10 +262,6 @@ ALTER TABLE `creature_template` DROP COLUMN `flags_extra`;
 
 -- Last one (XX)
 ALTER TABLE `creature_template` ADD COLUMN `rooted` int(10) unsigned NOT NULL DEFAULT '0' AFTER `summonguard`;
-
--- ScriptName: leave it be, it wont harm
-
--- VerifiedBuild: leave it be, it wont harm
 
 -- Now lets take care of (C) and (D):
 ALTER TABLE `creature_template` CHANGE COLUMN `PetSpellDataId` `spelldataid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `summonguard`;
@@ -390,20 +423,11 @@ WHERE creature_template.entry = creature_template_addon.entry;
 
 -- TODO: set auras on spawnid (arcemu dont have this... go in lua?)
 
--- (XII): `boss`
--- ArcEmu = { normal, boss }
--- TDB = { normal, elite, rare elite, boss, rare }
-
-UPDATE `creature_template` SET `boss` = 1 WHERE `rank` = 3;
-
 -- (XIII): `invisibility_type` ( TODO )
 -- Aparantly TDB didnt have this
 
 -- (XIV): `fly_speed` ( TODO )
 -- Aparantly TDB didnt have this
-
--- (XV): `extra_a9_flags`
--- Seems its not used by arcemu at the moment
 
 -- (XVI): spell
 
@@ -478,8 +502,6 @@ ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
 ALTER TABLE `creature_template` DROP COLUMN `rank`;
 ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
-ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
-ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 --
 -- The End: rename to kickass way
