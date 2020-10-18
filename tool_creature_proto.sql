@@ -9,6 +9,7 @@
 	TODO:
 	
 	*) extra_a9_flags (not working in arcemu)
+	*) spell_flags (not working in arcemu)
 	*) isTrainingDummy
 	*) guardtype
 	*) summonguard
@@ -43,8 +44,6 @@ ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 ALTER TABLE `creature_template` DROP COLUMN `AIName`;
 
 ALTER TABLE `creature_template` DROP COLUMN `ScriptName`;
-
-ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
 
@@ -502,12 +501,15 @@ ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `modelid1`;
 ALTER TABLE `creature_template` DROP COLUMN `rank`;
 ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
+ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 --
 -- The End: rename to kickass way
 --
 
 RENAME TABLE `creature_template` TO `creature_proto`;
+
+ALTER TABLE `creature_proto` ADD PRIMARY KEY (`entry`);
 
 --
 -- Rename our backup table
