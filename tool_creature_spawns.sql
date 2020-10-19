@@ -2,9 +2,7 @@
 ==============================================
 	Title: creature to creature_spawns
 	
-	WARNING: this one is very slow
-	
-	From TDB: 335.20091
+	From TDB: 335.20101
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -25,24 +23,8 @@ CREATE TABLE `game_event_creature2` SELECT * FROM `game_event_creature`;
 -- Unload all transports
 --
 
-DELETE FROM `creature` WHERE `map` = 582;
-DELETE FROM `creature` WHERE `map` = 584;
-DELETE FROM `creature` WHERE `map` = 586;
-DELETE FROM `creature` WHERE `map` = 587;
-DELETE FROM `creature` WHERE `map` = 588;
-DELETE FROM `creature` WHERE `map` = 589;
-DELETE FROM `creature` WHERE `map` = 590;
-DELETE FROM `creature` WHERE `map` = 591;
-DELETE FROM `creature` WHERE `map` = 593;
-DELETE FROM `creature` WHERE `map` = 610;
-DELETE FROM `creature` WHERE `map` = 612;
-DELETE FROM `creature` WHERE `map` = 613;
-DELETE FROM `creature` WHERE `map` = 614;
-DELETE FROM `creature` WHERE `map` = 620;
-DELETE FROM `creature` WHERE `map` = 621;
-DELETE FROM `creature` WHERE `map` = 622;
-DELETE FROM `creature` WHERE `map` = 623;
-DELETE FROM `creature` WHERE `map` = 647;
+DELETE FROM `creature` WHERE `map` 
+IN (582,584,586,587,588,589,590,591,593,594,610,612,613,614,620,621,622,623,647);
 
 --
 -- Goodbay events
