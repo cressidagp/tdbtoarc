@@ -6,6 +6,14 @@
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
+	TODO:
+	
+	*) CanFly
+	*) creature.equipment_id = -1 (random)
+	*) death_state
+	*) bytes0 (WTF IS THIS?)
+	
+	
 ==============================================
 */
 
@@ -46,6 +54,28 @@ ALTER TABLE `creature` DROP COLUMN `eventEntry`;
 DROP TABLE IF EXISTS `game_event_creature`;
 
 --
+-- Drop not supported columns
+--
+
+ALTER TABLE `creature` DROP COLUMN `zoneId`;
+
+ALTER TABLE `creature` DROP COLUMN `areaId`;
+
+ALTER TABLE `creature` DROP COLUMN `spawnMask`;
+
+ALTER TABLE `creature` DROP COLUMN `wander_distance`;
+
+ALTER TABLE `creature` DROP COLUMN `curhealth`;
+
+ALTER TABLE `creature` DROP COLUMN `curmana`;
+
+--
+-- Drop creature_proto stuff
+--
+
+ALTER TABLE `creature` DROP COLUMN `spawntimesecs`;
+
+--
 -- Here we go...
 --
 
@@ -55,12 +85,6 @@ DROP TABLE IF EXISTS `game_event_creature`;
 
 ALTER TABLE `creature` CHANGE COLUMN `map` `map` int(30) NOT NULL;
 
-ALTER TABLE `creature` DROP COLUMN `zoneId`;
-
-ALTER TABLE `creature` DROP COLUMN `areaId`;
-
-ALTER TABLE `creature` DROP COLUMN `spawnMask`; -- Not implemented by arcemu
-
 -- phaseMask: change this to phase later (C)
 
 -- modelid: change this to displayid later (D)
@@ -68,14 +92,15 @@ ALTER TABLE `creature` DROP COLUMN `spawnMask`; -- Not implemented by arcemu
 -- equipment_id: do nothing for now (E)
 
 ALTER TABLE `creature` CHANGE COLUMN `position_x` `position_x` float NOT NULL AFTER `map`;
+
 ALTER TABLE `creature` CHANGE COLUMN `position_y` `position_y` float NOT NULL AFTER `position_x`;
+
 ALTER TABLE `creature` CHANGE COLUMN `position_z` `position_z` float NOT NULL AFTER `position_y`;
+
 ALTER TABLE `creature` CHANGE COLUMN `orientation` `orientation` float NOT NULL AFTER `position_z`;
-ALTER TABLE `creature` DROP COLUMN `spawntimesecs`; -- The respawn time, in seconds, of the creature (not implemented by arcemu)
-ALTER TABLE `creature` DROP COLUMN `wander_distance`; -- If creature has random waypoints how far he can walk from spawnpoint (not implemented by arcemu)
+
 ALTER TABLE `creature` DROP COLUMN `currentwaypoint`; -- The current waypoint that the creature is on, if any (not implemented by arcemu)
-ALTER TABLE `creature` DROP COLUMN `curhealth`; -- The health that the creature will spawn with (not implemented by arcemu, however we have lua)
-ALTER TABLE `creature` DROP COLUMN `curmana`; -- The mana that the creature will spawn with (not implemented by arcemu, however we have lua)
+
 ALTER TABLE `creature` CHANGE COLUMN `MovementType` `movetype` int(30) NOT NULL DEFAULT '0' AFTER `orientation`;
 
 -- Now take care of (D)
