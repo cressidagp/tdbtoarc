@@ -12,7 +12,10 @@
 	*) creature.equipment_id = -1 (random)
 	*) death_state
 	*) bytes0 (WTF IS THIS?)
-	
+	*) npc_respawn_link (THIS IS WORKING?)
+	*) channel_spell
+	*) channel_target_sqlid
+	*) channel_target_sqlid_creature
 	
 ==============================================
 */
@@ -51,7 +54,7 @@ DELETE FROM `creature` WHERE `eventEntry` != 0;
 
 ALTER TABLE `creature` DROP COLUMN `eventEntry`;
 
-DROP TABLE IF EXISTS `game_event_creature`;
+DROP TABLE IF EXISTS `game_event_creature`; -- Not needed anymore
 
 --
 -- Drop not supported columns
@@ -68,6 +71,12 @@ ALTER TABLE `creature` DROP COLUMN `wander_distance`;
 ALTER TABLE `creature` DROP COLUMN `curhealth`;
 
 ALTER TABLE `creature` DROP COLUMN `curmana`;
+
+ALTER TABLE `creature` DROP COLUMN `currentwaypoint`;
+
+ALTER TABLE `creature` DROP COLUMN `ScriptName`;
+
+ALTER TABLE `creature` DROP COLUMN `VerifiedBuild`;
 
 --
 -- Drop creature_proto stuff
@@ -99,8 +108,6 @@ ALTER TABLE `creature` CHANGE COLUMN `position_z` `position_z` float NOT NULL AF
 
 ALTER TABLE `creature` CHANGE COLUMN `orientation` `orientation` float NOT NULL AFTER `position_z`;
 
-ALTER TABLE `creature` DROP COLUMN `currentwaypoint`; -- The current waypoint that the creature is on, if any (not implemented by arcemu)
-
 ALTER TABLE `creature` CHANGE COLUMN `MovementType` `movetype` int(30) NOT NULL DEFAULT '0' AFTER `orientation`;
 
 -- Now take care of (D)
@@ -126,38 +133,52 @@ SET creature.displayid = creature_template.modelid4
 WHERE creature.id = creature_template.entry 
 AND (creature.displayid = 0 and creature_template.modelid1 = 0 and creature_template.modelid2 = 0 and creature_template.modelid3 = 0 and creature_template.modelid4 != 0);
 
--- TODO: fill 32000 displayid
+-- TODO: fill 32000 displayid (got a extra tool for this, need to find a SQL way)
 
--- Kickass emu have this here, goin to fill it in (*)
-ALTER TABLE `creature` ADD COLUMN `faction` int(30) NOT NULL DEFAULT '14' AFTER `displayid`;
+ALTER TABLE `creature` ADD COLUMN `faction` int(30) NOT NULL DEFAULT '14' AFTER `displayid`; -- goin to fill it in (*)
 
 ALTER TABLE `creature` DROP COLUMN `npcflag`;
+
 ALTER TABLE `creature` DROP COLUMN `unit_flags`;
+
 ALTER TABLE `creature` CHANGE COLUMN `dynamicflags` `flags` int(30) NOT NULL DEFAULT '0' AFTER `faction`; -- This are arcemu unit_field_flags
 
 ALTER TABLE `creature` ADD COLUMN `bytes0` int(30) NOT NULL DEFAULT '0' AFTER `flags`; -- WTF ARE THIS???
+
 ALTER TABLE `creature` ADD COLUMN `bytes1` int(30) NOT NULL DEFAULT '0' AFTER `bytes0`; -- Stand State
+
 ALTER TABLE `creature` ADD COLUMN `bytes2` int(30) NOT NULL DEFAULT '0' AFTER `bytes1`; -- Sheath Info
+
 ALTER TABLE `creature` ADD COLUMN `emote_state` int(30) NOT NULL DEFAULT '0' AFTER `bytes2`;
+
 ALTER TABLE `creature` ADD COLUMN `npc_respawn_link` int(30) NOT NULL DEFAULT '0' AFTER `emote_state`;
+
 ALTER TABLE `creature` ADD COLUMN `channel_spell` int(30) NOT NULL DEFAULT '0' AFTER `npc_respawn_link`;
+
 ALTER TABLE `creature` ADD COLUMN `channel_target_sqlid` int(30) NOT NULL DEFAULT '0' AFTER `channel_spell`;
+
 ALTER TABLE `creature` ADD COLUMN `channel_target_sqlid_creature` int(30) NOT NULL DEFAULT '0' AFTER `channel_target_sqlid`;
+
 ALTER TABLE `creature` ADD COLUMN `standstate` int(10) NOT NULL DEFAULT '0' AFTER `channel_target_sqlid_creature`;
+
 ALTER TABLE `creature` ADD COLUMN `death_state` tinyint(3) unsigned NOT NULL DEFAULT '0' AFTER `standstate`;
+
 ALTER TABLE `creature` ADD COLUMN `mountdisplayid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `death_state`;
+
 ALTER TABLE `creature` ADD COLUMN `slot1item` int(10) unsigned NOT NULL DEFAULT '0' AFTER `mountdisplayid`;
+
 ALTER TABLE `creature` ADD COLUMN `slot2item` int(10) unsigned NOT NULL DEFAULT '0' AFTER `slot1item`;
+
 ALTER TABLE `creature` ADD COLUMN `slot3item` int(10) unsigned NOT NULL DEFAULT '0' AFTER `slot2item`;
+
 ALTER TABLE `creature` ADD COLUMN `CanFly` smallint(3) NOT NULL DEFAULT '0' AFTER `slot3item`;
 
 -- Now take care of (C)
+
 ALTER TABLE `creature` CHANGE COLUMN  `phaseMask` `phase` int(10) unsigned NOT NULL DEFAULT '1' AFTER `CanFly`;
 
-ALTER TABLE `creature` DROP COLUMN `ScriptName`;
-ALTER TABLE `creature` DROP COLUMN `VerifiedBuild`;
-
 -- Lets fill (*)
+
 UPDATE creature, creature_template
 SET creature.faction = creature_template.faction 
 WHERE creature.id = creature_template.entry;
@@ -165,6 +186,7 @@ WHERE creature.id = creature_template.entry;
 -- TODO: bytes0
 
 -- bytes1:
+
 UPDATE creature, creature_template_addon
 SET creature.bytes1 = creature_template_addon.bytes1
 WHERE creature.id = creature_template_addon.entry;
@@ -174,6 +196,7 @@ SET creature.bytes1 = creature_addon.bytes1
 WHERE creature.guid = creature_addon.guid;
 
 -- bytes2:
+
 UPDATE creature, creature_template_addon
 SET creature.bytes2 = creature_template_addon.bytes2
 WHERE creature.id = creature_template_addon.entry;
@@ -183,6 +206,7 @@ SET creature.bytes2 = creature_addon.bytes2
 WHERE creature.guid = creature_addon.guid;
 
 -- emote_state:
+
 UPDATE creature, creature_template_addon
 SET creature.emote_state = creature_template_addon.emote
 WHERE creature.id = creature_template_addon.entry;
@@ -208,6 +232,7 @@ WHERE creature.guid = creature_addon.guid;
 -- TODO: `death_state`
 
 -- mountdisplayid:
+
 UPDATE creature, creature_template_addon
 SET creature.mountdisplayid = creature_template_addon.mount
 WHERE creature.id = creature_template_addon.entry;
@@ -217,6 +242,7 @@ SET creature.mountdisplayid = creature_addon.mount
 WHERE creature.guid = creature_addon.guid;
 
 -- Now take care of (E)
+
 UPDATE creature, creature_equip_template
 SET creature.slot1item = creature_equip_template.ItemID1
 WHERE (creature.id = creature_equip_template.CreatureID AND creature.equipment_id = 1);
@@ -236,9 +262,11 @@ ALTER TABLE `creature` DROP COLUMN `equipment_id`;
 -- TODO: CanFly
 
 -- Take care of (B)
+
 ALTER TABLE `creature` CHANGE COLUMN `id` `entry` int(30) NOT NULL;
 
 -- Take care of (A)
+
 ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
 --
