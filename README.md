@@ -1,7 +1,7 @@
 # tdbtoarc
 This repo its for learning SQL while i have fun.
 
-WARNING: this stuff its experimental and eventually i can find something than cant be done. So if you have a database them keep developing it.
+WARNING: this stuff its experimental and eventually i can find something than cant be done. So if you have a database then keep developing it.
 
 *) Credits to:
             - TDB Team for his wonderfull database job.
