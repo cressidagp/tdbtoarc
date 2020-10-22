@@ -8,6 +8,7 @@
 	
 	TODO:
 	
+	*) STANDSTATE_SUBMERGE (not implemented in core)
 	*) CanFly
 	*) creature.equipment_id = -1 (random)
 	*) death_state
@@ -169,9 +170,43 @@ ALTER TABLE `creature` ADD COLUMN `channel_target_sqlid` int(30) NOT NULL DEFAUL
 
 ALTER TABLE `creature` ADD COLUMN `channel_target_sqlid_creature` int(30) NOT NULL DEFAULT '0' AFTER `channel_target_sqlid`;
 
+/* standstate (seems to override bytes1):
+
+    STANDSTATE_STAND			 = 0
+    STANDSTATE_SIT				 = 1
+    STANDSTATE_SIT_CHAIR		 = 2
+    STANDSTATE_SLEEP			 = 3
+    STANDSTATE_SIT_LOW_CHAIR	 = 4
+    STANDSTATE_SIT_MEDIUM_CHAIR  = 5
+    STANDSTATE_SIT_HIGH_CHAIR    = 6
+    STANDSTATE_DEAD				 = 7
+    STANDSTATE_KNEEL			 = 8
+	STANDSTATE_SUBMERGE 	     = 9 				// NOT IMPLEMENTED: Submerges the creature below the ground
+    STANDSTATE_FORM_ALL          = 0x00FF0000
+    STANDSTATE_FLAG_ALWAYS_STAND = 0x01             // byte 4
+    STANDSTATE_FLAG_CREEP        = 0x02000000
+    STANDSTATE_FLAG_UNTRACKABLE  = 0x04000000
+    STANDSTATE_FLAG_ALL          = 0xFF000000
+	
+*/
+
 ALTER TABLE `creature` ADD COLUMN `standstate` int(10) NOT NULL DEFAULT '0' AFTER `channel_target_sqlid_creature`;
 
+UPDATE creature, creature_addon
+SET creature.standstate = creature_addon.bytes1
+WHERE creature.guid = creature_addon.guid;
+
+/* death_state:
+
+    CREATURE_STATE_ALIVE 		= 0	// no special death state
+    CREATURE_STATE_APPEAR_DEAD  = 1	// these creatures are actually alive but appears as dead for client
+    CREATURE_STATE_DEAD 		= 2	// these creatures are dead
+	
+*/
+
 ALTER TABLE `creature` ADD COLUMN `death_state` tinyint(3) unsigned NOT NULL DEFAULT '0' AFTER `standstate`;
+
+-- TODO: fill me
 
 ALTER TABLE `creature` ADD COLUMN `mountdisplayid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `death_state`;
 
@@ -201,10 +236,6 @@ UPDATE creature, creature_template_addon
 SET creature.bytes1 = creature_template_addon.bytes1
 WHERE creature.id = creature_template_addon.entry;
 
-UPDATE creature, creature_addon
-SET creature.bytes1 = creature_addon.bytes1
-WHERE creature.guid = creature_addon.guid;
-
 -- bytes2:
 
 UPDATE creature, creature_template_addon
@@ -232,14 +263,6 @@ WHERE creature.guid = creature_addon.guid;
 -- TODO: `channel_target_sqlid`
 
 -- TODO: `channel_target_sqlid_creature`
-
--- standstate: WTF with this?
--- if bytes1 != standstate will do nothing
--- if bytes1 = sit and standtate = 0 he will sit
--- if bytes1 = 0 and standstate = 1 he will sit -.-
--- so why 2 columns who do the same?
-
--- TODO: `death_state`
 
 -- mountdisplayid:
 
