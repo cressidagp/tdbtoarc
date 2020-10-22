@@ -9,7 +9,7 @@
 	TODO:
 	
 	*) STANDSTATE_SUBMERGE (not implemented in core)
-	*) CanFly
+	*) CanFly overrides on creature_spawns (not implemented in core)
 	*) creature.equipment_id = -1 (random)
 	*) death_state
 	*) bytes0 (WTF IS THIS?)
@@ -236,7 +236,19 @@ UPDATE creature, creature_template_addon
 SET creature.bytes1 = creature_template_addon.bytes1
 WHERE creature.id = creature_template_addon.entry;
 
--- bytes2:
+/* bytes2:
+	
+	STATE_UNARMED = 0    // not prepared weapon
+	STATE_MELEE   = 1    // prepared melee weapon
+	STATE_RANGED  = 2    // prepared ranged weapon
+	              = 4027 // will make the npc hold there items in there hands instead of sheaths.
+	not tested:
+	Twohands = 256 
+	Staffs = 512
+	Onehand = 789
+	Shields = 1038
+	
+*/
 
 UPDATE creature, creature_template_addon
 SET creature.bytes2 = creature_template_addon.bytes2
@@ -244,7 +256,7 @@ WHERE creature.id = creature_template_addon.entry;
 
 UPDATE creature, creature_addon
 SET creature.bytes2 = creature_addon.bytes2
-WHERE creature.guid = creature_addon.guid;
+WHERE creature.guid = creature_addon.guid and creature_addon.bytes2 != 0;
 
 -- emote_state:
 
@@ -254,7 +266,7 @@ WHERE creature.id = creature_template_addon.entry;
 
 UPDATE creature, creature_addon
 SET creature.emote_state = creature_addon.emote
-WHERE creature.guid = creature_addon.guid;
+WHERE creature.guid = creature_addon.guid and creature_addon.emote != 0;
 
 -- TODO: `npc_respawn_link`
 
@@ -292,13 +304,20 @@ WHERE (creature.id = creature_equip_template.CreatureID AND creature.equipment_i
 
 ALTER TABLE `creature` DROP COLUMN `equipment_id`;
 
--- TODO: CanFly
+/* CanFly:
 
--- Take care of (B)
+	DISABLE_FLYING = 0
+	ENABLE_FLYING  = 1
+	
+*/
+
+UPDATE creature, creature_template_movement
+SET creature.CanFly = creature_template_movement.Flight
+WHERE creature.id = creature_template_movement.CreatureId;
+
+-- Take care of (B) and (A)
 
 ALTER TABLE `creature` CHANGE COLUMN `id` `entry` int(30) NOT NULL;
-
--- Take care of (A)
 
 ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
