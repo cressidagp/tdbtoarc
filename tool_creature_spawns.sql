@@ -216,7 +216,18 @@ ALTER TABLE `creature` ADD COLUMN `slot2item` int(10) unsigned NOT NULL DEFAULT 
 
 ALTER TABLE `creature` ADD COLUMN `slot3item` int(10) unsigned NOT NULL DEFAULT '0' AFTER `slot2item`;
 
+/* CanFly:
+
+	DISABLE_FLYING = 0
+	ENABLE_FLYING  = 1
+	
+*/
+
 ALTER TABLE `creature` ADD COLUMN `CanFly` smallint(3) NOT NULL DEFAULT '0' AFTER `slot3item`;
+
+UPDATE creature, creature_template_movement
+SET creature.CanFly = creature_template_movement.Flight
+WHERE creature.id = creature_template_movement.CreatureId;
 
 -- Now take care of (C)
 
@@ -304,17 +315,6 @@ WHERE (creature.id = creature_equip_template.CreatureID AND creature.equipment_i
 
 ALTER TABLE `creature` DROP COLUMN `equipment_id`;
 
-/* CanFly:
-
-	DISABLE_FLYING = 0
-	ENABLE_FLYING  = 1
-	
-*/
-
-UPDATE creature, creature_template_movement
-SET creature.CanFly = creature_template_movement.Flight
-WHERE creature.id = creature_template_movement.CreatureId;
-
 -- Take care of (B) and (A)
 
 ALTER TABLE `creature` CHANGE COLUMN `id` `entry` int(30) NOT NULL;
@@ -324,6 +324,10 @@ ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_
 --
 -- Rename to kickass way
 --
+
+ALTER TABLE `creature` DROP INDEX `idx_map`;
+
+ALTER TABLE `creature` DROP INDEX `idx_id`;
 
 RENAME TABLE `creature` TO `creature_spawns`;
 
