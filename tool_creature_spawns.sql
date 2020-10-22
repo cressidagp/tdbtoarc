@@ -84,6 +84,8 @@ ALTER TABLE `creature` DROP COLUMN `VerifiedBuild`;
 
 ALTER TABLE `creature` DROP COLUMN `spawntimesecs`;
 
+ALTER TABLE `creature` DROP COLUMN `npcflag`;
+
 --
 -- Here we go...
 --
@@ -137,11 +139,19 @@ AND (creature.displayid = 0 and creature_template.modelid1 = 0 and creature_temp
 
 ALTER TABLE `creature` ADD COLUMN `faction` int(30) NOT NULL DEFAULT '14' AFTER `displayid`; -- goin to fill it in (*)
 
-ALTER TABLE `creature` DROP COLUMN `npcflag`;
+ALTER TABLE `creature` DROP COLUMN `dynamicflags`;
 
-ALTER TABLE `creature` DROP COLUMN `unit_flags`;
+ALTER TABLE `creature` ADD COLUMN `flags` int(30) NOT NULL DEFAULT '0' AFTER `faction`;
 
-ALTER TABLE `creature` CHANGE COLUMN `dynamicflags` `flags` int(30) NOT NULL DEFAULT '0' AFTER `faction`; -- This are arcemu unit_field_flags
+UPDATE creature, creature_template
+SET creature.flags = creature_template.unit_flags
+WHERE creature.id = creature_template.entry;
+
+ALTER TABLE `creature` CHANGE COLUMN `unit_flags` `temp_flags` int(30) NOT NULL DEFAULT '0';
+
+UPDATE `creature` SET `flags` = `temp_flags` WHERE `temp_flags` != 0;
+
+ALTER TABLE `creature` DROP COLUMN `temp_flags`;
 
 ALTER TABLE `creature` ADD COLUMN `bytes0` int(30) NOT NULL DEFAULT '0' AFTER `flags`; -- WTF ARE THIS???
 
