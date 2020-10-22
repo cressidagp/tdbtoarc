@@ -8,7 +8,7 @@
 	
 	TODO:
 	
-	*) questitem1-6
+	*) questitem1-6 (WTF IS THIS?)
 	
 ==============================================
 */
@@ -37,6 +37,36 @@ ALTER TABLE `creature_template` DROP COLUMN `HoverHeight`;
 
 ALTER TABLE `creature_template` DROP COLUMN `RegenHealth`;
 
+ALTER TABLE `creature_template` DROP COLUMN `exp`;
+
+ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
+
+ALTER TABLE `creature_template` DROP COLUMN `gossip_menu_id`;
+
+--
+-- Drop creature_proto stuff
+--
+
+ALTER TABLE `creature_template` DROP COLUMN `npcflag`;
+
+ALTER TABLE `creature_template` DROP COLUMN `scale`;
+
+ALTER TABLE `creature_template` DROP COLUMN `faction`;
+
+ALTER TABLE `creature_template` DROP COLUMN `minlevel`;
+
+ALTER TABLE `creature_template` DROP COLUMN `maxlevel`;
+
+ALTER TABLE `creature_template` DROP COLUMN `VehicleId`;
+
+ALTER TABLE `creature_template` DROP COLUMN `PetSpellDataId`;
+
+--
+-- Drop creature_spawns stuff
+--
+
+ALTER TABLE `creature_template` DROP COLUMN `MovementType`;
+
 --
 -- Here we go...
 --
@@ -61,23 +91,9 @@ ALTER TABLE `creature_template` CHANGE COLUMN `subname` `subname` varchar(100); 
 
 ALTER TABLE `creature_template` CHANGE COLUMN `IconName` `info_str` varchar(500); -- NOT NULL
 
-ALTER TABLE `creature_template` DROP COLUMN `gossip_menu_id`;
-
-ALTER TABLE `creature_template` DROP COLUMN `minlevel`;
-
-ALTER TABLE `creature_template` DROP COLUMN `maxlevel`;
-
-ALTER TABLE `creature_template` DROP COLUMN `exp`;
-
-ALTER TABLE `creature_template` DROP COLUMN `faction`;
-
-ALTER TABLE `creature_template` DROP COLUMN `npcflag`;
-
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `unknown_float1` float NOT NULL DEFAULT '1';
 
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `unknown_float2` float NOT NULL DEFAULT '1';
-
-ALTER TABLE `creature_template` DROP COLUMN `scale`;
 
 -- rank: return to this later (G)
 
@@ -111,15 +127,9 @@ ALTER TABLE `creature_template` DROP COLUMN `pickpocketloot`;
 
 ALTER TABLE `creature_template` DROP COLUMN `skinloot`;
 
-ALTER TABLE `creature_template` DROP COLUMN `PetSpellDataId`;
-
-ALTER TABLE `creature_template` DROP COLUMN `VehicleId`;
-
 ALTER TABLE `creature_template` DROP COLUMN `mingold`;
 
 ALTER TABLE `creature_template` DROP COLUMN `maxgold`;
-
-ALTER TABLE `creature_template` DROP COLUMN `MovementType`;
 
 ALTER TABLE `creature_template` DROP COLUMN `HealthModifier`;
 
@@ -128,8 +138,6 @@ ALTER TABLE `creature_template` DROP COLUMN `ManaModifier`;
 ALTER TABLE `creature_template` DROP COLUMN `ArmorModifier`;
 
 ALTER TABLE `creature_template` DROP COLUMN `DamageModifier`;
-
-ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
 
 ALTER TABLE `creature_template` CHANGE COLUMN `RacialLeader` `leader` tinyint(3) unsigned NOT NULL DEFAULT '0';
 
