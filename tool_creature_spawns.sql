@@ -8,8 +8,8 @@
 	
 	TODO:
 	
+	*) research if canfly its used by hovers in arcemu, like that spiders in icc
 	*) STANDSTATE_SUBMERGE (not implemented in core)
-	*) CanFly overrides on creature_spawns (not implemented in core)
 	*) creature.equipment_id = -1 (random)
 	*) death_state
 	*) bytes0 (WTF IS THIS?)
@@ -188,6 +188,11 @@ ALTER TABLE `creature` ADD COLUMN `channel_target_sqlid_creature` int(30) NOT NU
     STANDSTATE_FLAG_UNTRACKABLE  = 0x04000000
     STANDSTATE_FLAG_ALL          = 0xFF000000
 	
+	need to test:
+	131072 = stealth mode
+	33554432 = Hover mode    use this spiders 36725
+	50331648 = Hover mode 2
+	
 */
 
 ALTER TABLE `creature` ADD COLUMN `standstate` int(10) NOT NULL DEFAULT '0' AFTER `channel_target_sqlid_creature`;
@@ -218,8 +223,9 @@ ALTER TABLE `creature` ADD COLUMN `slot3item` int(10) unsigned NOT NULL DEFAULT 
 
 /* CanFly:
 
-	DISABLE_FLYING = 0
-	ENABLE_FLYING  = 1
+	DISABLE_FLYING = 0  // if spawn in air he will fall
+	ENABLE_FLYING  = 1  // in air he will fly and will move
+	HOVER		   = 2  // float but dont move
 	
 */
 
@@ -228,6 +234,14 @@ ALTER TABLE `creature` ADD COLUMN `CanFly` smallint(3) NOT NULL DEFAULT '0' AFTE
 UPDATE creature, creature_template_movement
 SET creature.CanFly = creature_template_movement.Flight
 WHERE creature.id = creature_template_movement.CreatureId;
+
+UPDATE creature, creature_movement_override
+SET creature.CanFly = creature_movement_override.Flight
+WHERE creature.guid = creature_movement_override.SpawnId;
+
+UPDATE `creature` SET `CanFly` = 0 WHERE `CanFly` = 1; -- This are hovers in TDB
+
+UPDATE `creature` SET `CanFly` = 1 WHERE `CanFly` = 2; -- This are CanFly on TDB
 
 -- Now take care of (C)
 
