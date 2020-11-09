@@ -223,9 +223,9 @@ ALTER TABLE `creature` ADD COLUMN `slot3item` int(10) unsigned NOT NULL DEFAULT 
 
 /* CanFly:
 
-	DISABLE_FLYING = 0  // if spawn in air he will fall
-	ENABLE_FLYING  = 1  // in air he will fly and will move
-	HOVER		   = 2  // float but dont move
+	0: always landed
+	1: spawned in air with flying animation
+	2: spawned in air with landing animation (on gameobject) aka DisabledGravity on trinity (1)
 	
 */
 
@@ -239,9 +239,13 @@ UPDATE creature, creature_movement_override
 SET creature.CanFly = creature_movement_override.Flight
 WHERE creature.guid = creature_movement_override.SpawnId;
 
-UPDATE `creature` SET `CanFly` = 0 WHERE `CanFly` = 1; -- This are hovers in TDB
+UPDATE `creature` SET `CanFly` = 3 WHERE `CanFly` = 1; -- This are hovers in TDB
 
-UPDATE `creature` SET `CanFly` = 1 WHERE `CanFly` = 2; -- This are CanFly on TDB
+UPDATE `creature` SET `CanFly` = 4 WHERE `CanFly` = 2; -- This are CanFly on TDB
+
+UPDATE `creature` SET `CanFly` = 1 WHERE `CanFly` = 4;
+
+UPDATE `creature` SET `CanFly` = 2 WHERE `CanFly` = 3;
 
 -- Now take care of (C)
 
