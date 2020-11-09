@@ -43,6 +43,8 @@ ALTER TABLE `creature_template` DROP COLUMN `ExperienceModifier`;
 
 ALTER TABLE `creature_template` DROP COLUMN `gossip_menu_id`;
 
+ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
+
 --
 -- Drop creature_proto stuff
 --
@@ -60,6 +62,8 @@ ALTER TABLE `creature_template` DROP COLUMN `maxlevel`;
 ALTER TABLE `creature_template` DROP COLUMN `VehicleId`;
 
 ALTER TABLE `creature_template` DROP COLUMN `PetSpellDataId`;
+
+ALTER TABLE `creature_template` DROP COLUMN `dmgschool`;
 
 --
 -- Drop creature_spawns stuff
@@ -97,8 +101,6 @@ ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `unknown_float2` float
 
 -- rank: return to this later (G)
 
-ALTER TABLE `creature_template` DROP COLUMN `dmgschool`;
-
 ALTER TABLE `creature_template` DROP COLUMN `BaseAttackTime`;
 
 ALTER TABLE `creature_template` DROP COLUMN `RangeAttackTime`;
@@ -106,8 +108,6 @@ ALTER TABLE `creature_template` DROP COLUMN `RangeAttackTime`;
 ALTER TABLE `creature_template` DROP COLUMN `BaseVariance`;
 
 ALTER TABLE `creature_template` DROP COLUMN `RangeVariance`;
-
-ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
 
 ALTER TABLE `creature_template` DROP COLUMN `unit_flags`;
 

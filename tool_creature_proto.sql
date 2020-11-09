@@ -150,10 +150,15 @@ ALTER TABLE `creature_template` ADD COLUMN `armor` int(30) unsigned NOT NULL DEF
 -- Lets add kick ass emu wonderfull columns: will return to this in (VIII)
 
 ALTER TABLE `creature_template` ADD COLUMN `resistance1` int(30) unsigned NOT NULL DEFAULT '0' AFTER `armor`;
+
 ALTER TABLE `creature_template` ADD COLUMN `resistance2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance1`;
+
 ALTER TABLE `creature_template` ADD COLUMN `resistance3` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance2`;
+
 ALTER TABLE `creature_template` ADD COLUMN `resistance4` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance3`;
+
 ALTER TABLE `creature_template` ADD COLUMN `resistance5` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance4`;
+
 ALTER TABLE `creature_template` ADD COLUMN `resistance6` int(30) unsigned NOT NULL DEFAULT '0' AFTER `resistance5`;
 
 -- More kick ass emu column: return to this in (IX)
@@ -172,6 +177,7 @@ ALTER TABLE `creature_template` ADD COLUMN `auras` longtext NOT NULL AFTER `boun
 
 	Normal = 0
 	Boss = 1
+	
 */
 
 ALTER TABLE `creature_template` ADD COLUMN `boss` int(11) unsigned NOT NULL DEFAULT '0' AFTER `auras`;
@@ -225,13 +231,21 @@ ALTER TABLE `creature_template` ADD COLUMN `extra_a9_flags` int(30) NOT NULL DEF
 -- And yet... (XVI)
 
 ALTER TABLE `creature_template` ADD COLUMN `spell1` int(30) unsigned NOT NULL DEFAULT '0' AFTER `extra_a9_flags`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell2` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell1`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell3` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell2`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell4` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell3`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell5` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell4`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell6` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell5`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell7` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell6`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell8` int(30) unsigned NOT NULL DEFAULT '0' AFTER `spell7`;
+
 ALTER TABLE `creature_template` ADD COLUMN `spell_flags` int(30) NOT NULL DEFAULT '0' AFTER `spell8`;
 
 -- JESUS... (XVII)
@@ -263,7 +277,9 @@ ALTER TABLE `creature_template` DROP COLUMN `flags_extra`;
 ALTER TABLE `creature_template` ADD COLUMN `rooted` int(10) unsigned NOT NULL DEFAULT '0' AFTER `summonguard`;
 
 -- Now lets take care of (C) and (D):
+
 ALTER TABLE `creature_template` CHANGE COLUMN `PetSpellDataId` `spelldataid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `summonguard`;
+
 ALTER TABLE `creature_template` CHANGE COLUMN `VehicleId` `vehicleid` int(10) unsigned NOT NULL DEFAULT '0' AFTER `spelldataid`;
 
 -- (I): Fill `minhealth` with data:
