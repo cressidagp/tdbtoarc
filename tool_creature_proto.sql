@@ -2,7 +2,7 @@
 ==============================================
 	Title: creature_template to creature_proto
 	
-	From TDB: 335.20101
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 
@@ -492,7 +492,7 @@ ALTER TABLE `creature_template` CHANGE COLUMN `mechanic_immune_mask` `modImmunit
 	Got some data in arcemu forums, seems to be OK but it should be more, all credits to KFL. (Need to confirm this one 32547)
 */
 
-UPDATE `creature_proto` SET `isTrainingDummy` = 1 WHERE `entry` 
+UPDATE `creature_template` SET `isTrainingDummy` = 1 WHERE `entry` 
 IN (32542,32546,32666,31144,31146,32545,32541,32667,30527,32543,32547);
 
 /* (XIII): guardtype
@@ -506,10 +506,10 @@ IN (32542,32546,32666,31144,31146,32545,32541,32667,30527,32543,32547);
 	Got some data in arcemu forums, seems to be OK but it should be more, all credits to KFL.
 */
 
-UPDATE `creature_proto` SET `guardtype` = 1 WHERE `entry` 
+UPDATE `creature_template` SET `guardtype` = 1 WHERE `entry` 
 IN (68,1423,1756,15858,15859,16864,20556,18948,18949,1642,3296,15852,15853,15854,18950,5624,18971,16432,16733,18815,3084,16221,17029,16222,727,5595,12996);
 
-UPDATE `creature_proto` SET `guardtype` = 2 WHERE `entry` 
+UPDATE `creature_template` SET `guardtype` = 2 WHERE `entry` 
 IN (3502,4624,15088,9460,11102,16378,15184,11822,11190,17855,18099,18101,18102,20484,20485,22494,23636,23721,26253,24994);
 
 -- (XIX): `summonguard`
@@ -548,7 +548,7 @@ ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 RENAME TABLE `creature_template` TO `creature_proto`;
 
-ALTER TABLE `creature_proto` ADD PRIMARY KEY (`entry`);
+-- ALTER TABLE `creature_proto` ADD PRIMARY KEY (`entry`);
 
 --
 -- Rename our backup table
