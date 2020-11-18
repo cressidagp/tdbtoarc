@@ -2,7 +2,7 @@
 ==============================================
 	Title: creature to creature_spawns
 	
-	From TDB: 335.20101
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -356,3 +356,15 @@ RENAME TABLE `creature` TO `creature_spawns`;
 RENAME TABLE `creature2` TO `creature`;
 
 RENAME TABLE `game_event_creature2` TO `game_event_creature`;
+
+--
+-- Since our backup table will lost his keys we should add them again
+--
+
+ALTER TABLE `creature` ADD PRIMARY KEY (`guid`);
+
+ALTER TABLE `creature` ADD KEY `idx_map` (`map`);
+
+ALTER TABLE `creature` ADD KEY `idx_id` (`id`);
+
+ALTER TABLE `game_event_creature` ADD PRIMARY KEY (`guid`,`eventEntry`);
