@@ -124,6 +124,8 @@ DELETE FROM `creature_template_addon` WHERE `chance` = 0;
 
 RENAME TABLE `creature_template_addon` TO `npc_monstersay`;
 
+ALTER TABLE `npc_monstersay` ADD PRIMARY KEY (`entry`,`event`);
+
 --
 -- Rename our backup table
 --
