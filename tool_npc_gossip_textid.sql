@@ -2,11 +2,22 @@
 ==============================================
 	Title: gossip_menu to npc_gossip_textid
 	
-	From TDB: 335.20101
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
 	WARNING: this one its slow.
+	
+	*) gossips in arcemu: 
+	
+	npc_gossip_textid.creatureId, npc_gossip_textid.textid -> npc_text.entry
+	
+	**) gossips in trinity:
+	
+	creature_template.gossip_menu_id -> gossip_menu.entry, gossip_menu.text_id -> npc_text.id
+	
+	Note: arcemu cant handle options
+	
 ==============================================
 */
 
