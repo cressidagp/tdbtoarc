@@ -3,12 +3,23 @@
 	Title: creature_template_addon to npc_monstersay
 	(but we will take info from creature_text and smart_scripts)
 	
-	From TDB: 335.20092
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 ==============================================
 */
+
 DROP TABLE IF EXISTS `npc_monstersay`;
+
+--
+-- Create a backup of original table...
+--
+
+CREATE TABLE `creature_template_addon2` SELECT * FROM `creature_template_addon`;
+
+--
+-- Here we go...
+--
 
 ALTER TABLE `creature_template_addon` CHANGE COLUMN `entry` `entry` int(10) unsigned NOT NULL DEFAULT '0';
 
@@ -78,17 +89,23 @@ ALTER TABLE `creature_template_addon` DROP COLUMN `emote`;
 ALTER TABLE `creature_template_addon` DROP COLUMN `visibilityDistanceType`;
 ALTER TABLE `creature_template_addon` DROP COLUMN `auras`;
 
-DELETE FROM `npc_monstersay` WHERE `text0` IS NULL;
+DELETE FROM `creature_template_addon` WHERE `text0` IS NULL;
 
 UPDATE `creature_template_addon` SET `text1` = '' WHERE `text1` IS NULL;
 UPDATE `creature_template_addon` SET `text2` = '' WHERE `text2` IS NULL;
 UPDATE `creature_template_addon` SET `text3` = '' WHERE `text3` IS NULL;
 UPDATE `creature_template_addon` SET `text4` = '' WHERE `text4` IS NULL;
 
-DELETE FROM `npc_monstersay` WHERE `chance` = 0;
+DELETE FROM `creature_template_addon` WHERE `chance` = 0;
 
 --
 -- The End: rename to kickass emu way
 --
 
 RENAME TABLE `creature_template_addon` TO `npc_monstersay`;
+
+--
+-- Rename our backup table
+--
+
+RENAME TABLE `creature_template_addon2` TO `creature_template_addon`;
