@@ -2,7 +2,7 @@
 ==============================================
 	Title: item_template to items
 	
-	From TDB: 335.20091
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -319,9 +319,9 @@ ALTER TABLE `item_template` CHANGE COLUMN `ItemLimitCategory` `ItemLimitCategory
 
 ALTER TABLE `item_template` CHANGE COLUMN `HolidayId` `HolidayId` int(32) unsigned NOT NULL DEFAULT '0';
 
-ALTER TABLE `item_template` DROP KEY;
+-- ALTER TABLE `item_template` DROP KEY;
 
-ALTER TABLE `item_template` ADD PRIMARY KEY (entry);
+-- ALTER TABLE `item_template` ADD PRIMARY KEY (entry);
 
 --
 -- The End: rename to kickass way
