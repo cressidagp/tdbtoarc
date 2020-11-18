@@ -220,7 +220,13 @@ ALTER TABLE `creature_template` CHANGE COLUMN `speed_walk` `walk_speed` float NO
 
 ALTER TABLE `creature_template` CHANGE COLUMN `speed_run` `run_speed` float NOT NULL DEFAULT '8' AFTER `walk_speed`;
 
-UPDATE `creature_template` SET `walk_speed` = '2.5' WHERE `walk_speed` = 1;
+-- UPDATE `creature_template` SET `walk_speed` = '2.5' WHERE `walk_speed` = 1;
+
+UPDATE `creature_template` SET `walk_speed` = `walk_speed` * 2.5;
+
+-- UPDATE `creature_template` SET `run_speed` = '8' WHERE `run_speed` = 1.14286;
+
+UPDATE `creature_template` SET `run_speed` = `run_speed` * 7;
 
 -- And again... return to this in (XIV)
 
