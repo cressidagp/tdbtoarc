@@ -6,6 +6,7 @@
 	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
+	 
 ==============================================
 */
 
@@ -27,9 +28,28 @@ ALTER TABLE `creature_template_addon` ADD COLUMN `event` int(10) unsigned NOT NU
 
 ALTER TABLE `creature_template_addon` ADD COLUMN `chance` float NOT NULL DEFAULT '0' AFTER `event`;
 
+/* MONSTER_SAY_EVENTS
+
+    MONSTER_SAY_EVENT_ENTER_COMBAT		= 0,
+    MONSTER_SAY_EVENT_RANDOM_WAYPOINT	= 1,
+    MONSTER_SAY_EVENT_CALL_HELP			= 2,
+    MONSTER_SAY_EVENT_ON_COMBAT_STOP	= 3,
+    MONSTER_SAY_EVENT_ON_DAMAGE_TAKEN	= 4,
+    MONSTER_SAY_EVENT_ON_DIED			= 5,
+
+*/
+
 UPDATE creature_template_addon, smart_scripts
 SET creature_template_addon.chance = smart_scripts.event_chance
-WHERE (creature_template_addon.entry = smart_scripts.entryorguid AND smart_scripts.event_type = 4 AND smart_scripts.action_type = 1);
+WHERE (creature_template_addon.entry = smart_scripts.entryorguid AND smart_scripts.event_type = 4 AND smart_scripts.action_type = 1); -- Enter_Combat
+
+UPDATE creature_template_addon, smart_scripts 
+SET creature_template_addon.chance = smart_scripts.event_chance
+WHERE (creature_template_addon.entry = smart_scripts.entryorguid AND smart_scripts.event_type = 6 AND smart_scripts.action_type = 1); -- On_Died
+
+UPDATE creature_template_addon, smart_scripts 
+SET creature_template_addon.event = 5
+WHERE(creature_template_addon.entry = smart_scripts.entryorguid AND smart_scripts.event_type = 6 AND smart_scripts.action_type = 1);
 
 ALTER TABLE `creature_template_addon` ADD COLUMN `language` int(10) unsigned NOT NULL DEFAULT '0' AFTER `chance`;
 
