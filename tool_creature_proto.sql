@@ -561,3 +561,11 @@ RENAME TABLE `creature_template` TO `creature_proto`;
 --
 
 RENAME TABLE `creature_template2` TO `creature_template`;
+
+--
+-- Since our backup table will lost his keys we should add them again
+--
+
+ALTER TABLE `creature_template` ADD PRIMARY KEY (`entry`);
+
+ALTER TABLE `creature_template` ADD KEY `idx_name` (`name`);
