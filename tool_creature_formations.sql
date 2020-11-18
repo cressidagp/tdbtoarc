@@ -2,7 +2,7 @@
 ==============================================
 	Title: creature_formations to creature_formations
 	
-	From TDB: 335.20101
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 ==============================================
@@ -38,5 +38,9 @@ ALTER TABLE `creature_formations` CHANGE COLUMN `dist` `follow_dist` float NOT N
 
 ALTER TABLE `creature_formations` CHANGE COLUMN `angle` `follow_angle` float NOT NULL DEFAULT '0' AFTER `target_spawn_id`;
 
+UPDATE `creature_formations` SET `follow_angle` = (`follow_angle` * PI()) / 180; -- from degress to radians
+
 DELETE FROM `creature_formations` WHERE `spawn_id` = `target_spawn_id`; -- remove this or they wont move...
+
+
 
