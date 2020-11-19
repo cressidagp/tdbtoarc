@@ -321,16 +321,29 @@ ALTER TABLE `item_template` CHANGE COLUMN `HolidayId` `HolidayId` int(32) unsign
 
 -- ALTER TABLE `item_template` DROP KEY;
 
--- ALTER TABLE `item_template` ADD PRIMARY KEY (entry);
-
 --
 -- The End: rename to kickass way
 --
 
 RENAME TABLE `item_template` TO `items`;
 
+ALTER TABLE `items` DROP KEY `idx_name`;
+
+ALTER TABLE `items` DROP KEY `items_index`;
+
 --
 -- Rename our backup table
 --
 
 RENAME TABLE `item_template2` TO `item_template`;
+
+--
+-- Since our backup table will lost his keys we should add them again
+--
+
+ALTER TABLE `item_template` ADD PRIMARY KEY (`entry`);
+
+ALTER TABLE `item_template` ADD KEY `idx_name` (`name`);
+
+ALTER TABLE `item_template` ADD KEY `items_index` (`class`);
+
