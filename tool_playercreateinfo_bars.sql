@@ -2,7 +2,7 @@
 ==============================================
 	Title: playercreateinfo_action to playercreateinfo_bars
 	
-	From TDB: 335.20091
+	From TDB: 335.20111
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 
@@ -37,9 +37,19 @@ ALTER TABLE `playercreateinfo_action` ADD COLUMN `misc` int(10) unsigned DEFAULT
 
 UPDATE `playercreateinfo_action` SET `misc` = '0' WHERE `misc` IS NULL;
 
--- HACKFIX: For some reason Every man for Himselft its not being added in slot 11 for mages...
+--
+-- HACKFIX: For some reason Every man for Himselft its not being added in slot 11 for warrior, rogue, dk, mage, warlock
+--
 
-UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 8);
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 1 and `action` = 59752 );
+
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 4 and `action` = 59752 );
+
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 6 and `action` = 59752 );
+
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 8 and `action` = 59752 );
+
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 9 and `action` = 59752 );
 
 --
 -- The End: rename to kickass way
@@ -52,3 +62,11 @@ RENAME TABLE `playercreateinfo_action` TO `playercreateinfo_bars`;
 --
 
 RENAME TABLE `playercreateinfo_action2` TO `playercreateinfo_action`;
+
+--
+-- Since our backup table will lost his keys we should add them again
+--
+
+ALTER TABLE `playercreateinfo_action` ADD PRIMARY KEY (`race`,`class`,`button`);
+
+ALTER TABLE `playercreateinfo_action` ADD KEY `playercreateinfo_race_class_index` (`race`,`class`);
