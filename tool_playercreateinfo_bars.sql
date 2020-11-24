@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+
 	Title: playercreateinfo_action to playercreateinfo_bars
 	
 	From TDB: 335.20111
@@ -33,19 +35,17 @@ ALTER TABLE `playercreateinfo_action` CHANGE COLUMN `action` `action` int(10) un
 
 ALTER TABLE `playercreateinfo_action` CHANGE COLUMN `type` `type` int(10) unsigned DEFAULT NULL;
 
-ALTER TABLE `playercreateinfo_action` ADD COLUMN `misc` int(10) unsigned DEFAULT NULL AFTER `type`;
-
-UPDATE `playercreateinfo_action` SET `misc` = '0' WHERE `misc` IS NULL;
+ALTER TABLE `playercreateinfo_action` ADD COLUMN `misc` int(10) unsigned DEFAULT '0' AFTER `type`;
 
 --
 -- HACKFIX: For some reason Every man for Himselft its not being added in slot 11 for warrior, rogue, dk, mage, warlock
 --
 
-UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 1 and `action` = 59752 );
+UPDATE `playercreateinfo_action` SET `button` = '83' WHERE (`race` = 1 and `class` = 1 and `action` = 59752 ); -- OK!
 
-UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 4 and `action` = 59752 );
+UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 4 and `action` = 59752 ); -- BUGGED
 
-UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 6 and `action` = 59752 );
+UPDATE `playercreateinfo_action` SET `button` = '9' WHERE (`race` = 1 and `class` = 6 and `action` = 59752 );
 
 UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 8 and `action` = 59752 );
 
@@ -56,6 +56,10 @@ UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `clas
 --
 
 RENAME TABLE `playercreateinfo_action` TO `playercreateinfo_bars`;
+
+ALTER TABLE `playercreateinfo_bars` DROP PRIMARY KEY;
+
+ALTER TABLE `playercreateinfo_bars` DROP KEY `playercreateinfo_race_class_index`;
 
 --
 -- Rename our backup table
