@@ -11,6 +11,10 @@ Feel free to open tickets to report bugs. Feedback its apreciated.
 
 ## Features
 
+Scripts for the following tables: 
+
+ai_threattospellid, battlemasters, creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints
+
 * ai_threattospellid
 * battlemasters
 * creature_formations
@@ -24,6 +28,12 @@ Feel free to open tickets to report bugs. Feedback its apreciated.
 This require the latest release of TDB world database.
 
 ## Instalation
+
+1. Setup a TDB world database.
+
+2. Apply all tool files.
+
+3. Add missing tables.
 
 
 ## Credits to
