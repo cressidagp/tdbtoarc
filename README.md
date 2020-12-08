@@ -11,7 +11,7 @@ Feel free to open tickets to report bugs. Feedback its apreciated.
 
 ## Features
 
-Scripts to obtain the following tables: 
+Scripts to obtain the following tables populated: 
 
 * ai_threattospellid
 * battlemasters
@@ -23,11 +23,23 @@ Scripts to obtain the following tables:
 * creature_quest_starter
 * creature_spawns
 * creature_waypoints
-WIP
+
+The following tables are not going to be supported:
+
+* ai_agents
+* areatriggers
+* auctionhouse
+* clientaddons
+* command_overrides
+* creature_staticspawns
+* creature_timed_emotes
+So far. 
+
 
 ## Requirements
 
 This require the latest release of TDB world database.
+
 
 ## Instalation
 
@@ -35,16 +47,19 @@ This require the latest release of TDB world database.
 
 2. Apply all tool files.
 
-3. Add missing tables (you can use formers arcemu database projects)
+3. Add missing tables (you can use formers arcemu database projects).
 
 
 ## Credits to
 
-	*) Trinity for his wonderfull database job. 
-	*) KFL for some info about guardtype and IsTrainingDummy.
-	*) Formers ArcEmu database projects: NCDB, WHYDB, IFDB, POTD and ARCDB (so far).
-	*) ArcEmu developers for ArcEmu, specially to dfighter1985.
+* Trinity for his wonderfull database job. 
+* KFL for some info about guardtype and IsTrainingDummy.
+* Formers ArcEmu database projects: NCDB, WHYDB, IFDB, POTD and ARCDB (so far).
+* ArcEmu developers for ArcEmu, specially to dfighter1985.
+
 
 ## Links
 
 * [ArcEmu Forums](http://www.arcemu.org/forums/)
+* [ArcEmu Github](https://github.com/arcemu)
+* [ArcEmu Wiki](https://arcemu.fandom.com/wiki/Arcemu_Wiki)
