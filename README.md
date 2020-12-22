@@ -47,7 +47,7 @@ This require the latest release of TDB world database.
 
 2. Apply all tool files.
 
-3. Aplly table remover.
+3. Apply table remover.
 
 4. Add missing tables (you can use formers arcemu database projects).
 
