@@ -23,6 +23,21 @@ Scripts to obtain the following tables populated:
 * creature_quest_starter
 * creature_spawns
 * creature_waypoints
+* itempages
+* itempages_localized
+* itempetfood
+* items
+* items_localized
+* npc_gossip_textid
+* npc_monstersay
+* npc_text
+* npc_text_localized
+* playercreateinfo_bars
+* quest_poi
+* quest_poi_points
+* quests
+* quests_localized
+* spellclickspells
 
 The following tables are not going to be supported:
 
@@ -33,8 +48,8 @@ The following tables are not going to be supported:
 * command_overrides
 * creature_staticspawns
 * creature_timed_emotes
-So far. 
 
+So far. 
 
 ## Requirements
 
