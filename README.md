@@ -2,7 +2,7 @@
 
 ## Introduction
 
-TDBtoARC its a non oficial database conversion project for ArcEmu just for learning purposes. It will convert the latest Trinity world database to ArcEmu structure.
+TDBtoARC its a NON-OFFICIAL database conversion project for ArcEmu just for learning purposes. It will partially convert the latest Trinity world database to ArcEmu structure.
 
 WARNING: this stuff its experimental and eventually i can find something than cant be done, so if you have a database then keep developing it.
 
