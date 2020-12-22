@@ -64,7 +64,7 @@ This require the latest release of TDB world database.
 
 3. Apply table remover.
 
-4. Add missing tables (you can use formers arcemu database projects).
+4. Add missing tables (you can use formers arcemu database projects or run world_structure)
 
 
 ## Credits to
