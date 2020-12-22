@@ -14,22 +14,18 @@ Feel free to open tickets to report bugs. Feedback its apreciated.
 Scripts to obtain the following tables populated: 
 
 * ai_threattospellid
+
 * battlemasters
+
 * creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints
-* itempages
-* itempages_localized
-* itempetfood
-* items
-* items_localized
-* npc_gossip_textid
-* npc_monstersay
-* npc_text
-* npc_text_localized
+* itempages, itempages_localized, itempetfood, items, items_localized
+
+* npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized
+
 * playercreateinfo_bars
-* quest_poi
-* quest_poi_points
-* quests
-* quests_localized
+
+* quest_poi, quest_poi_points, quests, quests_localized
+
 * spellclickspells
 
 The following tables are not going to be supported:
