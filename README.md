@@ -15,14 +15,7 @@ Scripts to obtain the following tables populated:
 
 * ai_threattospellid
 * battlemasters
-* creature_formations
-* creature_names
-* creature_names_localized
-* creature_proto
-* creature_quest_finisher
-* creature_quest_starter
-* creature_spawns
-* creature_waypoints
+* creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints
 * itempages
 * itempages_localized
 * itempetfood
