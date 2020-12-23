@@ -2,7 +2,7 @@
 ==============================================
 	Title: creature to creature_spawns
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -24,7 +24,7 @@
 DROP TABLE IF EXISTS `creature_spawns`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `creature2` SELECT * FROM `creature`;
@@ -343,14 +343,14 @@ ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_
 -- Rename to kickass way
 --
 
-ALTER TABLE `creature` DROP INDEX `idx_map`;
-
-ALTER TABLE `creature` DROP INDEX `idx_id`;
-
 RENAME TABLE `creature` TO `creature_spawns`;
 
+ALTER TABLE `creature_spawns` DROP INDEX `idx_map`;
+
+ALTER TABLE `creature_spawns` DROP INDEX `idx_id`;
+
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `creature2` TO `creature`;
@@ -358,7 +358,7 @@ RENAME TABLE `creature2` TO `creature`;
 RENAME TABLE `game_event_creature2` TO `game_event_creature`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `creature` ADD PRIMARY KEY (`guid`);
