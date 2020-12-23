@@ -30,6 +30,7 @@ Scripts to obtain the following tables populated:
 
 * spellclickspells
 
+
 The following tables are not going to be supported:
 
 * ai_agents, areatriggers, auctionhouse
@@ -43,6 +44,7 @@ The following tables are not going to be supported:
 * gameobject_staticspawns
 
 So far. 
+
 
 ## Requirements
 
