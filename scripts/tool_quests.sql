@@ -19,7 +19,6 @@
 	*) RewRepLimit
 	*) RewXP
 	*) MailSendItem
-	*) ExploreTrigger1-4
 	*) RequiredOneOfQuest
 	*) RequiredQuest1-4
 	*) ReceiveItemId1-4
@@ -41,6 +40,8 @@ CREATE TABLE `quest_template2` SELECT * FROM `quest_template`;
 CREATE TABLE `quest_offer_reward2` SELECT * FROM `quest_offer_reward`;
 
 CREATE TABLE `quest_request_items2` SELECT * FROM `quest_request_items`;
+
+CREATE TABLE `areatrigger_involvedrelation2` SELECT * FROM `areatrigger_involvedrelation`;
 
 --
 -- Drop not supported columns
@@ -362,6 +363,20 @@ ALTER TABLE `quest_template` ADD COLUMN `ExploreTrigger3` int(10) unsigned NOT N
 
 ALTER TABLE `quest_template` ADD COLUMN `ExploreTrigger4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `ExploreTrigger3`;
 
+-- For NOW:
+
+UPDATE `quest_template` SET `ExploreTrigger1` = 231, `ExploreTrigger2` = 232, `ExploreTrigger3` = 235 WHERE `entry` = 984;
+
+UPDATE `quest_template` SET `ExploreTrigger1` = 5705, `ExploreTrigger2` = 5706  WHERE `entry` = 24541;
+
+UPDATE `quest_template` SET `ExploreTrigger1` = 5703, `ExploreTrigger2` = 5704  WHERE `entry` = 24656;
+
+DELETE FROM `areatrigger_involvedrelation` WHERE `quest` IN ( 984, 24541, 24656 );
+
+UPDATE quest_template, areatrigger_involvedrelation
+SET quest_template.ExploreTrigger1 = areatrigger_involvedrelation.id
+WHERE quest_template.entry = areatrigger_involvedrelation.quest;
+
 ALTER TABLE `quest_template` ADD COLUMN `RequiredOneOfQuest` longtext NOT NULL AFTER `ExploreTrigger4`;
 
 ALTER TABLE `quest_template` ADD COLUMN `RequiredQuest1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `RequiredOneOfQuest`;
@@ -596,6 +611,8 @@ DROP TABLE IF EXISTS `quest_offer_reward`;
 
 DROP TABLE IF EXISTS `quest_request_items`;
 
+DROP TABLE IF EXISTS `areatrigger_involvedrelation`;
+
 --
 -- Rename our backup table
 --
@@ -605,3 +622,5 @@ RENAME TABLE `quest_template2` TO `quest_template`;
 RENAME TABLE `quest_offer_reward2` TO `quest_offer_reward`;
 
 RENAME TABLE `quest_request_items2` TO `quest_request_items`;
+
+RENAME TABLE `areatrigger_involvedrelation2` TO `areatrigger_involvedrelation`;
