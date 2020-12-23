@@ -91,6 +91,12 @@ ALTER TABLE `gameobject` ADD COLUMN `Flags` int(11) unsigned NOT NULL DEFAULT '0
 
 ALTER TABLE `gameobject` ADD COLUMN `Faction` int(10) unsigned NOT NULL DEFAULT '0' AFTER `Flags`;
 
+UPDATE gameobject, gameobject_template_addon
+SET gameobject.Faction = gameobject_template_addon.faction
+WHERE gameobject.Entry = gameobject_template_addon.entry;
+
+-- there arent any faction overrides in tdb at the momment
+
 ALTER TABLE `gameobject` ADD COLUMN `Scale` float NOT NULL DEFAULT '0' AFTER `Faction`;
 
 ALTER TABLE `gameobject` ADD COLUMN `stateNpcLink` int(10) unsigned NOT NULL DEFAULT '0' AFTER `Scale`;
