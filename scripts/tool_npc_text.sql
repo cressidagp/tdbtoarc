@@ -2,38 +2,54 @@
 ==============================================
 	Title: npc_text to npc_text
 	
-	From TDB: 335.20092
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 ==============================================
 */
+
+DROP TABLE IF EXISTS `npc_text2`;
+
+--
+-- Create a backup of original table(s)...
+--
+
+CREATE TABLE `npc_text2` SELECT * FROM `npc_text`;
 
 --
 -- Remove Data truncated for column...
 --
 
 UPDATE `npc_text` SET `text0_0` = '' WHERE `text0_0` IS NULL;
+
 UPDATE `npc_text` SET `text0_1` = '' WHERE `text0_1` IS NULL;
 
 UPDATE `npc_text` SET `text1_0` = '' WHERE `text1_0` IS NULL;
+
 UPDATE `npc_text` SET `text1_1` = '' WHERE `text1_1` IS NULL;
 
 UPDATE `npc_text` SET `text2_0` = '' WHERE `text2_0` IS NULL;
+
 UPDATE `npc_text` SET `text2_1` = '' WHERE `text2_1` IS NULL;
 
 UPDATE `npc_text` SET `text3_0` = '' WHERE `text3_0` IS NULL;
+
 UPDATE `npc_text` SET `text3_1` = '' WHERE `text3_1` IS NULL;
 
 UPDATE `npc_text` SET `text4_0` = '' WHERE `text4_0` IS NULL;
+
 UPDATE `npc_text` SET `text4_1` = '' WHERE `text4_1` IS NULL;
 
 UPDATE `npc_text` SET `text5_0` = '' WHERE `text5_0` IS NULL;
+
 UPDATE `npc_text` SET `text5_1` = '' WHERE `text5_1` IS NULL;
 
 UPDATE `npc_text` SET `text6_0` = '' WHERE `text6_0` IS NULL;
+
 UPDATE `npc_text` SET `text6_1` = '' WHERE `text6_1` IS NULL;
 
 UPDATE `npc_text` SET `text7_0` = '' WHERE `text7_0` IS NULL;
+
 UPDATE `npc_text` SET `text7_1` = '' WHERE `text7_1` IS NULL;
 
 --
@@ -233,49 +249,94 @@ ALTER TABLE `npc_text` CHANGE COLUMN `Emote7_2` `temp_Emote7_5` int(10) unsigned
 --
 
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote0_1` `Emote0_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay0_2` `EmoteDelay0_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote0_3` `Emote0_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay0_4` `EmoteDelay0_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote0_5` `Emote0_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote1_1` `Emote1_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay1_2` `EmoteDelay1_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote1_3` `Emote1_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay1_4` `EmoteDelay1_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote1_5` `Emote1_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote2_1` `Emote2_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay2_2` `EmoteDelay2_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote2_3` `Emote2_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay2_4` `EmoteDelay2_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote2_5` `Emote2_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote3_1` `Emote3_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay3_2` `EmoteDelay3_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote3_3` `Emote3_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay3_4` `EmoteDelay3_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote3_5` `Emote3_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote4_1` `Emote4_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay4_2` `EmoteDelay4_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote4_3` `Emote4_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay4_4` `EmoteDelay4_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote4_5` `Emote4_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote5_1` `Emote5_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay5_2` `EmoteDelay5_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote5_3` `Emote5_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay5_4` `EmoteDelay5_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote5_5` `Emote5_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote6_1` `Emote6_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay6_2` `EmoteDelay6_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote6_3` `Emote6_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay6_4` `EmoteDelay6_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote6_5` `Emote6_5` int(10) unsigned NOT NULL DEFAULT '0';
 
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote7_1` `Emote7_1` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay7_2` `EmoteDelay7_2` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote7_3` `Emote7_3` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_EmoteDelay7_4` `EmoteDelay7_4` int(10) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE `npc_text` CHANGE COLUMN `temp_Emote7_5` `Emote7_5` int(10) unsigned NOT NULL DEFAULT '0';
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `npc_text2` ADD PRIMARY KEY (`ID`);

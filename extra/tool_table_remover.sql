@@ -105,6 +105,7 @@ DROP TABLE IF EXISTS `milling_loot_template`;
 DROP TABLE IF EXISTS `npc_spellclick_spells`;
 
 --DROP TABLE IF EXISTS `npc_text`;
+DROP TABLE IF EXISTS `npc_text2`;
 
 DROP TABLE IF EXISTS `npc_text_locale`;
 DROP TABLE IF EXISTS `npc_vendor`;
