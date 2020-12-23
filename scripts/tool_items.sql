@@ -2,7 +2,7 @@
 ==============================================
 	Title: item_template to items
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -332,13 +332,13 @@ ALTER TABLE `items` DROP KEY `idx_name`;
 ALTER TABLE `items` DROP KEY `items_index`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `item_template2` TO `item_template`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `item_template` ADD PRIMARY KEY (`entry`);
