@@ -2,7 +2,7 @@
 ==============================================
 	Title: page_text to itempages
 	
-	From TDB: 335.20091
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -36,7 +36,13 @@ ALTER TABLE `page_text` CHANGE COLUMN `NextPageID` `next_page` int(10) unsigned 
 RENAME TABLE `page_text` TO `itempages`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `page_text2` TO `page_text`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `page_text` ADD PRIMARY KEY (`ID`);
