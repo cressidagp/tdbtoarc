@@ -20,6 +20,8 @@ Scripts to obtain the following tables populated:
 * creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints
 * itempages, itempages_localized, itempetfood, items, items_localized
 
+* gameobject_names
+
 * npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized
 
 * playercreateinfo_bars
