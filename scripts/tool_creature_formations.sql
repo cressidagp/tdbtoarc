@@ -42,5 +42,8 @@ UPDATE `creature_formations` SET `follow_angle` = (`follow_angle` * PI()) / 180;
 
 DELETE FROM `creature_formations` WHERE `spawn_id` = `target_spawn_id`; -- remove this or they wont move...
 
+--
+-- Since our backup table will lost his keys we should add them again
+--
 
-
+ALTER TABLE `creature_formations2` ADD PRIMARY KEY (`memberGUID`);
