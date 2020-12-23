@@ -32,7 +32,7 @@
 DROP TABLE IF EXISTS `quests`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `quest_template2` SELECT * FROM `quest_template`;
@@ -604,7 +604,7 @@ ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
 RENAME TABLE `quest_template` TO `quests`;
 
 --
--- Remove pillaged tables...
+-- Remove pillaged table(s)
 --
 
 DROP TABLE IF EXISTS `quest_offer_reward`;
@@ -614,7 +614,7 @@ DROP TABLE IF EXISTS `quest_request_items`;
 DROP TABLE IF EXISTS `areatrigger_involvedrelation`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `quest_template2` TO `quest_template`;
@@ -624,3 +624,15 @@ RENAME TABLE `quest_offer_reward2` TO `quest_offer_reward`;
 RENAME TABLE `quest_request_items2` TO `quest_request_items`;
 
 RENAME TABLE `areatrigger_involvedrelation2` TO `areatrigger_involvedrelation`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `quest_template` ADD PRIMARY KEY (`ID`);
+
+ALTER TABLE `quest_offer_reward` ADD PRIMARY KEY (`ID`);
+
+ALTER TABLE `quest_request_items` ADD PRIMARY KEY (`ID`);
+
+ALTER TABLE `areatrigger_involvedrelation` ADD PRIMARY KEY (`entry`);
