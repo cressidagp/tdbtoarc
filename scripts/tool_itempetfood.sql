@@ -2,7 +2,7 @@
 ==============================================
 	Title: item_template to itempetfood
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 
@@ -169,16 +169,15 @@ ALTER TABLE `item_template` DROP COLUMN `flagsCustom`;
 RENAME TABLE `item_template` TO `itempetfood`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `item_template2` TO `item_template`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `item_template` ADD PRIMARY KEY (`entry`);
 ALTER TABLE `item_template` ADD KEY `idx_name` (`name`);
 ALTER TABLE `item_template` ADD KEY `items_index` (`class`);
-
