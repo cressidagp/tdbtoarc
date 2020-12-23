@@ -32,15 +32,15 @@ Scripts to obtain the following tables populated:
 
 The following tables are not going to be supported:
 
-* ai_agents
-* areatriggers
-* auctionhouse
-* clientaddons
-* command_overrides
-* creature_staticspawns
-* creature_timed_emotes
+* ai_agents, areatriggers, auctionhouse
+
+* clientaddons, command_overrides, creature_staticspawns, creature_timed_emotes
+
 * display_bounding_boxes
+
 * fishing
+
+* gameobject_staticspawns
 
 So far. 
 
