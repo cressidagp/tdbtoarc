@@ -269,29 +269,6 @@ CREATE TABLE `fishing` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `gameobject_quest_finisher`
---
-
-DROP TABLE IF EXISTS `gameobject_quest_finisher`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `gameobject_quest_finisher` (
-  `id` int(11) unsigned NOT NULL DEFAULT '0',
-  `quest` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`quest`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Quest System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `gameobject_quest_finisher`
---
-
-LOCK TABLES `gameobject_quest_finisher` WRITE;
-/*!40000 ALTER TABLE `gameobject_quest_finisher` DISABLE KEYS */;
-/*!40000 ALTER TABLE `gameobject_quest_finisher` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `gameobject_quest_item_binding`
 --
 
