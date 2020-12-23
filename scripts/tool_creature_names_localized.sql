@@ -11,6 +11,12 @@
 DROP TABLE IF EXISTS `creature_names_localized`;
 
 --
+-- Create a backup of original table...
+--
+
+CREATE TABLE `creature_template_locale2` SELECT * FROM `creature_template_locale`;
+
+--
 -- Remove Incorrect string value (im sorry China, Korea, Taiwan and Rusia)
 --
 
@@ -41,3 +47,15 @@ ALTER TABLE `creature_template_locale` CHANGE COLUMN `Title` `subname` varchar(1
 --
 
 RENAME TABLE `creature_template_locale` TO `creature_names_localized`;
+
+--
+-- Rename our backup table(s)
+--
+
+RENAME TABLE `creature_template2` TO `creature_template`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `creature_template` ADD PRIMARY KEY (`entry`, `locale`);
