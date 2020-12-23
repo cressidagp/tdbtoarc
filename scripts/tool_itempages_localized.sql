@@ -2,7 +2,7 @@
 ==============================================
 	Title: page_text_locale to itempages_localized
 	
-	From TDB: 335.20091
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -52,7 +52,13 @@ ALTER TABLE `page_text_locale` CHANGE COLUMN `Text` `text` text CHARACTER SET la
 RENAME TABLE `page_text_locale` TO `itempages_localized`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `page_text_locale2` TO `page_text_locale`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `page_text_locale` ADD PRIMARY KEY (`ID`,`locale`);
