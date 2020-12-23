@@ -341,29 +341,6 @@ LOCK TABLES `gameobject_quest_pickup_binding` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `gameobject_quest_starter`
---
-
-DROP TABLE IF EXISTS `gameobject_quest_starter`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `gameobject_quest_starter` (
-  `id` int(11) unsigned NOT NULL DEFAULT '0',
-  `quest` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`quest`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Quest System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `gameobject_quest_starter`
---
-
-LOCK TABLES `gameobject_quest_starter` WRITE;
-/*!40000 ALTER TABLE `gameobject_quest_starter` DISABLE KEYS */;
-/*!40000 ALTER TABLE `gameobject_quest_starter` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `gameobject_staticspawns`
 --
 
