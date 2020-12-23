@@ -8,10 +8,8 @@
 	
 	ToDo:
 	
-	*) flags
-	*) faction
 	*) scale
-	*) stateNpcLink
+	*) stateNpcLink (deprecated stuff?)
 	*) overrides
 		
 ==============================================
