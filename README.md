@@ -39,6 +39,8 @@ The following tables are not going to be supported:
 * command_overrides
 * creature_staticspawns
 * creature_timed_emotes
+* display_bounding_boxes
+* fishing
 
 So far. 
 
