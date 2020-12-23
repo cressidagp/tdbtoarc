@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS `creature_default_trainer`;
 DROP TABLE IF EXISTS `creature_equip_template`;
 
 --DROP TABLE IF EXISTS `creature_formations`;
+DROP TABLE IF EXISTS `creature_formations2`;
 
 DROP TABLE IF EXISTS `creature_loot_template`;
 DROP TABLE IF EXISTS `creature_model_info`;
