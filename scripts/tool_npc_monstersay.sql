@@ -3,7 +3,7 @@
 	Title: creature_template_addon to npc_monstersay
 	(but we will take info from creature_text and smart_scripts)
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	 
@@ -13,7 +13,7 @@
 DROP TABLE IF EXISTS `npc_monstersay`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `creature_template_addon2` SELECT * FROM `creature_template_addon`;
@@ -127,7 +127,13 @@ RENAME TABLE `creature_template_addon` TO `npc_monstersay`;
 ALTER TABLE `npc_monstersay` ADD PRIMARY KEY (`entry`,`event`);
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `creature_template_addon2` TO `creature_template_addon`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `creature_template_addon` ADD PRIMARY KEY (`entry`);
