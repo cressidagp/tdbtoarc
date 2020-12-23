@@ -4,7 +4,7 @@
 
 	Title: creature_template to creature_proto
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 
@@ -586,16 +586,14 @@ ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 RENAME TABLE `creature_template` TO `creature_proto`;
 
--- ALTER TABLE `creature_proto` ADD PRIMARY KEY (`entry`);
-
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `creature_template2` TO `creature_template`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `creature_template` ADD PRIMARY KEY (`entry`);
