@@ -2,7 +2,7 @@
 ==============================================
 	Title: gossip_menu to npc_gossip_textid
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -22,6 +22,12 @@
 */
 
 DROP TABLE IF EXISTS `npc_gossip_textid`;
+
+--
+-- Create a backup of original table(s)...
+--
+
+CREATE TABLE `gossip_menu2` SELECT * FROM `gossip_menu`;
 
 --
 -- Prepare structure
@@ -86,3 +92,15 @@ ALTER TABLE `gossip_menu` ADD PRIMARY KEY (`creatureid`);
 --
 
 RENAME TABLE `gossip_menu` TO `npc_gossip_textid`;
+
+--
+-- Rename our backup table(s)
+--
+
+RENAME TABLE `gossip_menu2` TO `gossip_menu`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `gossip_menu` ADD PRIMARY KEY (`MenuID`,`TextID`);
