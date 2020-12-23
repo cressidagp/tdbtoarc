@@ -2,7 +2,7 @@
 ==============================================
 	Title: creature_template to creature_names
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
@@ -220,6 +220,8 @@ ALTER TABLE `creature_template` CHANGE COLUMN `info_str` `info_str` varchar(500)
 --
 
 RENAME TABLE `creature_template` TO `creature_names`;
+
+ALTER TABLE `creature_names` DROP KEY `idx_name`;
 
 --
 -- Rename our backup table

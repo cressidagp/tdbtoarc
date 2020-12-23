@@ -2,7 +2,7 @@
 ==============================================
 	Title: spell_threat to ai_threattospellid
 	
-	From TDB: 335.20111
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 
