@@ -89,6 +89,14 @@ ALTER TABLE `gameobject` CHANGE COLUMN `phaseMask` `phase` int(10) unsigned NOT 
 
 ALTER TABLE `gameobject` ADD COLUMN `Flags` int(11) unsigned NOT NULL DEFAULT '0' AFTER `State`;
 
+UPDATE gameobject, gameobject_template_addon
+SET gameobject.Flags = gameobject_template_addon.flags
+WHERE gameobject.Entry = gameobject_template_addon.entry;
+
+UPDATE gameobject, gameobject_overrides
+SET gameobject.Flags = gameobject_overrides.flags
+WHERE gameobject.id = gameobject_overrides.spawnId;
+
 ALTER TABLE `gameobject` ADD COLUMN `Faction` int(10) unsigned NOT NULL DEFAULT '0' AFTER `Flags`;
 
 UPDATE gameobject, gameobject_template_addon
