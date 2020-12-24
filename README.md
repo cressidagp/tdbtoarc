@@ -22,6 +22,8 @@ Scripts to obtain the following tables populated:
 
 * gameobject_names, gameobject_names_localized, gameobject_quest_starter, gameobject_quest_finisher, gameobject_spawns
 
+* instance_bosses
+
 * npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized
 
 * playercreateinfo_bars

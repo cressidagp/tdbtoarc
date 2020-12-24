@@ -416,31 +416,6 @@ LOCK TABLES `graveyards` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `instance_bosses`
---
-
-DROP TABLE IF EXISTS `instance_bosses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `instance_bosses` (
-  `mapid` int(11) unsigned NOT NULL DEFAULT '0',
-  `creatureid` int(11) unsigned NOT NULL DEFAULT '0',
-  `trash` text NOT NULL,
-  `trash_respawn_override` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`mapid`,`creatureid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Instance Boss Definitions';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `instance_bosses`
---
-
-LOCK TABLES `instance_bosses` WRITE;
-/*!40000 ALTER TABLE `instance_bosses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `instance_bosses` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `item_quest_association`
 --
 
