@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: quest_template_locale to quests_localized
 	
 	From TDB: 335.20091
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `quests_localized`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `quest_template_locale2` SELECT * FROM `quest_template_locale`;
@@ -74,7 +76,13 @@ ALTER TABLE `quest_template_locale` CHANGE COLUMN `ObjectiveText4` `ObjectiveTex
 RENAME TABLE `quest_template_locale` TO `quests_localized`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `quest_template_locale2` TO `quest_template_locale`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `quest_template_locale2` ADD PRIMARY KEY (`ID`,`locale`);

@@ -42,8 +42,6 @@ ALTER TABLE `quest_poi_points` CHANGE COLUMN `Y` `y` int(10) NOT NULL DEFAULT '0
 -- The End: rename to kickass way
 --
 
---ALTER TABLE `quest_poi_points` DROP PRIMARY KEY;
-
 ALTER TABLE `quest_poi_points` DROP KEY `questId_id`;
 
 ALTER TABLE `quest_poi_points` ADD KEY `questId_id` (`questId`,`poiId`);

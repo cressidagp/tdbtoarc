@@ -1,8 +1,10 @@
 /*
 ==============================================
+	TDBtoARC
+
 	Title: quest_template to quests (THE PAIN)
 	
-	From TDB: 335.20091
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
