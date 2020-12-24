@@ -41,7 +41,7 @@ ALTER TABLE `quest_poi` CHANGE COLUMN `Flags` `unk4` int(10) unsigned NOT NULL D
 -- VerifiedBuild: leave it be... it wont harm.
 
 --
--- Rename our backup table
+-- The End: rename to kickass way
 --
 
 ALTER TABLE `quest_poi` DROP PRIMARY KEY;
