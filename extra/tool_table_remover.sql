@@ -144,6 +144,8 @@ DROP TABLE IF EXISTS `quest_offer_reward`;
 DROP TABLE IF EXISTS `quest_offer_reward_locale`;
 
 --DROP TABLE IF EXISTS `quest_poi`;
+DROP TABLE IF EXISTS `quest_poi2`;
+
 --DROP TABLE IF EXISTS `quest_poi_points`;
 
 DROP TABLE IF EXISTS `quest_pool_members`;
