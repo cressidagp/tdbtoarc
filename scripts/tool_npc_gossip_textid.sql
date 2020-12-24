@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: gossip_menu to npc_gossip_textid
 	
 	From TDB: 335.20121
@@ -49,15 +51,15 @@ ALTER TABLE `gossip_menu` ADD COLUMN `temp_entry` int(8) unsigned NOT NULL DEFAU
 -- Remove when more than one...
 --
 
-CREATE TABLE `gossip_menu2` LIKE `gossip_menu`;
+CREATE TABLE `gossip_menu_temp` LIKE `gossip_menu`;
 
-ALTER TABLE `gossip_menu2` DISABLE KEYS;
+ALTER TABLE `gossip_menu_temp` DISABLE KEYS;
 
-INSERT INTO `gossip_menu2` SELECT * FROM `gossip_menu`;
+INSERT INTO `gossip_menu_temp` SELECT * FROM `gossip_menu`;
 
-ALTER TABLE `gossip_menu2` ENABLE KEYS;
+ALTER TABLE `gossip_menu_temp` ENABLE KEYS;
 	
-DELETE FROM `gossip_menu` WHERE `id` NOT IN ( SELECT MAX(`id`) FROM `gossip_menu2` GROUP BY `creatureid` );	
+DELETE FROM `gossip_menu` WHERE `id` NOT IN ( SELECT MAX(`id`) FROM `gossip_menu_temp` GROUP BY `creatureid` );	
 
 --
 -- Fill `temp_entry` with precious data then set creatureid
@@ -77,7 +79,7 @@ ALTER TABLE `gossip_menu` DROP COLUMN `id`;
 
 ALTER TABLE `gossip_menu` DROP COLUMN `temp_entry`;
 
-DROP TABLE IF EXISTS `gossip_menu2`;
+DROP TABLE IF EXISTS `gossip_menu_temp`;
 
 --
 -- Alter table to match arcemu ways
