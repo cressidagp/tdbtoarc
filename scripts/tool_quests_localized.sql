@@ -4,7 +4,7 @@
 	
 	Title: quest_template_locale to quests_localized
 	
-	From TDB: 335.20091
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 		
@@ -20,6 +20,12 @@ DROP TABLE IF EXISTS `quests_localized`;
 CREATE TABLE `quest_template_locale2` SELECT * FROM `quest_template_locale`;
 
 --
+-- Drop not supported columns
+--
+
+ALTER TABLE `quest_template_locale` DROP COLUMN `CompletedText`;
+
+--
 -- Remove Incorrect string value (im sorry China, Korea, Taiwan and Rusia)
 --
 
@@ -30,6 +36,24 @@ DELETE FROM `quest_template_locale` WHERE `locale` = 'zhCN';
 DELETE FROM `quest_template_locale` WHERE `locale` = 'zhTW';
 
 DELETE FROM `quest_template_locale` WHERE `locale` = 'ruRU';
+
+--
+-- Remove Data truncated for column (last checked at 335.20121)
+--
+
+UPDATE `quest_template_locale` SET `Title` = '' WHERE `Title` IS NULL;
+
+UPDATE `quest_template_locale` SET `Objectives` = '' WHERE `Objectives` IS NULL;
+
+UPDATE `quest_template_locale` SET `EndText` = '' WHERE `EndText` IS NULL;
+
+UPDATE `quest_template_locale` SET `ObjectiveText1` = '' WHERE `ObjectiveText1` IS NULL;
+
+UPDATE `quest_template_locale` SET `ObjectiveText2` = '' WHERE `ObjectiveText2` IS NULL;
+
+UPDATE `quest_template_locale` SET `ObjectiveText3` = '' WHERE `ObjectiveText3` IS NULL;
+
+UPDATE `quest_template_locale` SET `ObjectiveText4` = '' WHERE `ObjectiveText4` IS NULL;
 
 --
 -- Here we go...
@@ -85,4 +109,4 @@ RENAME TABLE `quest_template_locale2` TO `quest_template_locale`;
 -- Since our backup table(s) will lost his keys we should add them again
 --
 
-ALTER TABLE `quest_template_locale2` ADD PRIMARY KEY (`ID`,`locale`);
+ALTER TABLE `quest_template_locale` ADD PRIMARY KEY (`ID`,`locale`);
