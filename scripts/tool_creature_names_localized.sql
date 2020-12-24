@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: creature_template_locale to creature_names_localized
 	
 	From TDB: 335.20121
@@ -52,10 +54,10 @@ RENAME TABLE `creature_template_locale` TO `creature_names_localized`;
 -- Rename our backup table(s)
 --
 
-RENAME TABLE `creature_template2` TO `creature_template`;
+RENAME TABLE `creature_template_locale2` TO `creature_template_locale`;
 
 --
 -- Since our backup table(s) will lost his keys we should add them again
 --
 
-ALTER TABLE `creature_template` ADD PRIMARY KEY (`entry`, `locale`);
+ALTER TABLE `creature_template_locale` ADD PRIMARY KEY (`entry`, `locale`);
