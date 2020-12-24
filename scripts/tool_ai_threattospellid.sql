@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: spell_threat to ai_threattospellid
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `ai_threattospellid`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `spell_threat2` SELECT * FROM `spell_threat`;
@@ -40,13 +42,13 @@ ALTER TABLE `spell_threat` CHANGE COLUMN `pctMod` `modcoef` float NOT NULL DEFAU
 RENAME TABLE `spell_threat` TO `ai_threattospellid`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `spell_threat2` TO `spell_threat`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `spell_threat` ADD PRIMARY KEY (`entry`);

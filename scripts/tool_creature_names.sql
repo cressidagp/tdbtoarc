@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: creature_template to creature_names
 	
 	From TDB: 335.20121
@@ -16,7 +18,7 @@
 DROP TABLE IF EXISTS `creature_names`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
@@ -224,13 +226,13 @@ RENAME TABLE `creature_template` TO `creature_names`;
 ALTER TABLE `creature_names` DROP KEY `idx_name`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `creature_template2` TO `creature_template`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `creature_template` ADD PRIMARY KEY (`entry`);
