@@ -1,18 +1,24 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: npc_spellclick_spells to spellclickspells
 	
-	From TDB: 335.20091
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 	
+	ToDo:
+	
+	*) there are creature with two spells so primary key need to be modified.
+
 ==============================================
 */
 
 DROP TABLE IF EXISTS `spellclickspells`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)...
 --
 
 CREATE TABLE `npc_spellclick_spells2` SELECT * FROM `npc_spellclick_spells`;
@@ -44,3 +50,9 @@ RENAME TABLE `npc_spellclick_spells` TO `spellclickspells`;
 --
 
 RENAME TABLE `npc_spellclick_spells2` TO `npc_spellclick_spells`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `npc_spellclick_spells` ADD PRIMARY KEY (`npc_entry`,`spell_id`);
