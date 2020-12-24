@@ -25,6 +25,23 @@ DROP TABLE IF EXISTS `gameobject_spawns`;
 
 CREATE TABLE `gameobject2` SELECT * FROM `gameobject`;
 
+CREATE TABLE `game_event_gameobject2` SELECT * FROM `game_event_gameobject`;
+
+--
+-- Goodbay events
+--
+
+ALTER TABLE `gameobject` ADD COLUMN `eventEntry` int(4) NOT NULL DEFAULT '0' AFTER `map`;
+UPDATE gameobject, game_event_gameobject
+SET gameobject.eventEntry = game_event_gameobject.eventEntry 
+WHERE gameobject.guid = game_event_gameobject.guid;
+
+DELETE FROM `gameobject` WHERE `eventEntry` != 0;
+
+ALTER TABLE `gameobject` DROP COLUMN `eventEntry`;
+
+DROP TABLE IF EXISTS `game_event_gameobject`; -- Not needed anymore
+
 --
 -- Drop not supported columns
 --
@@ -123,8 +140,12 @@ RENAME TABLE `gameobject` TO `gameobject_spawns`;
 
 RENAME TABLE `gameobject2` TO `gameobject`;
 
+RENAME TABLE `game_event_gameobject2` TO `game_event_gameobject`;
+
 --
 -- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `gameobject` ADD PRIMARY KEY (`guid`);
+
+ALTER TABLE `game_event_gameobject` ADD PRIMARY KEY (`guid`,`eventEntry`);
