@@ -43,7 +43,7 @@ The following tables are not going to be supported:
 
 * fishing
 
-* gameobject_staticspawns, graveyards
+* gameobject_quest_item_binding, gameobject_quest_pickup_binding, gameobject_staticspawns, graveyards
 
 So far. 
 
