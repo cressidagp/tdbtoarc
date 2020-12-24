@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: gameobject_template to gameobject_names
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `gameobject_names`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `gameobject_template2` SELECT * FROM `gameobject_template`;
@@ -132,13 +134,13 @@ RENAME TABLE `gameobject_template` TO `gameobject_names`;
 ALTER TABLE `gameobject_names` DROP KEY `idx_name`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `gameobject_template2` TO `gameobject_template`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `gameobject_template` ADD PRIMARY KEY (`entry`);

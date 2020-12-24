@@ -13,7 +13,7 @@
 DROP TABLE IF EXISTS `creature_names_localized`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature_template_locale2` SELECT * FROM `creature_template_locale`;
@@ -45,7 +45,7 @@ ALTER TABLE `creature_template_locale` CHANGE COLUMN `Title` `subname` varchar(1
 -- VerifiedBuild: leave it be, it wont harm.
 
 --
--- The End: rename to kickass emu way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `creature_template_locale` TO `creature_names_localized`;

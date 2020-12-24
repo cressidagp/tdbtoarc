@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: item_template_locale to items_localized
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `items_localized`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `item_template_locale2` SELECT * FROM `item_template_locale`;
@@ -46,7 +48,7 @@ ALTER TABLE `item_template_locale` CHANGE COLUMN `Name` `name` varchar(255) NOT 
 ALTER TABLE `item_template_locale` CHANGE COLUMN `Description` `description` varchar(255) NOT NULL;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `item_template_locale` TO `items_localized`;

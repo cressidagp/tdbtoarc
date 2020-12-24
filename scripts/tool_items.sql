@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: item_template to items
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `items`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `item_template2` SELECT * FROM `item_template`;
@@ -322,7 +324,7 @@ ALTER TABLE `item_template` CHANGE COLUMN `HolidayId` `HolidayId` int(32) unsign
 -- ALTER TABLE `item_template` DROP KEY;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `item_template` TO `items`;

@@ -1,5 +1,7 @@
 /*
 ===========================================================
+	TDBtoARC
+	
 	Title: waypoint_data to creature_waypoints
 	
 	From TDB: 335.20121
@@ -16,7 +18,7 @@
 DROP TABLE IF EXISTS `creature_waypoints`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `waypoint_data2` SELECT * FROM `waypoint_data`;
@@ -88,7 +90,7 @@ ALTER TABLE `waypoint_data` DROP PRIMARY KEY;
 ALTER TABLE `waypoint_data` DROP COLUMN `id`;
 
 --
--- Rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `waypoint_data` TO `creature_waypoints`;

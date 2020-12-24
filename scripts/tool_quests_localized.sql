@@ -14,7 +14,7 @@
 DROP TABLE IF EXISTS `quests_localized`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `quest_template_locale2` SELECT * FROM `quest_template_locale`;
@@ -70,7 +70,7 @@ ALTER TABLE `quest_template_locale` CHANGE COLUMN `ObjectiveText4` `ObjectiveTex
 -- VerifiedBuild: leave it be for now, it wont harm.
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `quest_template_locale` TO `quests_localized`;

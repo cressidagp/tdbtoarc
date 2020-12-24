@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: creature_template_addon to npc_monstersay
 	(but we will take info from creature_text and smart_scripts)
 	
@@ -13,7 +15,7 @@
 DROP TABLE IF EXISTS `npc_monstersay`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature_template_addon2` SELECT * FROM `creature_template_addon`;
@@ -119,7 +121,7 @@ UPDATE `creature_template_addon` SET `text4` = '' WHERE `text4` IS NULL;
 DELETE FROM `creature_template_addon` WHERE `chance` = 0;
 
 --
--- The End: rename to kickass emu way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `creature_template_addon` TO `npc_monstersay`;

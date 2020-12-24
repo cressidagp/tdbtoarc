@@ -14,7 +14,7 @@
 DROP TABLE IF EXISTS `battlemasters`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `battlemaster_entry2` SELECT * FROM `battlemaster_entry`;
@@ -28,7 +28,7 @@ ALTER TABLE `battlemaster_entry` CHANGE COLUMN `entry` `creature_entry` int(10) 
 ALTER TABLE `battlemaster_entry` CHANGE COLUMN `bg_template` `battleground_id` int(10) unsigned NOT NULL DEFAULT '0';
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `battlemaster_entry` TO `battlemasters`;

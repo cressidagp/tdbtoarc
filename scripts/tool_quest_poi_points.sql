@@ -13,7 +13,7 @@
 DROP TABLE IF EXISTS `quest_poi_points2`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `quest_poi_points2` SELECT * FROM `quest_poi_points`;
@@ -39,7 +39,7 @@ ALTER TABLE `quest_poi_points` CHANGE COLUMN `X` `x` int(10) NOT NULL DEFAULT '0
 ALTER TABLE `quest_poi_points` CHANGE COLUMN `Y` `y` int(10) NOT NULL DEFAULT '0';
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 ALTER TABLE `quest_poi_points` DROP KEY `questId_id`;

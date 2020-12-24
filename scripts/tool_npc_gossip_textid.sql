@@ -26,7 +26,7 @@
 DROP TABLE IF EXISTS `npc_gossip_textid`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `gossip_menu2` SELECT * FROM `gossip_menu`;
@@ -48,7 +48,7 @@ ALTER TABLE `gossip_menu` CHANGE COLUMN `VerifiedBuild` `VerifiedBuild` int(5) N
 ALTER TABLE `gossip_menu` ADD COLUMN `temp_entry` int(8) unsigned NOT NULL DEFAULT '0' AFTER `VerifiedBuild`;
 
 --
--- Remove when more than one...
+-- Remove when more than one
 --
 
 CREATE TABLE `gossip_menu_temp` LIKE `gossip_menu`;
@@ -90,7 +90,7 @@ DELETE FROM `gossip_menu` WHERE `creatureid` = 0;
 ALTER TABLE `gossip_menu` ADD PRIMARY KEY (`creatureid`);
 
 --
--- The End: rename to kickass emu way :P
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `gossip_menu` TO `npc_gossip_textid`;

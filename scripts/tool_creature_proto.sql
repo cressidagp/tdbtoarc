@@ -22,7 +22,7 @@
 DROP TABLE IF EXISTS `creature_proto`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
@@ -581,7 +581,7 @@ ALTER TABLE `creature_template` DROP COLUMN `unit_class`;
 ALTER TABLE `creature_template` DROP COLUMN `VerifiedBuild`;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `creature_template` TO `creature_proto`;

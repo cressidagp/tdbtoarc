@@ -14,7 +14,7 @@
 DROP TABLE IF EXISTS `playercreateinfo_bars`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `playercreateinfo_action2` SELECT * FROM `playercreateinfo_action`;
@@ -52,7 +52,7 @@ UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `clas
 UPDATE `playercreateinfo_action` SET `button` = '10' WHERE (`race` = 1 and `class` = 9 and `action` = 59752 );
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `playercreateinfo_action` TO `playercreateinfo_bars`;
@@ -62,13 +62,13 @@ ALTER TABLE `playercreateinfo_bars` DROP PRIMARY KEY;
 ALTER TABLE `playercreateinfo_bars` DROP KEY `playercreateinfo_race_class_index`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `playercreateinfo_action2` TO `playercreateinfo_action`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `playercreateinfo_action` ADD PRIMARY KEY (`race`,`class`,`button`);

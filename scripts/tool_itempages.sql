@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: page_text to itempages
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `itempages`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `page_text2` SELECT * FROM `page_text`;
@@ -30,7 +32,7 @@ ALTER TABLE `page_text` CHANGE COLUMN `NextPageID` `next_page` int(10) unsigned 
 -- VerifiedBuild: leave it be for now, lets see if this break something
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `page_text` TO `itempages`;

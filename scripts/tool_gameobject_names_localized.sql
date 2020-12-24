@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: gameobject_template_locale to gameobject_names_localized
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `gameobject_names_localized`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `gameobject_template_locale2` SELECT * FROM `gameobject_template_locale`;
@@ -54,13 +56,13 @@ ALTER TABLE `gameobject_template_locale` CHANGE COLUMN `name` `name` varchar(100
 RENAME TABLE `gameobject_template_locale` TO `gameobject_names_localized`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `gameobject_template_locale2` TO `gameobject_template_locale`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `gameobject_template_locale` ADD PRIMARY KEY (`entry`, `locale`);

@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: creature_queststarter to creature_quest_starter
 	
 	From TDB: 335.20121
@@ -11,13 +13,13 @@
 DROP TABLE IF EXISTS `creature_quest_starter`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature_queststarter2` SELECT * FROM `creature_queststarter`;
 
 --
--- Lets start...
+-- Here we go...
 --
 
 ALTER TABLE `creature_queststarter` CHANGE COLUMN `id` `id` int(11) unsigned NOT NULL DEFAULT '0';
@@ -25,7 +27,7 @@ ALTER TABLE `creature_queststarter` CHANGE COLUMN `id` `id` int(11) unsigned NOT
 ALTER TABLE `creature_queststarter` CHANGE COLUMN `quest` `quest` int(11) unsigned NOT NULL DEFAULT '0';
 
 --
--- The End: rename to kickass emu way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `creature_queststarter` TO `creature_quest_starter`;

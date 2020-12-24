@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: page_text_locale to itempages_localized
 	
 	From TDB: 335.20121
@@ -14,7 +16,7 @@
 DROP TABLE IF EXISTS `itempages_localized`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `page_text_locale2` SELECT * FROM `page_text_locale`;
@@ -46,7 +48,7 @@ ALTER TABLE `page_text_locale` CHANGE COLUMN `locale` `language_code` varchar(5)
 ALTER TABLE `page_text_locale` CHANGE COLUMN `Text` `text` text CHARACTER SET latin1 NOT NULL;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `page_text_locale` TO `itempages_localized`;

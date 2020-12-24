@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: npc_text to npc_text
 	
 	From TDB: 335.20121
@@ -11,13 +13,13 @@
 DROP TABLE IF EXISTS `npc_text2`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `npc_text2` SELECT * FROM `npc_text`;
 
 --
--- Remove Data truncated for column...
+-- Remove Data truncated for column
 --
 
 UPDATE `npc_text` SET `text0_0` = '' WHERE `text0_0` IS NULL;
@@ -53,7 +55,7 @@ UPDATE `npc_text` SET `text7_0` = '' WHERE `text7_0` IS NULL;
 UPDATE `npc_text` SET `text7_1` = '' WHERE `text7_1` IS NULL;
 
 --
--- Start! :)
+-- Here we go...
 --
 
 ALTER TABLE `npc_text` CHANGE COLUMN `ID` `entry` int(10) unsigned NOT NULL DEFAULT '0';

@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: npc_text_locale to npc_text_localized
 	
 	From TDB: 335.20121
@@ -11,7 +13,7 @@
 DROP TABLE IF EXISTS `npc_text_localized`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `npc_text_locale2` SELECT * FROM `npc_text_locale`;
@@ -29,7 +31,7 @@ DELETE FROM `npc_text_locale` WHERE `Locale` = 'zhTW';
 DELETE FROM `npc_text_locale` WHERE `Locale` = 'ruRU';
 
 --
--- Remove Data truncated for column...
+-- Remove Data truncated for column
 --
 
 UPDATE `npc_text_locale` SET `text0_0` = '' WHERE `text0_0` IS NULL;
@@ -57,7 +59,7 @@ UPDATE `npc_text_locale` SET `text7_0` = '' WHERE `text7_0` IS NULL;
 UPDATE `npc_text_locale` SET `text7_1` = '' WHERE `text7_1` IS NULL;
 
 --
--- Start! :)
+-- Here we go...
 --
 
 ALTER TABLE `npc_text_locale` CHANGE COLUMN `ID` `entry` int(30) NOT NULL;
@@ -99,7 +101,7 @@ ALTER TABLE `npc_text_locale` CHANGE COLUMN `Text7_1` `text7_1` varchar(500) CHA
 -- TODO: Seems to TDB dont have all the info. Found this one missing 13441
 
 --
--- The End: rename to kickass emu way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `npc_text_locale` TO `npc_text_localized`;

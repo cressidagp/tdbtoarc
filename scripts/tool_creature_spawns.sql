@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: creature to creature_spawns
 	
 	From TDB: 335.20121
@@ -24,7 +26,7 @@
 DROP TABLE IF EXISTS `creature_spawns`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature2` SELECT * FROM `creature`;
@@ -340,7 +342,7 @@ ALTER TABLE `creature` CHANGE COLUMN `id` `entry` int(30) NOT NULL;
 ALTER TABLE `creature` CHANGE COLUMN `guid` `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 
 --
--- Rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `creature` TO `creature_spawns`;

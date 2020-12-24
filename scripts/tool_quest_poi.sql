@@ -13,7 +13,7 @@
 DROP TABLE IF EXISTS `quest_poi2`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `quest_poi2` SELECT * FROM `quest_poi`;
@@ -41,7 +41,7 @@ ALTER TABLE `quest_poi` CHANGE COLUMN `Flags` `unk4` int(10) unsigned NOT NULL D
 -- VerifiedBuild: leave it be... it wont harm.
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 ALTER TABLE `quest_poi` DROP PRIMARY KEY;

@@ -34,7 +34,7 @@
 DROP TABLE IF EXISTS `quests`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `quest_template2` SELECT * FROM `quest_template`;
@@ -600,7 +600,7 @@ ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride4`;
 ALTER TABLE `quest_template` DROP COLUMN `RewardFactionOverride5`;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `quest_template` TO `quests`;

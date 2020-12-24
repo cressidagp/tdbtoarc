@@ -13,7 +13,7 @@
 DROP TABLE IF EXISTS `creature_formations2`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature_formations2` SELECT * FROM `creature_formations`;

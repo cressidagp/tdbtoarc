@@ -14,7 +14,7 @@
 DROP TABLE IF EXISTS `ai_threattospellid`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `spell_threat2` SELECT * FROM `spell_threat`;
@@ -36,7 +36,7 @@ ALTER TABLE `spell_threat` CHANGE COLUMN `flatMod` `mod` int(11) NOT NULL DEFAUL
 ALTER TABLE `spell_threat` CHANGE COLUMN `pctMod` `modcoef` float NOT NULL DEFAULT '1';
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `spell_threat` TO `ai_threattospellid`;

@@ -18,7 +18,7 @@
 DROP TABLE IF EXISTS `spellclickspells`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `npc_spellclick_spells2` SELECT * FROM `npc_spellclick_spells`;
@@ -40,7 +40,7 @@ ALTER TABLE `npc_spellclick_spells` CHANGE COLUMN `npc_entry` `CreatureID` int(1
 ALTER TABLE `npc_spellclick_spells` CHANGE COLUMN `spell_id` `SpellID` int(10) unsigned NOT NULL;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `npc_spellclick_spells` TO `spellclickspells`;

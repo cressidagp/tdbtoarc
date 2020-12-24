@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: gameobject_questender to gameobject_quest_finisher
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `gameobject_quest_finisher`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `gameobject_questender2` SELECT * FROM `gameobject_questender`;
@@ -32,13 +34,13 @@ ALTER TABLE `gameobject_questender` CHANGE COLUMN `quest` `quest` int(11) unsign
 RENAME TABLE `gameobject_questender` TO `gameobject_quest_finisher`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `gameobject_questender2` TO `gameobject_questender`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `gameobject_questender` ADD PRIMARY KEY (`id`, `quest`);

@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: gameobject to gameobject_spawns
 	
 	From TDB: 335.20121
@@ -18,7 +20,7 @@
 DROP TABLE IF EXISTS `gameobject_spawns`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `gameobject2` SELECT * FROM `gameobject`;
@@ -116,13 +118,13 @@ ALTER TABLE `gameobject` ADD COLUMN `overrides` int(10) unsigned NOT NULL DEFAUL
 RENAME TABLE `gameobject` TO `gameobject_spawns`;
 
 --
--- Rename our backup table
+-- Rename our backup table(s)
 --
 
 RENAME TABLE `gameobject2` TO `gameobject`;
 
 --
--- Since our backup table will lost his keys we should add them again
+-- Since our backup table(s) will lost his keys we should add them again
 --
 
 ALTER TABLE `gameobject` ADD PRIMARY KEY (`guid`);

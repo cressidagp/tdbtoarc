@@ -18,7 +18,7 @@
 DROP TABLE IF EXISTS `creature_names`;
 
 --
--- Create a backup of original table(s)...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `creature_template2` SELECT * FROM `creature_template`;
@@ -218,7 +218,7 @@ ALTER TABLE `creature_template` CHANGE COLUMN `subname` `subname` varchar(100) N
 ALTER TABLE `creature_template` CHANGE COLUMN `info_str` `info_str` varchar(500) NOT NULL;
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `creature_template` TO `creature_names`;

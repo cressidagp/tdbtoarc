@@ -1,5 +1,7 @@
 /*
 ==============================================
+	TDBtoARC
+	
 	Title: item_template to itempetfood
 	
 	From TDB: 335.20121
@@ -12,7 +14,7 @@
 DROP TABLE IF EXISTS `itempetfood`;
 
 --
--- Create a backup of original table...
+-- Create a backup of original table(s)
 --
 
 CREATE TABLE `item_template2` SELECT * FROM `item_template`;
@@ -163,7 +165,7 @@ ALTER TABLE `item_template` DROP COLUMN `flagsCustom`;
 -- `VerifiedBuild`: leave it be, it worn harm.
 
 --
--- The End: rename to kickass way
+-- The End: rename to ArcEmu way and set/remove keys if needed
 --
 
 RENAME TABLE `item_template` TO `itempetfood`;
