@@ -41,7 +41,7 @@ The following tables are not going to be supported:
 
 * fishing
 
-* gameobject_staticspawns
+* gameobject_staticspawns, graveyards
 
 So far. 
 
