@@ -2,13 +2,19 @@
 ==============================================
 	Title: npc_text_locale to npc_text_localized
 	
-	From TDB: 335.20091
+	From TDB: 335.20121
 	to
 	Arc: 2012-08-04_21-25_worldmap_info.sql
 ==============================================
 */
 
 DROP TABLE IF EXISTS `npc_text_localized`;
+
+--
+-- Create a backup of original table(s)...
+--
+
+CREATE TABLE `npc_text_locale2` SELECT * FROM `npc_text_locale`;
 
 --
 -- Remove Incorrect string value (im sorry China, Korea, Taiwan and Rusia)
@@ -97,3 +103,15 @@ ALTER TABLE `npc_text_locale` CHANGE COLUMN `Text7_1` `text7_1` varchar(500) CHA
 --
 
 RENAME TABLE `npc_text_locale` TO `npc_text_localized`;
+
+--
+-- Rename our backup table(s)
+--
+
+RENAME TABLE `npc_text_locale2` TO `npc_text_locale`;
+
+--
+-- Since our backup table(s) will lost his keys we should add them again
+--
+
+ALTER TABLE `npc_text_locale` ADD PRIMARY KEY (`ID`, `Locale`);
