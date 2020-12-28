@@ -91,7 +91,9 @@ DROP TABLE IF EXISTS `graveyard_zone`;
 DROP TABLE IF EXISTS `holiday_dates`;
 DROP TABLE IF EXISTS `instance_encounters`;
 DROP TABLE IF EXISTS `instance_spawn_groups`;
-DROP TABLE IF EXISTS `instance_template`;
+
+--DROP TABLE IF EXISTS `instance_template`;
+
 DROP TABLE IF EXISTS `item_enchantment_template`;
 DROP TABLE IF EXISTS `item_loot_template`;
 DROP TABLE IF EXISTS `item_set_names`;
