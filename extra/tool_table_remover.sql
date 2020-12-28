@@ -205,7 +205,9 @@ DROP TABLE IF EXISTS `updates_include`;
 DROP TABLE IF EXISTS `vehicle_accessory`;
 DROP TABLE IF EXISTS `vehicle_seat_addon`;
 DROP TABLE IF EXISTS `vehicle_template_accessory`;
-DROP TABLE IF EXISTS `version`;
+
+--DROP TABLE IF EXISTS `version`;
+
 DROP TABLE IF EXISTS `warden_checks`;
 DROP TABLE IF EXISTS `waypoints`;
 DROP TABLE IF EXISTS `waypoint_data`;
