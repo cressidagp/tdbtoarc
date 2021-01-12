@@ -6,7 +6,7 @@ TDBtoARC its a NON-OFFICIAL database conversion project for ArcEmu just for lear
 
 WARNING: this stuff its experimental and eventually i can find something than cant be done, so if you have a database then keep developing it.
 
-Feel free to open tickets to report bugs. Feedback its apreciated.
+Feel free to [open tickets to report bugs.](https://github.com/cressidagp/tdbtoarc/issues/new) Feedback its apreciated.
 
 
 ## Features
