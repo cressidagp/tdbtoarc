@@ -18,11 +18,12 @@ Scripts to obtain the following tables populated:
 * battlemasters
 
 * creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints
-* itempages, itempages_localized, itempetfood, items, items_localized
+
+* fishing
 
 * gameobject_names, gameobject_names_localized, gameobject_quest_starter, gameobject_quest_finisher, gameobject_spawns
 
-* instance_bosses
+* itempages, itempages_localized, itempetfood, items, items_localized, instance_bosses
 
 * npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized
 
@@ -40,8 +41,6 @@ The following tables are not going to be supported:
 * clientaddons, command_overrides, creature_staticspawns, creature_timed_emotes
 
 * display_bounding_boxes
-
-* fishing
 
 * gameobject_quest_item_binding, gameobject_quest_pickup_binding, gameobject_staticspawns, graveyards
 
