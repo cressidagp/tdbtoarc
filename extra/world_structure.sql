@@ -254,21 +254,6 @@ LOCK TABLES `creature_timed_emotes` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `fishing`
---
-
-DROP TABLE IF EXISTS `fishing`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fishing` (
-  `Zone` int(10) unsigned NOT NULL DEFAULT '0',
-  `MinSkill` int(10) unsigned DEFAULT NULL,
-  `MaxSkill` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`Zone`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Fishing System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `gameobject_quest_item_binding`
 --
 
