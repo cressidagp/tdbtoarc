@@ -118,7 +118,7 @@ Logeable at this point.
 * ArcEmu developers for ArcEmu, specially to dfighter1985.
 
 
-## Links
+## Useful Links
 
 * [ArcEmu Forums](http://www.arcemu.org/forums/)
 * [ArcEmu Github](https://github.com/arcemu)
