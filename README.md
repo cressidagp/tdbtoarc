@@ -4,7 +4,7 @@
 
 TDBtoARC its a NON-OFFICIAL database conversion project for ArcEmu just for learning purposes. It will partially convert [TrinityCore](https://github.com/TrinityCore) world database 335.21081 to ArcEmu structure.
 
-Status: this project its in maintenance mode since end of 2020, so there could be a couple of minor fixes but dont expect more tables implementation. The main reason its i had been unable to convert loot tables.
+Status: this project its in maintenance mode since end of 2020, so there could be a couple of minor fixes but dont expect more tables implementation.
 
 Feel free to [open tickets to report bugs.](https://github.com/cressidagp/tdbtoarc/issues/new) Constructive feedback its apreciated.
 
@@ -38,7 +38,13 @@ Scripts to obtain the following tables populated:
 
 The next ones are provided by arcemu so there is no need of conversion:
 
-* spell_coef_override, spell_effects_override, spell_proc, spelltargetconstraints, totemdisplayids, transport_data, unit_display_sizes, worldstring_tables, world_db_version
+* spell_coef_override, spell_effects_override, spell_proc, spelltargetconstraints, 
+
+* totemdisplayids, transport_data, 
+
+* unit_display_sizes
+
+* worldstring_tables, world_db_version
 
 
 The following tables are not going to be supported:
@@ -100,7 +106,7 @@ This require the TDB world database release 335.21081
 
 3. Apply remove_tdb_tables.sql from extra folder.
 
-4. Apply add_arc_world_structure.sql ([Reduced version of world_structure](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
+4. Apply add_arc_world_structure.sql [Reduced version of world_structure](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
 Logeable at this point.
 
 
