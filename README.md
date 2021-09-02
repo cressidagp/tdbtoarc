@@ -106,7 +106,7 @@ This require the TDB world database release 335.21081
 
 3. Apply remove_tdb_tables.sql from extra folder.
 
-4. Apply add_arc_world_structure.sql ([Reduced version of world_structure])(https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
+4. Apply add_arc_world_structure.sql [(reduced version of world_structure).](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
 Logeable at this point.
 
 
