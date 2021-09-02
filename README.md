@@ -15,82 +15,82 @@ Scripts to obtain the following tables populated:
 
 * *ai_threattospellid, auctionhouse*
 
-* battlemasters
+* *battlemasters*
 
-* creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints
+* *creature_formations, creature_names, creature_names_localized, creature_proto, creature_quest_finisher, creature_quest_starter, creature_spawns, creature_waypoints*
 
-* fishing
+* *fishing*
 
-* gameobject_names, gameobject_names_localized, gameobject_quest_finisher, gameobject_quest_item_binding, gameobject_quest_starter, gameobject_spawns
+* *gameobject_names, gameobject_names_localized, gameobject_quest_finisher, gameobject_quest_item_binding, gameobject_quest_starter, gameobject_spawns*
 
-* itemnames, itempages, itempages_localized, itempetfood, items, items_localized, instance_bosses
+* *itemnames, itempages, itempages_localized, itempetfood, items, items_localized, instance_bosses*
 
-* loot_skining
+* *loot_skining*
 
-* npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized
+* *npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized*
 
-* playercreateinfo_bars, professiondiscoveries
+* *playercreateinfo_bars, professiondiscoveries*
 
-* quest_poi, quest_poi_points, quests, quests_localized
+* *quest_poi, quest_poi_points, quests, quests_localized*
 
-* spellclickspells
+* *spellclickspells*
 
 
 The next ones are provided by arcemu so there is no need of conversion:
 
-* spell_coef_override, spell_effects_override, spell_proc, spelltargetconstraints, 
+* *spell_coef_override, spell_effects_override, spell_proc, spelltargetconstraints* 
 
-* totemdisplayids, transport_data, 
+* *totemdisplayids, transport_data*
 
-* unit_display_sizes
+* *unit_display_sizes*
 
-* worldstring_tables, world_db_version
+* *worldstring_tables, world_db_version*
 
 
 The following tables are not going to be supported:
 
-* ai_agents, areatriggers
+* *ai_agents, areatriggers*
 
-* clientaddons
+* *clientaddons*
 
-* display_bounding_boxes
+* *display_bounding_boxes*
 
-* gameobject_quest_pickup_binding, graveyards
+* *gameobject_quest_pickup_binding, graveyards*
 
-* item_randomprop_groups, item_randomsuffix_groups
+* *item_randomprop_groups, item_randomsuffix_groups*
 
-* loot_creatures, loot_fishing, loot_gameobjects, loot_items, loot_pickpocketing
+* *loot_creatures, loot_fishing, loot_gameobjects, loot_items, loot_pickpocketing*
 
-* petdefaultspells, playercreateinfo, playercreateinfo_items, playercreateinfo_skills, playercreateinfo_spells
+* *petdefaultspells, playercreateinfo, playercreateinfo_items, playercreateinfo_skills, playercreateinfo_spells*
 
-* recall, reputation_creature_onkill, reputation_faction_onkill, reputation_instance_onkill
+* *recall, reputation_creature_onkill, reputation_faction_onkill, reputation_instance_onkill*
 
-* spelloverride, 
+* *spelloverride*
 
-* teleport_coords, trainer_defs, trainer_spells, trainerspelloverride
+* *teleport_coords, trainer_defs, trainer_spells, trainerspelloverride*
 
-* vehicle_accessories, vendors, vendor_restrictions, 
+* *vehicle_accessories, vendors, vendor_restrictions*
 
-* weather, weather_season, wordfilter_character_names, worldmap_info, worldmap_info_localized, worldstate_templates, worldstring_tables_localized
+* *weather, weather_season, wordfilter_character_names, worldmap_info, worldmap_info_localized, worldstate_templates, worldstring_tables_localized*
 
-* zoneguards
+* *zoneguards*
 
 
 Finally, there are some special cases:
 
-* creature_timed_emotes (empty in all projects, so it wont be missed)
+* *creature_timed_emotes (empty in all projects, so it wont be missed)*
 
-* creature_staticspawns (useless)
+* *creature_staticspawns (useless)*
 
-* gameobject_staticspawns (needed by core)
+* *gameobject_staticspawns (needed by core)*
 
-* gameobject_teleports, items_extendedcost (for custom stuff)
+* *gameobject_teleports, items_extendedcost (for custom stuff)*
 
-* transport_creatures (this are very bugged)
+* *transport_creatures (this are very bugged)*
 
-* command_overrides, spell_disable, worldbroadcast, worldbroadcast_localized, wordfilter_chat (server admin)
+* *command_overrides, spell_disable, worldbroadcast, worldbroadcast_localized, wordfilter_chat (server admin)*
 
-* banned_phrases, item_quest_association, map_checkpoint (deprecated?)
+* *banned_phrases, item_quest_association, map_checkpoint (deprecated?)*
 
 
 ## Requirements
