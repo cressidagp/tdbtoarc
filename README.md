@@ -13,7 +13,7 @@ Feel free to [open tickets to report bugs.](https://github.com/cressidagp/tdbtoa
 
 Scripts to obtain the following tables populated: 
 
-* ai_threattospellid, auctionhouse
+* *ai_threattospellid, auctionhouse*
 
 * battlemasters
 
