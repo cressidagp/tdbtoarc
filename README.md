@@ -2,7 +2,7 @@
 
 ## Introduction
 
-TDBtoARC its a NON-OFFICIAL database conversion project for ArcEmu just for learning purposes. It will partially convert [TrinityCore](https://github.com/TrinityCore) world database 335.21081 to ArcEmu structure.
+TDBtoARC its a NON-OFFICIAL database conversion project for ArcEmu just for learning purposes. It will partially convert [TrinityCore](https://github.com/TrinityCore) world database 335.21081 to [ArcEmu structure.](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
 
 Status: this project its in maintenance mode since end of 2020, so there could be a couple of minor fixes but dont expect more tables implementation.
 
