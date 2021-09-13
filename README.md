@@ -4,7 +4,7 @@
 
 TDBtoARC its a NON-OFFICIAL database conversion project for ArcEmu just for learning purposes. It will partially convert [TrinityCore](https://github.com/TrinityCore) world database 335.21081 to [ArcEmu structure.](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
 
-Status: this project its in maintenance mode since end of 2020, so there could be a couple of minor fixes but dont expect more tables implementation.
+Status: this project its in maintenance mode since end of 2020, the reason its i've been unable to implement an automatic random waypoint generator.
 
 Feel free to [open tickets to report bugs.](https://github.com/cressidagp/tdbtoarc/issues/new) Constructive feedback its apreciated.
 
@@ -106,7 +106,7 @@ This require the TDB world database release 335.21081
 
 3. Apply remove_tdb_tables.sql from extra folder.
 
-4. Apply add_arc_world_structure.sql [(reduced version of world_structure).](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
+4. Apply add_arc_structure.sql [(reduced version of world_structure).](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
 Logeable at this point.
 
 
