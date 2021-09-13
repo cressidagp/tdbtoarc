@@ -113,7 +113,7 @@ Logeable at this point.
 ## Credits to
 
 * TrinityCore for his wonderfull database job. 
-* KFL for some info about guardtype, IsTrainingDummy and itempetfood script.
+* KFL for some info about guardtype, IsTrainingDummy.
 * Formers ArcEmu database projects: NCDB, WHYDB, IFDB, POTD and ARCDB (so far).
 * ArcEmu developers for ArcEmu, specially to dfighter1985.
 
