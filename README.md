@@ -38,13 +38,13 @@ Scripts to obtain the following tables populated:
 
 The next ones are provided by arcemu so there is no need of conversion:
 
-* *spell_coef_override | spell_effects_override |spell_proc | spelltargetconstraints* 
+* *spell_coef_override, spell_effects_override, spell_proc, spelltargetconstraints* 
 
-* *totemdisplayids | transport_data*
+* *totemdisplayids, transport_data*
 
 * *unit_display_sizes*
 
-* *worldstring_tables | world_db_version*
+* *worldstring_tables, world_db_version*
 
 
 The following tables are not going to be supported:
