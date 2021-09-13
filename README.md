@@ -102,7 +102,7 @@ This require the TDB world database release 335.21081
 
 1. Setup a TDB world database.
 
-2. Run all files inside script folder.
+2. Run all files inside scripts folder.
 
 3. Apply remove_tdb_tables.sql from extra folder.
 
