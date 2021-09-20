@@ -34,6 +34,40 @@ DROP TABLE IF EXISTS `creature_waypoints`;
 
 CREATE TABLE `waypoint_data2` SELECT * FROM `waypoint_data`;
 
+CREATE TABLE `creature_addon2` SELECT * FROM `creature_addon`;
+
+--
+--
+-- Remove transports waypoints
+--
+--
+
+ALTER TABLE `creature_addon` ADD COLUMN `temp_map` smallint(5) unsigned NOT NULL DEFAULT '0' AFTER `auras`;
+
+UPDATE creature_addon, creature
+SET creature_addon.temp_map = creature.map
+WHERE creature_addon.guid = creature.guid;
+
+DELETE FROM `creature_addon` WHERE `temp_map` IN ( 582, 584, 586, 587, 588, 589, 590, 591, 593, 594, 610, 612, 613, 614, 620, 621, 622, 623, 647 );
+
+ALTER TABLE `creature_addon` DROP COLUMN `temp_map`;
+
+--
+--
+-- Remove event waypoints (example: guid 178)
+--
+--
+
+ALTER TABLE `creature_addon` ADD COLUMN `temp_event` smallint(5) NOT NULL DEFAULT '0' AFTER `auras`;
+
+UPDATE creature_addon, game_event_creature
+SET creature_addon.temp_event = game_event_creature.eventEntry
+WHERE creature_addon.guid = game_event_creature.guid;
+
+DELETE FROM `creature_addon` WHERE `temp_event` NOT IN ( 0, 25, -25 );
+
+ALTER TABLE `creature_addon` DROP COLUMN `temp_event`;
+
 --
 --
 -- Here we go...
@@ -120,6 +154,10 @@ ALTER TABLE `creature_waypoints` ADD PRIMARY KEY (`spawnid`, `waypointid`);
 
 RENAME TABLE `waypoint_data2` TO `waypoint_data`;
 
+DROP TABLE IF EXISTS `creature_addon`;
+
+RENAME TABLE `creature_addon2` TO `creature_addon`;
+
 --
 --
 -- Since our backup table(s) will lost his key(s) we should add them again
@@ -127,3 +165,5 @@ RENAME TABLE `waypoint_data2` TO `waypoint_data`;
 --
 
 ALTER TABLE `waypoint_data` ADD PRIMARY KEY (`id`, `point`);
+
+ALTER TABLE `creature_addon` ADD PRIMARY KEY (`guid`);
