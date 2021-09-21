@@ -15,8 +15,6 @@
 	
 	*) extra_a9_flags (not working in arcemu)
 	*) spell_flags (not working in arcemu)
-	*) isTrainingDummy
-	*) guardtype
 	*) summonguard (not working in arcemu)
 	*) port to lua rooted of creature_movement_override?
 	*) set auras on spawnid
@@ -493,6 +491,33 @@ WHERE creature_template.entry = creature_template_addon.entry;
 /* modImmunities */
 
 ALTER TABLE `creature_template` CHANGE COLUMN `mechanic_immune_mask` `modImmunities` int(10) unsigned NOT NULL DEFAULT '0' AFTER `spell_flags`;
+
+/*	isTrainingDummy
+
+	0: False
+	1: True
+	
+	TDB dont have this.
+	
+	Got some data in arcemu forums, seems to be OK but it should be more, all credits to KFL.
+*/
+
+UPDATE `creature_template` SET `isTrainingDummy` = 1 WHERE `entry` IN ( 32542, 32546, 32666, 31144, 31146, 32545, 32541, 32667, 30527, 32543, 32547 );
+
+/*	guardtype
+
+	0: None
+	1: City
+	2: Neutral
+	
+	TDB seems to dont have this.
+	
+	Got some data in arcemu forums, seems to be OK but it should be more, all credits to KFL. 
+*/
+
+UPDATE `creature_template` SET `guardtype` = 1 WHERE `entry` IN ( 68, 1423, 1756, 15858, 15859, 16864, 20556, 18948, 18949, 1642, 3296, 15852, 15853, 15854, 18950, 5624, 18971, 16432, 16733, 18815, 3084, 16221, 17029, 16222, 727, 5595, 12996 );
+
+UPDATE `creature_template` SET `guardtype` = 2 WHERE `entry` IN ( 3502, 4624, 15088, 9460, 11102, 16378, 15184, 11822, 11190, 17855, 18099, 18101, 18102, 20484, 20485, 22494, 23636, 23721, 26253, 24994 );
 
 --
 --
