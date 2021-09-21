@@ -519,6 +519,12 @@ UPDATE `creature_template` SET `guardtype` = 1 WHERE `entry` IN ( 68, 1423, 1756
 
 UPDATE `creature_template` SET `guardtype` = 2 WHERE `entry` IN ( 3502, 4624, 15088, 9460, 11102, 16378, 15184, 11822, 11190, 17855, 18099, 18101, 18102, 20484, 20485, 22494, 23636, 23721, 26253, 24994 );
 
+-- Netherstorm Agent
+UPDATE `creature_template` SET `guardtype` = 2 WHERE `entry` = 19541;
+
+-- K3 Bruiser
+UPDATE `creature_template` SET `guardtype` = 2 WHERE `entry` = 29910;
+
 --
 --
 -- Cleanup table
