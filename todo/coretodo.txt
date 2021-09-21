@@ -1,0 +1,21 @@
+------------------------------------------------
+-- Things i should do if i get skilled at C++ --
+------------------------------------------------
+
+1. High Priority:
+
+*) Random wp generation
+*) fishing (if no area then load zone)
+*) quest packet upgrade
+
+2. Medium priority:
+
+*) Flee agent
+*) gossip options
+
+3. Low priority:
+
+*) Negative resistances
+*) Action bar fix
+*) Random display id
+
