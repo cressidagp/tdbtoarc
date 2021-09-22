@@ -332,7 +332,7 @@ WHERE creature.id = creature_template_addon.entry;
 
 UPDATE creature, creature_addon
 SET creature.bytes2 = creature_addon.bytes2
-WHERE creature.guid = creature_addon.guid and creature_addon.bytes2 != 0;
+WHERE creature.guid = creature_addon.guid;
 
 /* emote_state: */
 
@@ -342,7 +342,7 @@ WHERE creature.id = creature_template_addon.entry;
 
 UPDATE creature, creature_addon
 SET creature.emote_state = creature_addon.emote
-WHERE (creature.guid = creature_addon.guid and creature_addon.emote != 0);
+WHERE creature.guid = creature_addon.guid;
 
 /* mountdisplayid: */
 
