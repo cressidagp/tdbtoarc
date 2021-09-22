@@ -312,6 +312,10 @@ UPDATE creature, creature_template_addon
 SET creature.bytes1 = creature_template_addon.bytes1
 WHERE creature.id = creature_template_addon.entry;
 
+UPDATE creature, creature_addon
+SET creature.bytes1 = creature_addon.bytes1
+WHERE creature.guid = creature_addon.guid;
+
 /* bytes2:
 	
 	0: Unarmed
