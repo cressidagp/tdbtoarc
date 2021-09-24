@@ -1,21 +1,21 @@
 ------------------------------------------------
--- Things i should do if i get skilled at C++ --
+-- Things i should do IF i get skilled at C++ --
 ------------------------------------------------
 
 1. High Priority:
 
 *) Random wp generation
 *) fishing (if no area then load zone)
-*) quest packet upgrade
+*) quest packet upgrade (most quest cant be completed if questender has more than 1)
 
 2. Medium priority:
 
 *) Flee agent
-*) gossip options
+*) gossip conditions
 
 3. Low priority:
 
 *) Negative resistances
 *) Action bar fix
 *) Random display id
-
+*) Gameobject invisibility (for traps)
