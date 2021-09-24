@@ -5,7 +5,7 @@ COLOR F
 :TOP
 CLS
 ECHO.
-ECHO    Please enter your MySQL Info...
+ECHO Please enter your MySQL Info...
 ECHO.
 SET /p host= MySQL Server Address (e.g. localhost): 
 SET /p port= MySQL Server Port (e.g. 3306): 
@@ -23,6 +23,8 @@ CLS
 SET v=""
 ECHO.
 ECHO    C - Convert TDB to ArcEmu structure
+ECHO    A - Add ArcEmu world structure
+ECHO.
 ECHO    R - Remove not more needed tables
 ECHO.
 ECHO    S - Change your settings
@@ -33,6 +35,8 @@ SET /p v= 		Enter a char:
 IF %v%==* GOTO error
 IF %v%==c GOTO converttdb
 IF %v%==C GOTO converttdb
+IF %v%==a GOTO addstructure
+IF %v%==A GOTO addstructure
 IF %v%==r GOTO remove
 IF %v%==R GOTO remove
 IF %v%==s GOTO top
@@ -45,7 +49,7 @@ GOTO error
 :converttdb
 CLS
 ECHO.
-ECHO Convert TDB to ArcEmu structure
+ECHO Converting TDB to ArcEmu structure...
 ECHO.
 for %%C in (scripts\*.sql) do (
 	ECHO convert: %%~nxC
@@ -56,10 +60,22 @@ ECHO.
 PAUSE   
 GOTO begin
 
+:addstructure
+CLS
+ECHO.
+ECHO Adding ArcEmu world structure...
+ECHO.
+%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < %extrasql%\add_arc_world_structure.sql
+ECHO.
+ECHO      Structure added sucesfully!
+ECHO.
+PAUSE
+GOTO begin
+
 :remove
 CLS
 ECHO.
-ECHO Remove not more needed tables
+ECHO Removing not more needed tables...
 ECHO.
 %mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < %extrasql%\remove_tdb_tables.sql
 ECHO.
