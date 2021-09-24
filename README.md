@@ -102,12 +102,9 @@ This require the TDB world database release 335.21081
 
 1. Setup a TDB world database.
 
-2. Run all files inside scripts folder.
+2. Run install.
 
-3. Apply remove_tdb_tables.sql from extra folder.
-
-4. Apply add_arc_structure.sql [(reduced version of world_structure).](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
-Logeable at this point.
+3. Apply hotfixes.
 
 
 ## Credits to
