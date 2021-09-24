@@ -179,8 +179,8 @@ ALTER TABLE `creature`
 	/* Stand State */
 	ADD COLUMN `bytes1` int(30) NOT NULL DEFAULT '0' AFTER `bytes0`,
 	
-	/* Sheath Info */
-	ADD COLUMN `bytes2` int(30) NOT NULL DEFAULT '0' AFTER `bytes1`,
+	/* Sheath Info: need default 1 here or will have many unarmed dudes. */
+	ADD COLUMN `bytes2` int(30) NOT NULL DEFAULT '1' AFTER `bytes1`,
 
 	ADD COLUMN `emote_state` int(30) NOT NULL DEFAULT '0' AFTER `bytes2`,
 
