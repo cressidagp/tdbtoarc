@@ -1,6 +1,6 @@
-------------------------------------------------
--- Things i should do IF i get skilled at C++ --
-------------------------------------------------
+----------------------------------------------------
+-- Things i should do ( IF ) i get skilled at C++ --
+----------------------------------------------------
 
 1. High Priority:
 
@@ -21,3 +21,4 @@
 *) action bar fix
 *) random display id
 *) gameobject invisibility (for traps)
+*) playercreateinfo orientation
