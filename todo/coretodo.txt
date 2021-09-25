@@ -4,7 +4,7 @@
 
 1. High Priority:
 
-*) random wp generation
+*) random movement/wp generation
 *) fishing (if no area then load zone)
 *) quest packet upgrade (most quest cant be completed if questender has more than 1)
 
@@ -12,7 +12,6 @@
 
 *) flee agent
 *) gossip conditions
-*) monstersay_locale
 *) itemnames_locale
 
 3. Low priority:
@@ -22,3 +21,4 @@
 *) random display id
 *) gameobject invisibility (for traps)
 *) playercreateinfo orientation
+*) monstersay_locale
