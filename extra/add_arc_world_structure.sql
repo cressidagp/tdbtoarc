@@ -1334,31 +1334,6 @@ LOCK TABLES `transport_creatures` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `transport_data`
---
-
-DROP TABLE IF EXISTS `transport_data`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `transport_data` (
-  `entry` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `name` text,
-  `period` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`entry`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='Transports';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `transport_data`
---
-
-LOCK TABLES `transport_data` WRITE;
-/*!40000 ALTER TABLE `transport_data` DISABLE KEYS */;
-INSERT INTO `transport_data` VALUES (176495,'Grom\'Gol Base Camp and Undercity',315032),(176310,'Stormwind and Auberdine',234510),(176244,'Teldrassil and Auberdine',312734),(176231,'Menethil Harbor and Theramore Isle',230162),(175080,'Grom\'Gol Base Camp and Orgrimmar',248990),(164871,'Orgrimmar and Undercity',239334),(20808,'Ratchet and Booty Bay',231236),(177233,'Forgotton Coast and Feathermoon Stronghold',259751),(181646,'Azuremyst and Auberdine',238707),(190536,'Valiance Keep and Stormwind',271979),(181688,'Valgarde and Menethil',445534),(181689,'Undercity and Vengeance Landing',214579),(186238,'Orgrimmar and Warsong Hold',302705),(186371,'Stolen Zeppelin',484211),(187568,'Moa\'ki Harbor Turtle Boat',445220),(187038,'Pirate boat',307953),(188511,'Unu\'pe Turtle Boat',502354),(192241,'Orgrims Hammer',1424158),(192242,'Fizzcrank Airstrip',1051387);
-/*!40000 ALTER TABLE `transport_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `unit_display_sizes`
 --
 

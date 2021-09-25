@@ -35,14 +35,12 @@ Scripts to obtain the following tables populated:
 
 * *spellclickspells*
 
-* *totemdisplayids*
+* *totemdisplayids, transport_data*
 
 
 The next ones are provided by arcemu so there is no need of conversion:
 
 * *spell_coef_override, spell_effects_override, spell_proc, spelltargetconstraints* 
-
-* *transport_data*
 
 * *unit_display_sizes*
 
