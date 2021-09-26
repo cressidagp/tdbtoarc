@@ -29,7 +29,7 @@ ECHO    R - Remove not more needed tables
 ECHO.
 ECHO    S - Change your settings
 ECHO.
-ECHO    X - Exit this tool
+ECHO    Q - Quit
 ECHO.
 SET /p v= 		Enter a char: 
 IF %v%==* GOTO error
@@ -52,7 +52,7 @@ ECHO.
 ECHO Converting TDB to ArcEmu structure...
 ECHO.
 for %%C in (scripts\*.sql) do (
-	ECHO convert: %%~nxC
+	ECHO executing: %%~nxC
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
 ECHO Database converted sucesfully!
