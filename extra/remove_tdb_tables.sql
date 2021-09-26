@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS
 
 `exploration_basexp`, `fishing_loot_template`, `gameobject`, `gameobject_addon`, `gameobject_loot_template`, `gameobject_overrides`, `gameobject_questender`, `gameobject_questitem`,
 
-`gameobject_queststarter`, `gameobject_template`, `gameobject_template_addon`, `gameobject_template_locale`, `game_event`, `game_event_arena_seasons`, `game_event_battleground_holiday`,
+`gameobject_queststarter`, `gameobject_template`, `gameobject_template_addon`, `gameobject_template_locale`, `game_event_arena_seasons`, `game_event_battleground_holiday`,
 
 `game_event_condition`, `game_event_creature`, `game_event_creature_quest`, `game_event_gameobject`, `game_event_gameobject_quest`, `game_event_model_equip`, `game_event_npcflag`,
 
@@ -62,13 +62,7 @@ DROP TABLE IF EXISTS
 
 DROP TABLE IF EXISTS `areatrigger_tavern`;
 DROP TABLE IF EXISTS `battleground_template`;
-DROP TABLE IF EXISTS `game_event_creature`;
-DROP TABLE IF EXISTS `instance_template`;
-
-*/
-
-/* Lets keep this one as a source of information.
-
+DROP TABLE IF EXISTS `game_event`;
 DROP TABLE IF EXISTS `instance_template`;
 
 */
