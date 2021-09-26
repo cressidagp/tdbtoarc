@@ -58,15 +58,12 @@ DROP TABLE IF EXISTS
 
 `updates_include`, `vehicle_accessory`, `vehicle_seat_addon`, `vehicle_template`, `vehicle_template_accessory`, `warden_checks`, `waypoints`, `waypoint_data`, `waypoint_scripts`;
 
-/* Lets keep this one as a source of information.
+/* Lets keep this as a source of information.
 
 DROP TABLE IF EXISTS `areatrigger_tavern`;
-
-*/
-
-/* Lets keep this one as a source of information.
-
 DROP TABLE IF EXISTS `battleground_template`;
+DROP TABLE IF EXISTS `game_event_creature`;
+DROP TABLE IF EXISTS `instance_template`;
 
 */
 
