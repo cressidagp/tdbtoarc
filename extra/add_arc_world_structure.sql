@@ -772,32 +772,6 @@ insert  into `playercreateinfo`(`Index`,`race`,`factiontemplate`,`class`,`mapID`
 UNLOCK TABLES;
 
 --
--- Table structure for table `playercreateinfo_bars`
---
-
-DROP TABLE IF EXISTS `playercreateinfo_bars`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `playercreateinfo_bars` (
-  `race` tinyint(3) unsigned DEFAULT NULL,
-  `class` tinyint(3) unsigned DEFAULT NULL,
-  `button` int(10) unsigned DEFAULT NULL,
-  `action` int(10) unsigned DEFAULT NULL,
-  `type` int(10) unsigned DEFAULT NULL,
-  `misc` int(10) unsigned DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Player System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `playercreateinfo_bars`
---
-
-LOCK TABLES `playercreateinfo_bars` WRITE;
-/*!40000 ALTER TABLE `playercreateinfo_bars` DISABLE KEYS */;
-/*!40000 ALTER TABLE `playercreateinfo_bars` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `playercreateinfo_items`
 --
 
