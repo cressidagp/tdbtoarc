@@ -61,7 +61,7 @@ The following tables are not going to be supported:
 
 * *item_randomprop_groups, item_randomsuffix_groups*
 
-* *loot_creatures, loot_fishing, loot_gameobjects, loot_items, loot_pickpocketing*
+* *loot_creatures, loot_gameobjects, loot_items, loot_pickpocketing*
 
 * *petdefaultspells, playercreateinfo, playercreateinfo_items, playercreateinfo_skills, playercreateinfo_spells*
 
