@@ -870,30 +870,6 @@ LOCK TABLES `playercreateinfo_spells` WRITE;
 /*!40000 ALTER TABLE `playercreateinfo_spells` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `professiondiscoveries`
---
-
-DROP TABLE IF EXISTS `professiondiscoveries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `professiondiscoveries` (
-  `SpellId` int(10) unsigned NOT NULL DEFAULT '0',
-  `SpellToDiscover` int(10) unsigned NOT NULL DEFAULT '0',
-  `SkillValue` int(10) unsigned NOT NULL DEFAULT '0',
-  `Chance` float NOT NULL DEFAULT '0',
-  PRIMARY KEY (`SpellId`,`SpellToDiscover`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `professiondiscoveries`
---
-
-LOCK TABLES `professiondiscoveries` WRITE;
-/*!40000 ALTER TABLE `professiondiscoveries` DISABLE KEYS */;
-/*!40000 ALTER TABLE `professiondiscoveries` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `reputation_creature_onkill`
