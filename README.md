@@ -106,7 +106,7 @@ This require the TDB world database release 335.21081
 
 2. Excecute all files inside scripts folder or run install tool.
 
-3. Apply hotfixes.
+3. Apply hotfixes in order. Additional notes on each file.
 
 4. Can be completed with tables from [ArcDB.](https://github.com/DarkAngel39/ArcDB)
 
