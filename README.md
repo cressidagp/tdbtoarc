@@ -33,6 +33,8 @@ Scripts to obtain the following tables populated:
 
 * *quest_poi, quest_poi_points, quests, quests_localized*
 
+* *recall*
+
 * *spellclickspells*
 
 * *totemdisplayids, transport_data*
@@ -63,7 +65,7 @@ The following tables are not going to be supported:
 
 * *petdefaultspells, playercreateinfo, playercreateinfo_items, playercreateinfo_skills, playercreateinfo_spells*
 
-* *recall, reputation_creature_onkill, reputation_faction_onkill, reputation_instance_onkill*
+* *reputation_creature_onkill, reputation_faction_onkill, reputation_instance_onkill*
 
 * *spelloverride*
 

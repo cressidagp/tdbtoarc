@@ -896,34 +896,6 @@ LOCK TABLES `professiondiscoveries` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `recall`
---
-
-DROP TABLE IF EXISTS `recall`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recall` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `MapId` int(10) unsigned NOT NULL DEFAULT '0',
-  `positionX` float NOT NULL DEFAULT '0',
-  `positionY` float NOT NULL DEFAULT '0',
-  `positionZ` float NOT NULL DEFAULT '0',
-  `Orientation` float unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Tele Command';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `recall`
---
-
-LOCK TABLES `recall` WRITE;
-/*!40000 ALTER TABLE `recall` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recall` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `reputation_creature_onkill`
 --
 
