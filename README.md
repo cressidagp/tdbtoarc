@@ -104,9 +104,11 @@ This require the TDB world database release 335.21081
 
 1. Setup a TDB world database.
 
-2. Run install.
+2. Excecute all files inside scripts folder or run install tool.
 
 3. Apply hotfixes.
+
+4. Can be completed with tables from [ArcDB.](https://github.com/DarkAngel39/ArcDB)
 
 
 ## Credits to
