@@ -1,3 +1,19 @@
+/*
+
+	This file its a short/modified version of:
+	
+	https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql
+	
+	All credits to ArcEmu devs.
+	
+	To make it logeable after applying this file i added:
+	
+	1) I added playercreateinfo data from ArcDB
+	
+	2) Four entrys of worldmap_info
+
+*/
+
 -- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: localhost    Database: arcemu_world
