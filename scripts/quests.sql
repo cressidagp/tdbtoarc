@@ -13,16 +13,12 @@
 	
 	WARNING: this one its extremly slow... go take a nap or something
 	
-	Note: completeemote is not working i should report to arcemu
-		  money not displayed on quest gossip when ready to complete
-	
 	TODO:
 	
 	*) ReqCastSpellId1-4
 	*) ReqEmoteId1-4
 	*) RewRepFaction6
 	*) RewRepLimit
-	*) RewXP
 	*) MailSendItem
 	*) RequiredOneOfQuest
 	*) RequiredQuest1-4
@@ -371,7 +367,49 @@ ALTER TABLE `quest_template`
 	
 	CHANGE COLUMN `SuggestedGroupNum` `suggestedplayers` int(10) unsigned NOT NULL DEFAULT '0' AFTER `rewardtalents`,
 	
-	ADD COLUMN `detailemotecount` int(10) unsigned NOT NULL DEFAULT '0' AFTER `suggestedplayers`;
+	ADD COLUMN `detailemotecount` int(10) unsigned NOT NULL DEFAULT '0' AFTER `suggestedplayers`,
+	
+	ADD COLUMN `detailemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotecount`,
+	
+	ADD COLUMN `detailemote2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote1`,
+	
+	ADD COLUMN `detailemote3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote2`,
+	
+	ADD COLUMN `detailemote4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote3`,
+	
+	ADD COLUMN `detailemotedelay1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote4`,
+	
+	ADD COLUMN `detailemotedelay2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay1`,
+	
+	ADD COLUMN `detailemotedelay3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay2`,
+	
+	ADD COLUMN `detailemotedelay4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay3`,
+	
+	ADD COLUMN `completionemotecnt` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay4`,
+	
+	ADD COLUMN `completionemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotecnt`,
+	
+	ADD COLUMN `completionemote2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote1`,
+	
+	ADD COLUMN `completionemote3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote2`,
+	
+	ADD COLUMN `completionemote4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote3`,
+	
+	ADD COLUMN `completionemotedelay1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote4`,
+	
+	ADD COLUMN `completionemotedelay2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay1`,
+	
+	ADD COLUMN `completionemotedelay3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay2`,
+	
+	ADD COLUMN `completionemotedelay4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay3`,
+	
+	ADD COLUMN `completeemote` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay4`,
+	
+	ADD COLUMN `incompleteemote` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completeemote`,
+	
+	ADD COLUMN `iscompletedbyspelleffect` int(10) unsigned NOT NULL DEFAULT '0' AFTER `incompleteemote`,
+	
+	CHANGE COLUMN `RewardXPDifficulty` `RewXPId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `iscompletedbyspelleffect`;
 	
 /* ZoneId: */
 UPDATE `quest_template` SET `ZoneId` = `QuestSortID` WHERE `QuestSortID` > 0;
@@ -408,14 +446,12 @@ UPDATE quest_template, quest_template_addon
 SET quest_template.SpecialFlags = quest_template_addon.SpecialFlags
 WHERE quest_template.entry = quest_template_addon.ID;
 
-/* PrevQuestID: if value > 0: Contains the previous quest id, that must be completed before this quest can be started.
-PrevQuestID: If value < 0: Contains the parent quest id, that must be active before this quest can be started. */
-
+/* PrevQuestID: if value > 0: Contains the previous quest id, that must be completed before this quest can be started. */
 UPDATE quest_template, quest_template_addon
 SET quest_template.PrevQuestId = quest_template_addon.PrevQuestID
 WHERE quest_template.entry = quest_template_addon.ID and quest_template_addon.PrevQuestID > 0;
 
-/* TODO: PrevQuestID < 0 */
+/* PrevQuestID < 0: Contains the parent quest id, that must be active before this quest can be started. */
 
 /* NextQuestID: Contains the next quest id, in case PrevQuestId of that other quest is not sufficient. */
 UPDATE quest_template, quest_template_addon
@@ -447,12 +483,9 @@ UPDATE quest_template, quest_template_addon
 SET quest_template.MailDelaySecs = quest_template_addon.RewardMailDelay
 WHERE quest_template.entry = quest_template_addon.ID;
 
--- For NOW:
-
+/* ExploreTrigger#: */
 UPDATE `quest_template` SET `ExploreTrigger1` = 231, `ExploreTrigger2` = 232, `ExploreTrigger3` = 235 WHERE `entry` = 984;
-
 UPDATE `quest_template` SET `ExploreTrigger1` = 5705, `ExploreTrigger2` = 5706  WHERE `entry` = 24541;
-
 UPDATE `quest_template` SET `ExploreTrigger1` = 5703, `ExploreTrigger2` = 5704  WHERE `entry` = 24656;
 
 DELETE FROM `areatrigger_involvedrelation` WHERE `quest` IN ( 984, 24541, 24656 );
@@ -461,8 +494,10 @@ UPDATE quest_template, areatrigger_involvedrelation
 SET quest_template.ExploreTrigger1 = areatrigger_involvedrelation.id
 WHERE quest_template.entry = areatrigger_involvedrelation.quest;
 
+/* RequiredQuest1: */
 UPDATE `quest_template` SET `RequiredQuest1` = `PrevQuestId`;
 
+/* detailemotecount: */
 UPDATE quest_template, quest_details
 SET quest_template.detailemotecount = 1
 WHERE quest_template.entry = quest_details.ID 
@@ -483,56 +518,41 @@ SET quest_template.detailemotecount = 4
 WHERE quest_template.entry = quest_details.ID 
 AND (quest_details.Emote1 != 0 and quest_details.Emote2 != 0 and quest_details.Emote3 != 0 and quest_details.Emote4 != 0);
 
-ALTER TABLE `quest_template` ADD COLUMN `detailemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotecount`;
-
+/* detailemote#: */
 UPDATE quest_template, quest_details
 SET quest_template.detailemote1 = quest_details.Emote1
 WHERE quest_template.entry = quest_details.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `detailemote2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote1`;
 
 UPDATE quest_template, quest_details
 SET quest_template.detailemote2 = quest_details.Emote2
 WHERE quest_template.entry = quest_details.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `detailemote3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote2`;
-
 UPDATE quest_template, quest_details
 SET quest_template.detailemote3 = quest_details.Emote3
 WHERE quest_template.entry = quest_details.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `detailemote4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote3`;
 
 UPDATE quest_template, quest_details
 SET quest_template.detailemote4 = quest_details.Emote4
 WHERE quest_template.entry = quest_details.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemote4`;
-
+/* detailemotedelay#: */
 UPDATE quest_template, quest_details
 SET quest_template.detailemotedelay1 = quest_details.EmoteDelay1
 WHERE quest_template.entry = quest_details.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay1`;
 
 UPDATE quest_template, quest_details
 SET quest_template.detailemotedelay2 = quest_details.EmoteDelay2
 WHERE quest_template.entry = quest_details.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay2`;
-
 UPDATE quest_template, quest_details
 SET quest_template.detailemotedelay3 = quest_details.EmoteDelay3
 WHERE quest_template.entry = quest_details.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `detailemotedelay4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay3`;
 
 UPDATE quest_template, quest_details
 SET quest_template.detailemotedelay4 = quest_details.EmoteDelay4
 WHERE quest_template.entry = quest_details.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `completionemotecnt` int(10) unsigned NOT NULL DEFAULT '0' AFTER `detailemotedelay4`;
-
+/* completionemotecnt: */
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotecnt = 1
 WHERE quest_template.entry = quest_offer_reward.ID
@@ -553,75 +573,51 @@ SET quest_template.completionemotecnt = 4
 WHERE quest_template.entry = quest_offer_reward.ID
 AND (quest_offer_reward.Emote1 != 0 and quest_offer_reward.Emote2 != 0 and quest_offer_reward.Emote3 != 0 and quest_offer_reward.Emote4 != 0);
 
-ALTER TABLE `quest_template` ADD COLUMN `completionemote1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotecnt`;
-
+/* completionemote#: */
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemote1 = quest_offer_reward.Emote1
 WHERE quest_template.entry = quest_offer_reward.ID; 
-
-ALTER TABLE `quest_template` ADD COLUMN `completionemote2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote1`;
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemote2 = quest_offer_reward.Emote2
 WHERE quest_template.entry = quest_offer_reward.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `completionemote3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote2`;
-
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemote3 = quest_offer_reward.Emote3
 WHERE quest_template.entry = quest_offer_reward.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `completionemote4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote3`;
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemote4 = quest_offer_reward.Emote4
 WHERE quest_template.entry = quest_offer_reward.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay1` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemote4`;
-
+/* completionemotedelay#: */
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotedelay1 = quest_offer_reward.EmoteDelay1
 WHERE quest_template.entry = quest_offer_reward.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay2` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay1`;
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotedelay2 = quest_offer_reward.EmoteDelay2
 WHERE quest_template.entry = quest_offer_reward.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay3` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay2`;
-
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotedelay3 = quest_offer_reward.EmoteDelay3
 WHERE quest_template.entry = quest_offer_reward.ID;
-
-ALTER TABLE `quest_template` ADD COLUMN `completionemotedelay4` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay3`;
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.completionemotedelay4 = quest_offer_reward.EmoteDelay4
 WHERE quest_template.entry = quest_offer_reward.ID;
 
--- research tdb vermien quest has EmoteOnComplete = 1(talk), EmoteOnIncomplete = 6(question)
-
--- in game with arcdb on click (quest marked complete false) he question, 
-
-ALTER TABLE `quest_template` ADD COLUMN `completeemote` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completionemotedelay4`;
-
+/* completeemote: */
 UPDATE quest_template, quest_request_items
 SET quest_template.completeemote = quest_request_items.EmoteOnComplete
 WHERE quest_template.entry = quest_request_items.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `incompleteemote` int(10) unsigned NOT NULL DEFAULT '0' AFTER `completeemote`;
-
+/* incompleteemote: */
 UPDATE quest_template, quest_request_items
 SET quest_template.incompleteemote = quest_request_items.EmoteOnIncomplete
 WHERE quest_template.entry = quest_request_items.ID;
 
-ALTER TABLE `quest_template` ADD COLUMN `iscompletedbyspelleffect` int(10) unsigned NOT NULL DEFAULT '0' AFTER `incompleteemote`;
-
-ALTER TABLE `quest_template` CHANGE COLUMN `RewardXPDifficulty` `RewXPId` int(10) unsigned NOT NULL DEFAULT '0' AFTER `iscompletedbyspelleffect`;
-
-/* falgs: */
+/* flags: */
 UPDATE `quest_template` SET `new_flags` = `Flags`;
 
 ALTER TABLE `quest_template`
@@ -632,7 +628,7 @@ ALTER TABLE `quest_template`
 
 --
 --
--- Remove column(s) no more needed
+-- Remove unneeded column(s)
 --
 --
 
