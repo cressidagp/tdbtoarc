@@ -7,6 +7,12 @@
 	to
 	
 	Arc: 2012-08-04_21-25_worldmap_info.sql
+	
+	WARNING1: do not load this file at world startup, it may cause a crash. Just wait to world load then plug it in and use reloadscripts command.
+	
+	WARNING2: if you have heavy lua scripts then remove them until step1 its done.
+	
+	WARNING3: after step1 its done this file its useless, remove it.
 
 --]]
 
@@ -36,6 +42,7 @@ then
 			then
 				local ran = math.random( -4, -1 );
 				WorldDBQuery( "UPDATE `creature_spawns` SET `displayid` = '"..ran.."' WHERE `id` = '"..spid.."' " );
+				print( spid );
 			end
 			
 		until result:NextRow() ~= true;
