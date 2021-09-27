@@ -106,9 +106,11 @@ This require the TDB world database release 335.21081
 
 2. Excecute all files inside scripts folder or run install tool.
 
-3. Apply hotfixes in order. Additional notes on each file.
+3. Run add_arc_world_structure.sql, it would be logeable at this point.
 
-4. Can be completed with tables from [ArcDB.](https://github.com/DarkAngel39/ArcDB)
+4. Apply hotfixes in order. Additional notes on each file.
+
+5. Can be completed with tables from [ArcDB.](https://github.com/DarkAngel39/ArcDB)
 
 
 ## Credits to
