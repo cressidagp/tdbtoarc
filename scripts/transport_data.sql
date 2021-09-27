@@ -36,7 +36,7 @@ CREATE TABLE `transports2` SELECT * FROM `transports`;
 --
 --
 
-ALTER TABLE `transports` 
+ALTER TABLE `transports`
 
 	DROP PRIMARY KEY,
 	
@@ -54,7 +54,7 @@ ALTER TABLE `transports`
 --
 --
 
-ALTER TABLE `transports` 
+ALTER TABLE `transports`
 
 	CHANGE COLUMN `entry` `entry` mediumint(8) unsigned NOT NULL DEFAULT '0',
 	
@@ -131,5 +131,5 @@ RENAME TABLE `transports2` TO `transports`;
 ALTER TABLE `transports` 
 
 	ADD PRIMARY KEY (`guid`),
-
-	ADD KEY `idx_entry` (`entry`);
+	
+	ADD UNIQUE KEY `idx_entry` (`entry`);
