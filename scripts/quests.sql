@@ -84,6 +84,26 @@ ALTER TABLE `quest_template`
 
 	/* #105 */
 	DROP COLUMN `VerifiedBuild`;
+	
+--
+--
+-- Remove Data truncated
+--
+--
+
+UPDATE `quest_offer_reward` SET `RewardText` = '' WHERE `RewardText` IS NULL;
+
+UPDATE `quest_request_items` SET `CompletionText` = '' WHERE `CompletionText` IS NULL;
+
+UPDATE `quest_template` SET `AreaDescription` = '' WHERE `AreaDescription` IS NULL;
+
+UPDATE `quest_template` SET `ObjectiveText1` = '' WHERE `ObjectiveText1` IS NULL;
+
+UPDATE `quest_template` SET `ObjectiveText2` = '' WHERE `ObjectiveText2` IS NULL;
+
+UPDATE `quest_template` SET `ObjectiveText3` = '' WHERE `ObjectiveText3` IS NULL;
+
+UPDATE `quest_template` SET `ObjectiveText4` = '' WHERE `ObjectiveText4` IS NULL;
 
 --
 --
@@ -181,13 +201,13 @@ WHERE quest_template.entry = quest_template_addon.ID;
 
 ALTER TABLE `quest_template` CHANGE COLUMN `LogTitle` `Title` char(255) NOT NULL AFTER `SrcItemCount`;
 
-ALTER TABLE `quest_template` CHANGE COLUMN `QuestDescription` `Details` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `Title`;
+ALTER TABLE `quest_template` CHANGE COLUMN `LogDescription` `Details` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `Title`;
 
-ALTER TABLE `quest_template` CHANGE COLUMN `LogDescription` `Objectives` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `Details`;
+ALTER TABLE `quest_template` CHANGE COLUMN `QuestDescription` `Objectives` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `Details`;
 
 ALTER TABLE `quest_template` ADD COLUMN `CompletionText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `Objectives`;
 
-UPDATE `quest_offer_reward` SET `RewardText` = '' WHERE `RewardText` IS NULL;
+
 
 UPDATE quest_template, quest_offer_reward
 SET quest_template.CompletionText = quest_offer_reward.RewardText
@@ -195,29 +215,29 @@ WHERE quest_template.entry = quest_offer_reward.ID;
 
 ALTER TABLE `quest_template` ADD COLUMN `IncompleteText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `CompletionText`;
 
-UPDATE `quest_request_items` SET `CompletionText` = '' WHERE `CompletionText` IS NULL;
+
 
 UPDATE quest_template, quest_request_items
 SET quest_template.IncompleteText = quest_request_items.CompletionText
 WHERE quest_template.entry = quest_request_items.ID;
 
-UPDATE `quest_template` SET `AreaDescription` = '' WHERE `AreaDescription` IS NULL;
+
 
 ALTER TABLE `quest_template` CHANGE COLUMN `AreaDescription` `EndText` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL  AFTER `IncompleteText`;
 
-UPDATE `quest_template` SET `ObjectiveText1` = '' WHERE `ObjectiveText1` IS NULL;
+
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText1` `ObjectiveText1` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `EndText`;
 
-UPDATE `quest_template` SET `ObjectiveText2` = '' WHERE `ObjectiveText2` IS NULL;
+
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText2` `ObjectiveText2` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `ObjectiveText1`;
 
-UPDATE `quest_template` SET `ObjectiveText3` = '' WHERE `ObjectiveText3` IS NULL;
+
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText3` `ObjectiveText3` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `ObjectiveText2`;
 
-UPDATE `quest_template` SET `ObjectiveText4` = '' WHERE `ObjectiveText4` IS NULL;
+
 
 ALTER TABLE `quest_template` CHANGE COLUMN `ObjectiveText4` `ObjectiveText4` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `ObjectiveText3`;
 
