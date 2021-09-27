@@ -25,7 +25,7 @@ Scripts to obtain the following tables populated:
 
 * *itemnames, itempages, itempages_localized, itempetfood, items, items_localized, instance_bosses*
 
-* *loot_skining*
+* *loot_fishing, loot_skining*
 
 * *npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized*
 

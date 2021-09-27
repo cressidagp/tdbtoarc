@@ -500,35 +500,6 @@ LOCK TABLES `loot_creatures` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `loot_fishing`
---
-
-DROP TABLE IF EXISTS `loot_fishing`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `loot_fishing` (
-  `entryid` int(11) unsigned NOT NULL DEFAULT '0',
-  `itemid` int(11) unsigned NOT NULL DEFAULT '0',
-  `normal10percentchance` float NOT NULL DEFAULT '0',
-  `normal25percentchance` float NOT NULL DEFAULT '0',
-  `heroic10percentchance` float NOT NULL DEFAULT '0',
-  `heroic25percentchance` float NOT NULL DEFAULT '0',
-  `mincount` int(30) unsigned NOT NULL DEFAULT '1',
-  `maxcount` int(30) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`itemid`,`entryid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Loot System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `loot_fishing`
---
-
-LOCK TABLES `loot_fishing` WRITE;
-/*!40000 ALTER TABLE `loot_fishing` DISABLE KEYS */;
-/*!40000 ALTER TABLE `loot_fishing` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `loot_gameobjects`
 --
 
