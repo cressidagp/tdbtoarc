@@ -23,9 +23,9 @@ CLS
 SET v=""
 ECHO.
 ECHO    C - Convert TDB to ArcEmu structure
+ECHO    R - Remove not more needed tables
 ECHO    A - Add ArcEmu world structure
 ECHO.
-ECHO    R - Remove not more needed tables
 ECHO.
 ECHO    S - Change your settings
 ECHO.
