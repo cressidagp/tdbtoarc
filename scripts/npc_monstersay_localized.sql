@@ -61,10 +61,20 @@ DELETE FROM `creature_text_locale` WHERE (`locale` = 'koKR' or `locale` = 'zhCN'
 ALTER TABLE `creature_text_locale` 
 
 	CHANGE COLUMN `CreatureID` `entry` int(10) unsigned NOT NULL DEFAULT '0',
+	
+	ADD COLUMN `event` int(10) unsigned NOT NULL DEFAULT '0' AFTER `entry`,
 
 	CHANGE COLUMN `Locale` `language_code` varchar(5) CHARACTER SET latin1 NOT NULL,
 
-	CHANGE COLUMN `Text` `text` longtext CHARACTER SET utf8 NOT NULL;
+	CHANGE COLUMN `Text` `text0` longtext CHARACTER SET utf8 NOT NULL,
+	
+	ADD COLUMN `text1` longtext CHARACTER SET utf8 NOT NULL AFTER `text0`,
+	
+	ADD COLUMN `text2` longtext CHARACTER SET utf8 NOT NULL AFTER `text1`,
+	
+	ADD COLUMN `text3` longtext CHARACTER SET utf8 NOT NULL AFTER `text2`,
+	
+	ADD COLUMN `text4` longtext CHARACTER SET utf8 NOT NULL AFTER `text3`;
 
 --
 --
@@ -78,7 +88,7 @@ ALTER TABLE `npc_monstersay_localized`
 
 	DROP PRIMARY KEY,
 
-	ADD PRIMARY KEY (`entry`,`language_code`);
+	ADD PRIMARY KEY (`entry`,`event`,`language_code`);
 
 --
 --
