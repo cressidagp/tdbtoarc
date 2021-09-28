@@ -14,7 +14,7 @@
 
 DROP TABLE IF EXISTS
 
-`access_requirement`, `achievement_criteria_data`, `achievement_dbc`, `achievement_reward`, `achievement_reward_locale`, `areatrigger_involvedrelation`, `areatrigger_scripts`,
+`access_requirement`, `achievement_criteria_data`, `achievement_dbc`, `achievement_reward`, `achievement_reward_locale`, `areatrigger_involvedrelation`,
 
 `areatrigger_teleport`, `battlefield_template`, `battlemaster_entry`, `broadcast_text`, `broadcast_text_locale`, `command`, `conditions`, `creature`, `creature_addon`, `creature_classlevelstats`,
 
@@ -61,6 +61,7 @@ DROP TABLE IF EXISTS
 /* Lets keep this as a source of information.
 
 DROP TABLE IF EXISTS `areatrigger_tavern`;
+DROP TABLE IF EXISTS `areatrigger_scripts`,
 DROP TABLE IF EXISTS `battleground_template`;
 DROP TABLE IF EXISTS `game_event`;
 DROP TABLE IF EXISTS `instance_template`;
