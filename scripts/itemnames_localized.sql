@@ -69,6 +69,12 @@ ALTER TABLE `item_set_names_locale`
 
 RENAME TABLE `item_set_names_locale` TO `itemnames_localized`;
 
+ALTER TABLE `itemnames_localized` 
+
+	DROP PRIMARY KEY,
+
+	ADD PRIMARY KEY (`entry`,`language_code`);
+
 --
 --
 -- Rename our backup table(s)
