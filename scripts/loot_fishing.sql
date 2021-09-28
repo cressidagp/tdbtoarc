@@ -66,7 +66,7 @@ ALTER TABLE `reference_loot_template` DROP COLUMN `areaorzone`;
 ALTER TABLE `fishing_loot_template` 
 
 	/* #3 */
-	-- DROP COLUMN `Reference`,
+	DROP COLUMN `Reference`,
 
 	/* #5 */
 	DROP COLUMN `QuestRequired`,
