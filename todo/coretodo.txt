@@ -13,6 +13,7 @@
 *) flee agent
 *) gossip conditions
 *) itemnames_locale
+*) Many spells arent being casted from ai_agents (missing a column for a trigger parameter?)
 
 3. Low priority:
 
