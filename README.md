@@ -71,14 +71,14 @@ The following tables are not going to be supported:
 
 * *vehicle_accessories, vendors, vendor_restrictions*
 
-* *weather, weather_season, wordfilter_character_names, worldmap_info, worldmap_info_localized, worldstate_templates, worldstring_tables_localized*
+* *weather, weather_season, wordfilter_character_names, worldmap_info, worldstate_templates, worldstring_tables_localized*
 
 * *zoneguards*
 
 
 Finally, there are some special cases:
 
-* *creature_timed_emotes (empty in all projects, so it wont be missed)*
+* *creature_timed_emotes, worldmap_info_localized (empty in all projects, so it wont be missed)*
 
 * *creature_staticspawns (useless)*
 
