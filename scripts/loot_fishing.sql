@@ -49,6 +49,10 @@ SELECT `Entry`, `Item`, Reference, `Chance`, `QuestRequired`, `LootMode`, `Group
 FROM `reference_loot_template` 
 WHERE `areaorzone` != 0;
 
+DELETE FROM `fishing_loot_template` WHERE `areaorzone` = 4197 AND `Item` = 45904;
+
+UPDATE `fishing_loot_template` SET `Entry` = `areaorzone` WHERE `areaorzone` != 0;
+
 ALTER TABLE `fishing_loot_template` DROP COLUMN `areaorzone`;
 
 ALTER TABLE `reference_loot_template` DROP COLUMN `areaorzone`;
@@ -61,16 +65,16 @@ ALTER TABLE `reference_loot_template` DROP COLUMN `areaorzone`;
 
 ALTER TABLE `fishing_loot_template` 
 
-	/* #3  */
-	DROP COLUMN `Reference`,
+	/* #3 */
+	-- DROP COLUMN `Reference`,
 
-	/* #5  */
+	/* #5 */
 	DROP COLUMN `QuestRequired`,
 
-	/* #6  */
+	/* #6 */
 	DROP COLUMN `LootMode`,
 
-	/* #7  */
+	/* #7 */
 	DROP COLUMN `GroupId`;
 
 --
