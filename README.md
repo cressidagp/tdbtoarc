@@ -106,9 +106,9 @@ This require the TDB world database release 335.21081
 
 2. Run all files inside scripts folder or run install tool.
 
-3. Excecute remove_tdb_tables.sql
+3. Execute remove_tdb_tables.sql
 
-4. Excecute add_arc_world_structure.sql, it would be logeable at this point.
+4. Execute add_arc_world_structure.sql, it would be logeable at this point.
 
 5. Apply hotfixes in order. Additional notes on each file.
 
