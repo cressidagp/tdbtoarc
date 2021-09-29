@@ -545,35 +545,6 @@ LOCK TABLES `loot_items` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `loot_pickpocketing`
---
-
-DROP TABLE IF EXISTS `loot_pickpocketing`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `loot_pickpocketing` (
-  `entryid` int(11) unsigned NOT NULL DEFAULT '0',
-  `itemid` int(11) unsigned NOT NULL DEFAULT '25',
-  `normal10percentchance` float NOT NULL DEFAULT '0',
-  `normal25percentchance` float NOT NULL DEFAULT '0',
-  `heroic10percentchance` float NOT NULL DEFAULT '0',
-  `heroic25percentchance` float NOT NULL DEFAULT '0',
-  `mincount` int(30) unsigned NOT NULL DEFAULT '1',
-  `maxcount` int(30) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`entryid`,`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Loot System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `loot_pickpocketing`
---
-
-LOCK TABLES `loot_pickpocketing` WRITE;
-/*!40000 ALTER TABLE `loot_pickpocketing` DISABLE KEYS */;
-/*!40000 ALTER TABLE `loot_pickpocketing` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `map_checkpoint`
 --
 
