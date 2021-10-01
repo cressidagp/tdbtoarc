@@ -170,3 +170,57 @@ AND (creature_names.male_displayid != 0 and creature_names.female_displayid != 0
 --
 
 ALTER TABLE `creature_spawns` CHANGE COLUMN `displayid` `displayid` int(30) unsigned NOT NULL DEFAULT '0';
+
+--
+--
+-- Missing bytes0
+--
+--
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 256
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 1 AND creature_model_info.Gender = 0);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 65792
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 1 AND creature_model_info.Gender = 1);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 131328
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 1 AND creature_model_info.Gender = 2);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 512
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 2 AND creature_model_info.Gender = 0);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 66048
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 2 AND creature_model_info.Gender = 1);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 131584
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 2 AND creature_model_info.Gender = 2);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 1024
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 4 AND creature_model_info.Gender = 0);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 66560
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 4 AND creature_model_info.Gender = 1);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 132096
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 4 AND creature_model_info.Gender = 2);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 2048
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 8 AND creature_model_info.Gender = 0);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 67584
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 8 AND creature_model_info.Gender = 1);
+
+UPDATE creature_spawns, creature_model_info
+SET creature_spawns.bytes0 = 133120
+WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 8 AND creature_model_info.Gender = 2);
