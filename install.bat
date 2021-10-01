@@ -41,8 +41,8 @@ IF %v%==r GOTO remove
 IF %v%==R GOTO remove
 IF %v%==s GOTO top
 IF %v%==S GOTO top
-IF %v%==x GOTO exit
-IF %v%==X GOTO exit
+IF %v%==q GOTO exit
+IF %v%==Q GOTO exit
 IF %v%=="" GOTO exit
 GOTO error
 
