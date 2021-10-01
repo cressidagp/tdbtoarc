@@ -306,6 +306,24 @@ UPDATE creature, creature_template
 SET creature.faction = creature_template.faction 
 WHERE creature.id = creature_template.entry;
 
+/* bytes0: */
+
+UPDATE creature, creature_template
+SET creature.bytes0 = 256
+WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 1);
+
+UPDATE creature, creature_template
+SET creature.bytes0 = 512
+WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 2);
+
+UPDATE creature, creature_template
+SET creature.bytes0 = 1024
+WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 4);
+
+UPDATE creature, creature_template
+SET creature.bytes0 = 2048
+WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 8);
+
 /* bytes1: */
 
 UPDATE creature, creature_template_addon
