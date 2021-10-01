@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS
 
 `areatrigger_teleport`, `battlefield_template`, `battlemaster_entry`, `broadcast_text`, `broadcast_text_locale`, `command`, `conditions`, `creature`, `creature_addon`, `creature_classlevelstats`,
 
-`creature_default_trainer`, `creature_equip_template`, `creature_loot_template`, `creature_model_info`, `creature_movement_override`, `creature_onkill_reputation`, `creature_questender`,
+`creature_default_trainer`, `creature_equip_template`, `creature_loot_template`, `creature_movement_override`, `creature_onkill_reputation`, `creature_questender`,
 
 `creature_questitem`, `creature_queststarter`, `creature_summon_groups`, `creature_template`, `creature_template_addon`, `creature_template_locale`, `creature_template_movement`,
 
@@ -71,6 +71,12 @@ DROP TABLE IF EXISTS `instance_template`;
 
 /* Since arcemu and trinity share this table name, our backup table will keep tableName2 */
 DROP TABLE IF EXISTS `creature_formations2`, `npc_text2`, `quest_poi2`, `quest_poi_points2`;
+
+/* Dont drop it before hotfix.
+
+DROP TABLE IF EXISTS `creature_model_info`
+
+*/
 
 /*	Keep this one as credits for TrinityCore developers.
 
