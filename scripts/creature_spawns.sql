@@ -17,12 +17,10 @@
 	*) STANDSTATE_SUBMERGE (not implemented in core)
 	*) creature.equipment_id = -1 (random)
 	*) death_state
-	*) bytes0 (WTF IS THIS?)
 	*) npc_respawn_link (THIS IS WORKING?)
 	*) channel_spell
 	*) channel_target_sqlid
 	*) channel_target_sqlid_creature
-	*) fill 32000 displayid (got a extra tool for this, need to find a SQL way)
 	
 =================================================
 */
@@ -309,20 +307,68 @@ WHERE creature.id = creature_template.entry;
 /* bytes0: */
 
 UPDATE creature, creature_template
-SET creature.bytes0 = 256
+SET creature.bytes0 = 1
 WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 1);
 
 UPDATE creature, creature_template
-SET creature.bytes0 = 512
+SET creature.bytes0 = 2
 WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 2);
 
 UPDATE creature, creature_template
-SET creature.bytes0 = 1024
+SET creature.bytes0 = 4
 WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 4);
 
 UPDATE creature, creature_template
-SET creature.bytes0 = 2048
+SET creature.bytes0 = 8
 WHERE (creature.id = creature_template.entry AND creature_template.unit_class = 8);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 256
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 1 AND creature_model_info.Gender = 0);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 65792
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 1 AND creature_model_info.Gender = 1);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 131328
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 1 AND creature_model_info.Gender = 2);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 512
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 2 AND creature_model_info.Gender = 0);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 66048
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 2 AND creature_model_info.Gender = 1);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 131584
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 2 AND creature_model_info.Gender = 2);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 1024
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 4 AND creature_model_info.Gender = 0);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 66560
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 4 AND creature_model_info.Gender = 1);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 132096
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 4 AND creature_model_info.Gender = 2);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 2048
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 8 AND creature_model_info.Gender = 0);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 67584
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 8 AND creature_model_info.Gender = 1);
+
+UPDATE creature, creature_model_info
+SET creature.bytes0 = 133120
+WHERE (creature.displayid = creature_model_info.DisplayID AND creature.bytes0 = 8 AND creature_model_info.Gender = 2);
 
 /* bytes1: */
 
