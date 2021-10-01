@@ -117,6 +117,7 @@ This require the TDB world database release 335.21081
 
 * TrinityCore for his wonderfull database job. 
 * Formers ArcEmu database projects: NCDB, WHYDB, IFDB, POTD and ARCDB (so far).
+* Marforius for ArcAddons who make my life much easier.
 * ArcEmu developers for ArcEmu, specially to dfighter1985.
 
 
