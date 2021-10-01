@@ -139,7 +139,7 @@ ALTER TABLE `item_template`
 	/* Will return to this later (A) */
 	ADD COLUMN `Unique` int(30) NOT NULL DEFAULT '0' AFTER `RequiredFactionStanding`,
 
-	ALTER TABLE `item_template` CHANGE COLUMN `maxcount` `maxcount` int(30) NOT NULL DEFAULT '0',
+	CHANGE COLUMN `maxcount` `maxcount` int(30) NOT NULL DEFAULT '0',
 
 	CHANGE COLUMN `ContainerSlots` `ContainerSlots` int(30) NOT NULL DEFAULT '0',
 
