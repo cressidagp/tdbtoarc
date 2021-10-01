@@ -5,14 +5,14 @@
 1. High Priority:
 
 *) random movement/wp generation
-*) fishing (if no area then load zone)
+*) add skinloot to creature_proto
+*) add pocketloot to creature_proto
 *) quest packet upgrade (most quest cant be completed if questender has more than 1)
+*) fishing (if no area then load zone)
 
 2. Medium priority:
 
-*) flee agent
 *) gossip conditions
-*) itemnames_locale
 *) Many spells arent being casted from ai_agents (missing a column for a trigger parameter?)
 
 3. Low priority:
@@ -23,3 +23,4 @@
 *) gameobject invisibility (for traps)
 *) playercreateinfo orientation
 *) monstersay_locale
+*) itemnames_locale
