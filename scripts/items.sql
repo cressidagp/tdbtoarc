@@ -295,49 +295,49 @@ ALTER TABLE `item_template`
 
 	CHANGE COLUMN `Material` `lock_material` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `sheath` `sheathID` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `sheath` `sheathID` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `RandomProperty` `randomprop` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `RandomProperty` `randomprop` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `RandomSuffix` `randomsuffix` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `RandomSuffix` `randomsuffix` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `block` `block` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `block` `block` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `itemset` `itemset` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `itemset` `itemset` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `MaxDurability` `MaxDurability` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `MaxDurability` `MaxDurability` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `area` `ZoneNameID` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `area` `ZoneNameID` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `Map` `mapid` int(30) DEFAULT NULL;
+	CHANGE COLUMN `Map` `mapid` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `BagFamily` `bagfamily` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `BagFamily` `bagfamily` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `TotemCategory` `TotemCategory` int(30) DEFAULT NULL;
+	CHANGE COLUMN `TotemCategory` `TotemCategory` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `socketColor_1` `socket_color_1` int(30) DEFAULT NULL;
+	CHANGE COLUMN `socketColor_1` `socket_color_1` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `socketContent_1` `unk201_3` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `socketContent_1` `unk201_3` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `socketColor_2` `socket_color_2` int(30) DEFAULT NULL;
+	CHANGE COLUMN `socketColor_2` `socket_color_2` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `socketContent_2` `unk201_5` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `socketContent_2` `unk201_5` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `socketColor_3` `socket_color_3` int(30) DEFAULT NULL;
+	CHANGE COLUMN `socketColor_3` `socket_color_3` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `socketContent_3` `unk201_7` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `socketContent_3` `unk201_7` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `socketBonus` `socket_bonus` int(30) DEFAULT NULL;
+	CHANGE COLUMN `socketBonus` `socket_bonus` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `GemProperties` `GemProperties` int(30) DEFAULT NULL;
+	CHANGE COLUMN `GemProperties` `GemProperties` int(30) DEFAULT NULL,
 
-	CHANGE COLUMN `RequiredDisenchantSkill` `ReqDisenchantSkill` int(30) NOT NULL DEFAULT '-1';
+	CHANGE COLUMN `RequiredDisenchantSkill` `ReqDisenchantSkill` int(30) NOT NULL DEFAULT '-1',
 
-	CHANGE COLUMN `ArmorDamageModifier` `ArmorDamageModifier` int(30) NOT NULL DEFAULT '0';
+	CHANGE COLUMN `ArmorDamageModifier` `ArmorDamageModifier` int(30) NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `duration` `existingduration` int(10) unsigned NOT NULL DEFAULT '0';
+	CHANGE COLUMN `duration` `existingduration` int(10) unsigned NOT NULL DEFAULT '0',
 
-	CHANGE COLUMN `ItemLimitCategory` `ItemLimitCategoryId` int(32) unsigned NOT NULL DEFAULT '0';
+	CHANGE COLUMN `ItemLimitCategory` `ItemLimitCategoryId` int(32) unsigned NOT NULL DEFAULT '0',
 
 	CHANGE COLUMN `HolidayId` `HolidayId` int(32) unsigned NOT NULL DEFAULT '0';
 
