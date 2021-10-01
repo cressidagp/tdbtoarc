@@ -224,3 +224,5 @@ WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_sp
 UPDATE creature_spawns, creature_model_info
 SET creature_spawns.bytes0 = 133120
 WHERE (creature_spawns.displayid = creature_model_info.DisplayID AND creature_spawns.bytes0 = 8 AND creature_model_info.Gender = 2);
+
+DROP TABLE IF EXISTS `creature_model_info`;
