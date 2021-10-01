@@ -32,6 +32,16 @@ CREATE TABLE `skinning_loot_template2` SELECT * FROM `skinning_loot_template`;
 
 --
 --
+-- Ugly hack for shared skinloot
+--
+--
+
+-- 5982, 10147, 10184, 10257, 10981, 10990, 12121, 12122, 14282, 27641, 28860, 29724, 29725, 29726, 29727, 29728, 29730, 34797, 60000, 60001
+
+
+
+--
+--
 -- I don't wanna talk, about things we've gone through... (melancolic mode on)
 --
 --
@@ -47,6 +57,8 @@ ALTER TABLE `skinning_loot_template` ADD COLUMN `creatureid` int(10) unsigned NO
 UPDATE skinning_loot_template, creature_template
 SET skinning_loot_template.creatureid = creature_template.Entry
 WHERE skinning_loot_template.Entry = creature_template.skinloot;
+
+UPDATE `skinning_loot_template` SET `Entry` = `creatureid` WHERE `creatureid` != 0;
 
 ALTER TABLE `skinning_loot_template` DROP COLUMN `creatureid`;
 
