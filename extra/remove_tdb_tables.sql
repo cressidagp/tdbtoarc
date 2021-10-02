@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS
 
 `creature_questitem`, `creature_queststarter`, `creature_summon_groups`, `creature_template`, `creature_template_addon`, `creature_template_locale`, `creature_template_movement`,
 
-`creature_template_resistance`, `creature_template_spell`, `creature_text`, `creature_text_locale`, `creature_waypoints`, `disables`, `disenchant_loot_template`, `event_scripts`,
+`creature_template_resistance`, `creature_template_spell`, `creature_text`, `creature_text_locale`, `disables`, `disenchant_loot_template`, `event_scripts`,
 
 `exploration_basexp`, `fishing_loot_template`, `gameobject`, `gameobject_addon`, `gameobject_loot_template`, `gameobject_overrides`, `gameobject_questender`, `gameobject_questitem`,
 
