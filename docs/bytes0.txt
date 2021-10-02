@@ -1,0 +1,50 @@
+--
+-- BYTES0 RESEARCH
+--
+
+0: invalid0 / male
+
+1: invalid0 / male
+2: invalid0 / male
+4: invalid0 / male
+8: invalid0 / male
+
+16: invalid0 / male
+32:	invalid0 / male
+64:	invalid0 / male
+128: invalid0 / male 
+
+4096: invalid16  / male
+8192: invalid32  / male
+16384: invalid64  / male
+32768: invalid128 / male
+
+65536: invalid0 / female
+131072: invalid0 / neutral
+262144: invalid0 / invalid4
+524288: invalid0 / invalid8
+
+1048576 more invalid
+2097152 ..
+4194304 ..
+8388608 ..
+
+16777216 more invalid
+33554432..
+67108864..
+134217728..
+
+256: warrior / male
+512: paladin / male
+1024: rogue	/ male
+2048: mage	/ male
+
+65792: warrior / female
+66048: paladin / female
+66560: rogue / female
+67584: mage / female
+
+131328: warrior / neutral
+131584: paladin / neutral
+132096: rogue / neutral
+133120: mage / neutral
