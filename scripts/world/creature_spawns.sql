@@ -18,9 +18,6 @@
 	*) creature.equipment_id = -1 (random)
 	*) death_state
 	*) npc_respawn_link (THIS IS WORKING?)
-	*) channel_spell
-	*) channel_target_sqlid
-	*) channel_target_sqlid_creature
 	
 =================================================
 */
@@ -421,6 +418,12 @@ UPDATE `creature` SET `guid` = `guid` * (-1);
 UPDATE creature, smart_scripts
 SET creature.channel_spell = smart_scripts.action_param1
 WHERE (creature.guid = smart_scripts.entryorguid AND source_type = 0 AND smart_scripts.event_type = 1 AND smart_scripts.action_type = 11 AND (target_type = 10 OR target_type = 14));
+
+/* channel_target_sqlid: */
+
+UPDATE creature, smart_scripts
+SET creature.channel_spell = smart_scripts.target_param1
+WHERE (creature.guid = smart_scripts.entryorguid AND source_type = 0 AND smart_scripts.event_type = 1 AND smart_scripts.action_type = 11 AND target_type = 14);
 
 /* channel_target_sqlid_creature: */
 
