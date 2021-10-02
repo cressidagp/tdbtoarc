@@ -23,8 +23,6 @@ Scripts to obtain the following tables populated:
 
 * *itemnames, itempages, itempages_localized, itempetfood, items, items_localized, instance_bosses*
 
-* *loot_fishing, loot_gameobjects, loot_pickpocketing, loot_skining*
-
 * *npc_gossip_textid, npc_monstersay, npc_text, npc_text_localized*
 
 * *playercreateinfo_bars, professiondiscoveries*
@@ -59,7 +57,7 @@ The following tables are not going to be supported:
 
 * *item_randomprop_groups, item_randomsuffix_groups*
 
-* *loot_creatures, loot_items*
+* *loot_creatures, loot_fishing, loot_gameobjects, loot_items, loot_pickpocketing, loot_skining*
 
 * *petdefaultspells, playercreateinfo, playercreateinfo_items, playercreateinfo_skills, playercreateinfo_spells*
 

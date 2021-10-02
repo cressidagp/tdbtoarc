@@ -515,6 +515,56 @@ LOCK TABLES `loot_creatures` WRITE;
 /*!40000 ALTER TABLE `loot_creatures` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `loot_fishing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loot_fishing` (
+  `entryid` int(11) unsigned NOT NULL DEFAULT '0',
+  `itemid` int(11) unsigned NOT NULL DEFAULT '0',
+  `normal10percentchance` float NOT NULL DEFAULT '0',
+  `normal25percentchance` float NOT NULL DEFAULT '0',
+  `heroic10percentchance` float NOT NULL DEFAULT '0',
+  `heroic25percentchance` float NOT NULL DEFAULT '0',
+  `mincount` int(30) unsigned NOT NULL DEFAULT '1',
+  `maxcount` int(30) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`itemid`,`entryid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Loot System';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loot_fishing`
+--
+
+LOCK TABLES `loot_fishing` WRITE;
+/*!40000 ALTER TABLE `loot_fishing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loot_fishing` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `loot_gameobjects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loot_gameobjects` (
+  `entryid` int(11) unsigned NOT NULL DEFAULT '0',
+  `itemid` int(11) unsigned NOT NULL DEFAULT '0',
+  `normal10percentchance` float NOT NULL DEFAULT '0',
+  `normal25percentchance` float NOT NULL DEFAULT '0',
+  `heroic10percentchance` float NOT NULL DEFAULT '0',
+  `heroic25percentchance` float NOT NULL DEFAULT '0',
+  `mincount` int(30) unsigned NOT NULL DEFAULT '1',
+  `maxcount` int(30) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`entryid`,`itemid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Loot System';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loot_gameobjects`
+--
+
+LOCK TABLES `loot_gameobjects` WRITE;
+/*!40000 ALTER TABLE `loot_gameobjects` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loot_gameobjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `loot_items`
 --
@@ -542,6 +592,64 @@ CREATE TABLE `loot_items` (
 LOCK TABLES `loot_items` WRITE;
 /*!40000 ALTER TABLE `loot_items` DISABLE KEYS */;
 /*!40000 ALTER TABLE `loot_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `loot_pickpocketing`
+--
+
+DROP TABLE IF EXISTS `loot_pickpocketing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loot_pickpocketing` (
+  `entryid` int(11) unsigned NOT NULL DEFAULT '0',
+  `itemid` int(11) unsigned NOT NULL DEFAULT '25',
+  `normal10percentchance` float NOT NULL DEFAULT '0',
+  `normal25percentchance` float NOT NULL DEFAULT '0',
+  `heroic10percentchance` float NOT NULL DEFAULT '0',
+  `heroic25percentchance` float NOT NULL DEFAULT '0',
+  `mincount` int(30) unsigned NOT NULL DEFAULT '1',
+  `maxcount` int(30) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`entryid`,`itemid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Loot System';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loot_pickpocketing`
+--
+
+LOCK TABLES `loot_pickpocketing` WRITE;
+/*!40000 ALTER TABLE `loot_pickpocketing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loot_pickpocketing` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `loot_skinning`
+--
+
+DROP TABLE IF EXISTS `loot_skinning`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loot_skinning` (
+  `entryid` int(10) unsigned NOT NULL DEFAULT '0',
+  `itemid` int(10) unsigned NOT NULL DEFAULT '0',
+  `normal10percentchance` float NOT NULL DEFAULT '0',
+  `normal25percentchance` float NOT NULL DEFAULT '0',
+  `heroic10percentchance` float NOT NULL DEFAULT '0',
+  `heroic25percentchance` float NOT NULL DEFAULT '0',
+  `mincount` int(30) unsigned NOT NULL DEFAULT '1',
+  `maxcount` int(30) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`itemid`,`entryid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Loot System';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loot_skinning`
+--
+
+LOCK TABLES `loot_skinning` WRITE;
+/*!40000 ALTER TABLE `loot_skinning` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loot_skinning` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
