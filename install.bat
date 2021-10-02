@@ -26,6 +26,7 @@ ECHO.
 ECHO    C - Convert TDB to ArcEmu structure
 ECHO    R - Remove not more needed tables
 ECHO    A - Add ArcEmu world structure
+ECHO    W - Random waypoints
 ECHO.
 ECHO.
 ECHO    L - Delete localization
@@ -42,6 +43,8 @@ IF %v%==c GOTO converttdb
 IF %v%==C GOTO converttdb
 IF %v%==a GOTO addstructure
 IF %v%==A GOTO addstructure
+IF %v%==w GOTO randomwaypoints
+IF %v%==W GOTO randomwaypoints
 IF %v%==l GOTO deletelocale
 IF %v%==L GOTO deletelocale
 IF %v%==r GOTO remove
@@ -77,6 +80,21 @@ ECHO.
 ECHO      Structure added sucesfully!
 ECHO.
 PAUSE
+GOTO begin
+
+:randomwaypoints
+CLS
+ECHO.
+ECHO Random generated waypoints...
+ECHO.
+for %%C in (randwp\*.sql) do (
+	ECHO executing: %%~nxC
+	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
+)
+ECHO.
+ECHO Waypoints imported sucesfully!
+ECHO.
+PAUSE   
 GOTO begin
 
 :remove
