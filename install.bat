@@ -16,8 +16,8 @@ ECHO.
 SET /p world_db= World Database: 
 
 SET mysqlpath=.\mysql\
-SET extrasql=.\extra\
-SET localesql=.\locale\
+SET extrasql=.\scripts\extra\
+SET localesql=.\scripts\locale\
 
 :Begin
 CLS
@@ -61,7 +61,7 @@ CLS
 ECHO.
 ECHO Converting TDB to ArcEmu structure...
 ECHO.
-for %%C in (scripts\*.sql) do (
+for %%C in (scripts\world\*.sql) do (
 	ECHO executing: %%~nxC
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
@@ -87,7 +87,7 @@ CLS
 ECHO.
 ECHO Random generated waypoints...
 ECHO.
-for %%C in (randwp\*.sql) do (
+for %%C in (scripts\randwp\*.sql) do (
 	ECHO executing: %%~nxC
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
@@ -146,7 +146,7 @@ CLS
 ECHO.
 ECHO Delete all localization....
 ECHO.
-for %%C in (locale\*.sql) do (
+for %%C in (scripts\locale\*.sql) do (
 	ECHO executing: %%~nxC
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
