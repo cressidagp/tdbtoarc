@@ -68,7 +68,7 @@ for %%C in (scripts\world\*.sql) do (
 	ECHO executing: %%~nxC
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
-ECHO Database converted sucesfully!
+ECHO      Database converted sucesfully!
 ECHO.
 PAUSE   
 GOTO begin
@@ -107,7 +107,7 @@ for %%C in (scripts\randwp\*.sql) do (
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
 ECHO.
-ECHO Waypoints imported sucesfully!
+ECHO      Waypoints imported sucesfully!
 ECHO.
 PAUSE   
 GOTO begin
@@ -122,7 +122,7 @@ for %%C in (scripts\arcdb\*.sql) do (
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
 ECHO.
-ECHO Tables imported sucesfully!
+ECHO      Tables imported sucesfully!
 ECHO.
 PAUSE   
 GOTO begin
@@ -169,7 +169,7 @@ for %%C in (scripts\locale\*.sql) do (
 	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
 )
 ECHO.
-ECHO Localization deleted sucesfully!
+ECHO      Localization deleted sucesfully!
 ECHO.
 PAUSE   
 GOTO begin

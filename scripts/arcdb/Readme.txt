@@ -30,3 +30,5 @@ vendors
 worldmap_info
 worldstate_templates
 zoneguards
+
+Table count = 28
