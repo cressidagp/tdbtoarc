@@ -25,8 +25,9 @@ SET v=""
 ECHO.
 ECHO    C - Convert TDB to ArcEmu structure
 ECHO    R - Remove not more needed tables
-ECHO    A - Add ArcEmu world structure
+ECHO    A - Add ArcEmu missing world structure
 ECHO    W - Random waypoints
+ECHO    P - Patch with ArcDB tables
 ECHO.
 ECHO.
 ECHO    L - Delete localization
@@ -45,6 +46,8 @@ IF %v%==a GOTO addstructure
 IF %v%==A GOTO addstructure
 IF %v%==w GOTO randomwaypoints
 IF %v%==W GOTO randomwaypoints
+IF %v%==p GOTO patcharcdb
+IF %v%==P GOTO patcharcdb
 IF %v%==l GOTO deletelocale
 IF %v%==L GOTO deletelocale
 IF %v%==r GOTO remove
@@ -68,6 +71,18 @@ for %%C in (scripts\world\*.sql) do (
 ECHO Database converted sucesfully!
 ECHO.
 PAUSE   
+GOTO begin
+
+:remove
+CLS
+ECHO.
+ECHO Removing not more needed tables...
+ECHO.
+%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < %extrasql%\remove_tdb_tables.sql
+ECHO.
+ECHO      Tables removed sucesfully!
+ECHO.
+PAUSE
 GOTO begin
 
 :addstructure
@@ -97,16 +112,19 @@ ECHO.
 PAUSE   
 GOTO begin
 
-:remove
+:patcharcdb
 CLS
 ECHO.
-ECHO Removing not more needed tables...
+ECHO Patching with ArcDB tables...
 ECHO.
-%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < %extrasql%\remove_tdb_tables.sql
+for %%C in (scripts\arcdb\*.sql) do (
+	ECHO executing: %%~nxC
+	%mysqlpath%\mysql --host=%host% --user=%user% --password=%pass% --port=%port% %world_db% < "%%~fC"
+)
 ECHO.
-ECHO      Tables removed sucesfully!
+ECHO Tables imported sucesfully!
 ECHO.
-PAUSE
+PAUSE   
 GOTO begin
 
 :deletelocale
