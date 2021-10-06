@@ -27,7 +27,7 @@ ECHO    C - Convert TDB to ArcEmu structure
 ECHO    R - Remove not more needed tables
 ECHO    A - Add ArcEmu missing world structure
 ECHO    W - Random waypoints
-ECHO    P - Patch with ArcDB tables
+ECHO    P - Complete with ArcDB tables
 ECHO.
 ECHO.
 ECHO    L - Delete localization
