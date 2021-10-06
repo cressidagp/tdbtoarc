@@ -22,7 +22,7 @@ playercreateinfo_spells
 reputation_creature_onkill
 reputation_faction_onkill
 reputation_instance_onkill
-spell_override
+spelloverride
 teleport_coords
 trainer_defs
 trainer_spells
