@@ -1,5 +1,5 @@
 @ECHO OFF
-TITLE TDBtoARC Windows Installation Tool V1
+TITLE TDBtoArc Windows Installation Tool V1
 COLOR F
 
 :TOP
