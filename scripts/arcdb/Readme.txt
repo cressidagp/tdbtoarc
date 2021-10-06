@@ -22,6 +22,7 @@ playercreateinfo_spells
 reputation_creature_onkill
 reputation_faction_onkill
 reputation_instance_onkill
+spell_override
 teleport_coords
 trainer_defs
 trainer_spells
@@ -31,4 +32,4 @@ worldmap_info
 worldstate_templates
 zoneguards
 
-Table count = 28
+Table count = 29
