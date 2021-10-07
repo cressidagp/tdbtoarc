@@ -27,8 +27,9 @@ teleport_coords
 trainer_defs
 trainer_spells
 vendor_restrictions
+weather
 worldmap_info
 worldstate_templates
 zoneguards
 
-Table count = 28
+Table count = 29

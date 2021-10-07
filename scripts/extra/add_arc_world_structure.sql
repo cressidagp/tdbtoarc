@@ -1401,6 +1401,31 @@ LOCK TABLES `weather` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `weather_season`
+--
+
+DROP TABLE IF EXISTS `weather_season`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weather_season` (
+  `season` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT 'Weather season',
+  `active` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Only one season can be active',
+  `remark` text NOT NULL COMMENT 'Personal remarks',
+  PRIMARY KEY (`season`),
+  KEY `active` (`active`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `weather`
+--
+
+LOCK TABLES `weather_season` WRITE;
+/*!40101 ALTER TABLE `weather_season` DISABLE KEYS */;
+INSERT INTO `weather_season`(`season`,`active`,`remark`) VALUES (1,1,'Spring'),(2,0,'Summer'),(3,0,'Autumn'),(4,0,'Winter');
+/*!40101 ALTER TABLE `weather_season` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `wordfilter_character_names`
 --
 
