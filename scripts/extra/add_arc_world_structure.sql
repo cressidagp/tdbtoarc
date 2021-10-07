@@ -1373,33 +1373,6 @@ LOCK TABLES `vendor_restrictions` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `vendors`
---
-
-DROP TABLE IF EXISTS `vendors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vendors` (
-  `entry` int(10) unsigned NOT NULL DEFAULT '0',
-  `item` int(10) unsigned NOT NULL DEFAULT '0',
-  `amount` int(11) NOT NULL DEFAULT '0',
-  `max_amount` int(11) NOT NULL DEFAULT '0',
-  `inctime` bigint(20) NOT NULL DEFAULT '0',
-  `extended_cost` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`entry`,`item`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='NPC System';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vendors`
---
-
-LOCK TABLES `vendors` WRITE;
-/*!40000 ALTER TABLE `vendors` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `weather`
 --
 

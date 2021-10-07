@@ -35,6 +35,8 @@ Scripts to obtain the following tables populated:
 
 * *totemdisplayids, transport_data*
 
+* *vendors*
+
 
 The next ones are provided by arcemu so there is no need of conversion:
 
@@ -67,7 +69,7 @@ The following tables are not going to be supported:
 
 * *teleport_coords, trainer_defs, trainer_spells, trainerspelloverride*
 
-* *vehicle_accessories, vendors, vendor_restrictions*
+* *vehicle_accessories, vendor_restrictions*
 
 * *weather, weather_season, wordfilter_character_names, worldmap_info, worldstate_templates, worldstring_tables_localized*
 
