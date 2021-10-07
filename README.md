@@ -69,7 +69,7 @@ The following tables are not going to be supported:
 
 * *teleport_coords, trainer_defs, trainer_spells, trainerspelloverride*
 
-* *vehicle_accessories, vendor_restrictions*
+* *vendor_restrictions*
 
 * *weather, weather_season, wordfilter_character_names, worldmap_info, worldstate_templates, worldstring_tables_localized*
 
@@ -86,7 +86,7 @@ Finally, there are some special cases:
 
 * *gameobject_teleports, items_extendedcost (for custom stuff)*
 
-* *transport_creatures (this are very bugged)*
+* *transport_creatures, vehicle_accessories (this are very bugged, also poor implemented)*
 
 * *command_overrides, spell_disable, worldbroadcast, worldbroadcast_localized, wordfilter_chat (server admin)*
 
