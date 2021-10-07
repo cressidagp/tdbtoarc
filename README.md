@@ -71,14 +71,14 @@ The following tables are not going to be supported:
 
 * *vendor_restrictions*
 
-* *weather, weather_season, worldmap_info, worldstate_templates, worldstring_tables_localized*
+* *weather, weather_season, worldmap_info, worldstate_templates*
 
 * *zoneguards*
 
 
 Finally, there are some special cases:
 
-* *creature_timed_emotes, worldmap_info_localized (empty in all projects, so it wont be missed)*
+* *creature_timed_emotes, worldmap_info_localized, worldstring_tables_localized (empty in all projects, so it wont be missed)*
 
 * *creature_staticspawns (useless)*
 
