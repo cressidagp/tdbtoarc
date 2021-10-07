@@ -71,7 +71,7 @@ The following tables are not going to be supported:
 
 * *vendor_restrictions*
 
-* *weather, weather_season, worldmap_info, worldstate_templates*
+* *weather, worldmap_info, worldstate_templates*
 
 * *zoneguards*
 
@@ -88,7 +88,7 @@ Finally, there are some special cases:
 
 * *transport_creatures, vehicle_accessories (this are very bugged, also poor implemented)*
 
-* *command_overrides, spell_disable, trainerspelloverride, worldbroadcast, worldbroadcast_localized, wordfilter_chat, wordfilter_character_names (server admin)*
+* *command_overrides, spell_disable, trainerspelloverride, weather_season, worldbroadcast, worldbroadcast_localized, wordfilter_chat, wordfilter_character_names (server admin)*
 
 * *banned_phrases, item_quest_association, map_checkpoint (deprecated?)*
 
