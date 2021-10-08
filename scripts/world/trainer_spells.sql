@@ -91,7 +91,230 @@ DROP TABLE IF EXISTS `trainer_spell_temp`;
 CREATE TABLE `trainer_spell_temp` SELECT * FROM `trainer_spell`;
 
 --
--- 16 full mage --
+-- 1 full warrior
+--
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 913, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 914, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 985, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 1229, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 1403, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 1901, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 2131, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3041, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3042, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3043, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3063, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3169, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3353, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3354, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3408, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 3598, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 4087, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 4089, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 4593, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 4594, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 4595, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 4992, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5113, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5114, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5479, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5480, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5959, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5966, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 5967, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 7315, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 8141, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 10291, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 16771, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 17120, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 17480, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+INSERT INTO `trainer_spell` 
+SELECT 1, 17504, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 1;
+
+--
+-- 2 starting zone warrior
+--
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 911, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 912, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 2119, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 3059, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 3153, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 3593, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+INSERT INTO `trainer_spell` 
+SELECT 2, 16503, `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 2;
+
+--
+-- 16 full mage
 --
 
 INSERT INTO `trainer_spell` 
