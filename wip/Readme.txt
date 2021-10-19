@@ -1,3 +1,3 @@
 --
--- This ones aren't finished, decided to keep them here in case that one day someone want to pick were i left.
+-- This ones aren't finished, decided to keep them here in case that one day someone want to pick where i left.
 --
