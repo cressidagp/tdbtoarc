@@ -314,6 +314,44 @@ FROM `trainer_spell_temp`
 WHERE `TrainerId` = 2;
 
 --
+-- 3 full paladin
+--
+
+--
+-- starting zone paladin
+--
+
+INSERT INTO `trainer_spell` 
+SELECT 4, , `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 4;
+
+INSERT INTO `trainer_spell` 
+SELECT 4, , `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 4;
+
+INSERT INTO `trainer_spell` 
+SELECT 4, , `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 4;
+
+INSERT INTO `trainer_spell` 
+SELECT 4, , `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 4;
+
+INSERT INTO `trainer_spell` 
+SELECT 4, , `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 4;
+
+INSERT INTO `trainer_spell` 
+SELECT 4, , `cast_spell`, `learn_spell`, `spellcost`, `reqspell`, `reqskill`, `reqskillvalue`, `reqlevel`, `deletespell`
+FROM `trainer_spell_temp` 
+WHERE `TrainerId` = 4;
+
+--
 -- 16 full mage
 --
 
