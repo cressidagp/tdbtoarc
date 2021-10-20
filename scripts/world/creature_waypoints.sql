@@ -126,6 +126,12 @@ ALTER TABLE `waypoint_data`
 
 	DROP COLUMN `id`;
 	
+/* `flags`: */
+
+UPDATE `waypoint_data` SET `flags` = 256 WHERE `flags` = 1;
+
+UPDATE `waypoint_data` SET `flags` = 768 WHERE `flags` = 2;
+	
 /* TODO: fill `forwardemoteoneshot` */
 
 /* TODO: fill `forwardemoteid` */
