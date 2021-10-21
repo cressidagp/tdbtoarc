@@ -447,15 +447,15 @@ WHERE creature.guid = creature_addon.guid;
 
 UPDATE creature, creature_equip_template
 SET creature.slot1item = creature_equip_template.ItemID1
-WHERE (creature.id = creature_equip_template.CreatureID and creature.equipment_id = 1);
+WHERE (creature.id = creature_equip_template.CreatureID and creature.equipment_id = creature_equip_template.ID);
 
 UPDATE creature, creature_equip_template
 SET creature.slot2item = creature_equip_template.ItemID2
-WHERE (creature.id = creature_equip_template.CreatureID and creature.equipment_id = 1);
+WHERE (creature.id = creature_equip_template.CreatureID and creature.equipment_id = creature_equip_template.ID);
 UPDATE creature, creature_equip_template
 
 SET creature.slot3item = creature_equip_template.ItemID3
-WHERE (creature.id = creature_equip_template.CreatureID and creature.equipment_id = 1);
+WHERE (creature.id = creature_equip_template.CreatureID and creature.equipment_id = creature_equip_template.ID);
 
 ALTER TABLE `creature` DROP COLUMN `equipment_id`;
 
