@@ -142,7 +142,11 @@ UPDATE `waypoint_data` SET `flags` = 256 WHERE `flags` = 1;
 
 UPDATE `waypoint_data` SET `flags` = 768 WHERE `flags` = 2;
 	
-/* TODO: fill `forwardemoteoneshot` */
+/* `forwardemoteoneshot` */
+
+UPDATE waypoint_data, waypoint_scripts
+SET waypoint_data.forwardemoteoneshot = waypoint_scripts.datalong
+WHERE (waypoint_data.action = waypoint_scripts.id and waypoint_scripts.command = 1 and waypoint_scripts.delay = 0 and waypoint_scripts.datalong2 = 0);
 
 /* `forwardemoteid` */
 
