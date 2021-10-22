@@ -70,6 +70,23 @@ ALTER TABLE `creature_addon` DROP COLUMN `temp_event`;
 
 --
 --
+-- Drop not supported column(s)
+--
+--
+
+ALTER TABLE `waypoint_data` 
+
+	/* #9 */
+	DROP COLUMN `action`,
+
+	/* #10 */
+	DROP COLUMN `action_chance`,
+
+	/* #11 */
+	DROP COLUMN `wpguid`;
+
+--
+--
 -- Here we go...
 --
 --
@@ -91,12 +108,6 @@ ALTER TABLE `waypoint_data`
 	CHANGE COLUMN `delay` `waittime` int(10) unsigned NOT NULL DEFAULT '0',
 	
 	CHANGE COLUMN `move_type` `flags` int(10) unsigned NOT NULL DEFAULT '0',
-	
-	DROP COLUMN `action`,
-	
-	DROP COLUMN `action_chance`,
-	
-	DROP COLUMN `wpguid`,
 	
 	ADD COLUMN `forwardemoteoneshot` tinyint(3) unsigned NOT NULL DEFAULT '0' AFTER `flags`,
 	
