@@ -28,7 +28,7 @@ then
 	print("= TDBtoARC: appliyng hot fix step 1 =");
 	print("=====================================");
 	
-	WorldDBQuery( "ALTER TABLE `creature_spawns` CHANGE COLUMN `displayid` `displayid` int(30) NOT NULL DEFAULT '0' " );
+	WorldDBQuery( "ALTER TABLE `creature_spawns` CHANGE COLUMN `displayid` `displayid` int(30) NOT NULL DEFAULT '0'" );
 	
 	local result = WorldDBQuery( "SELECT `id`, `displayid` FROM `creature_spawns`" );
 	
@@ -41,7 +41,7 @@ then
 			if( disp == 0 )
 			then
 				local ran = math.random( -4, -1 );
-				WorldDBQuery( "UPDATE `creature_spawns` SET `displayid` = '"..ran.."' WHERE `id` = '"..spid.."' " );
+				WorldDBQuery( "UPDATE `creature_spawns` SET `displayid` = '"..ran.."' WHERE `id` = '"..spid.."'" );
 				print( spid );
 			end
 			
@@ -57,8 +57,7 @@ end
 -- 2: chat #arc2 to add values
 -- 3: then shutdown arcemu
 
---[[
-function TDBTOARC.OnChatCommand( event, plr, message )
+function TDBTOARC.OnChatCommand( _, plr, message )
 
 	if( plr:IsGm() and message == "#arc1" )
 	then
@@ -94,5 +93,3 @@ function TDBTOARC.OnChatCommand( event, plr, message )
 end
 
 RegisterServerHook( 16, TDBTOARC.OnChatCommand );
-
---]]
