@@ -14,6 +14,8 @@
 	[waypoint_data]		[creature_addon]		[creature]
 			id -------------> path_id
 							  guid ----------------> guid
+							  
+	TODO: delayed forwardemoteoneshot, forwardemoteid, forwardskinid (for now im just using the instant ones)
 
 =================================================
 */
@@ -154,11 +156,11 @@ UPDATE waypoint_data, waypoint_scripts
 SET waypoint_data.forwardemoteid = waypoint_scripts.datalong
 WHERE (waypoint_data.action = waypoint_scripts.id and waypoint_scripts.command = 1 and waypoint_scripts.delay = 0 and waypoint_scripts.datalong2 = 1);
 
-/* TODO: fill `backwardemoteoneshot` */
+/* `forwardskinid` */
 
-/* TODO: fill `backwardemoteid` */
-
-/* TODO: fill `forwardskinid` */
+UPDATE waypoint_data, waypoint_scripts
+SET waypoint_data.forwardskinid = waypoint_scripts.datalong
+WHERE (waypoint_data.action = waypoint_scripts.id and waypoint_scripts.command = 1 and waypoint_scripts.delay = 0);
 
 ALTER TABLE `waypoint_data` DROP COLUMN `action`;
 
