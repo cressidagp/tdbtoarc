@@ -68,6 +68,8 @@ ALTER TABLE `gameobject_loot_template` DROP COLUMN `data1`;
 
 ALTER TABLE `reference_loot_template` DROP COLUMN `data1`;
 
+DELETE FROM `gameobject_loot_template` WHERE `data1` < 6 and `reference` != 0;
+
 --
 --
 -- Drop not supported column(s)
