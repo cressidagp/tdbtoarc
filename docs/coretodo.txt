@@ -4,7 +4,9 @@
 
 1. High Priority:
 
-*) random movement/wp generation
+*) random movement/wp generation: READY!
+*) fix ai_agents OnFlee:	READY!
+*) fix ai_agents CallForHelp
 *) add skinloot to creature_proto
 *) add pocketloot to creature_proto
 *) quest packet upgrade (most quest cant be completed if questender has more than 1)
