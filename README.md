@@ -123,6 +123,5 @@ This require the TDB world database release 335.21081
 
 ## Useful Links
 
-* [ArcEmu Forums](http://www.arcemu.org/forums/)
 * [ArcEmu Github](https://github.com/arcemu)
 * [ArcEmu Wiki](https://arcemu.fandom.com/wiki/Arcemu_Wiki)
