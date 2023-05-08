@@ -2,7 +2,7 @@
 
 ## Status
 
-Development stoped at the end of 2021 since i found two big issues:
+Development stopped at the end of 2021 since i found two big issues:
 
 1) Arcemu cant autogenerate random waypoints automagically.
 
