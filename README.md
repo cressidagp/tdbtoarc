@@ -1,5 +1,13 @@
 # TDBtoArc
 
+## Status
+
+Development stoped at the end of 2021 since i found two big issues:
+
+1) Arcemu cant autogenerate random waypoints automagically.
+
+2) Loot tables seems to be too much different.
+
 ## Introduction
 
 TDBtoArc its a NON-OFFICIAL database conversion project for ArcEmu just for learning purposes. It will partially convert [TrinityCore](https://github.com/TrinityCore) world database 335.21081 to [ArcEmu structure.](https://github.com/arcemu/arcemu/blob/master/sql/world_structure.sql)
