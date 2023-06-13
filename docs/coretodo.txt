@@ -4,12 +4,10 @@
 
 1. High Priority:
 
-*) random movement/wp generation: READY!
+*) random movement/wp generation:
 *) fix ai_agents OnFlee:	READY!
-*) fix ai_agents CallForHelp
 *) add skinloot to creature_proto
 *) add pocketloot to creature_proto
-*) quest packet upgrade (most quest cant be completed if questender has more than 1)
 *) fishing (if no area then load zone)
 
 2. Medium priority:
@@ -19,9 +17,9 @@
 
 3. Low priority:
 
+*) fix ai_agents CallForHelp
 *) negative resistances
-*) action bar fix
-*) random display id
+*) random display id (got a hofix, but maybe better fix this in core)
 *) gameobject invisibility (for traps)
 *) playercreateinfo orientation
 *) monstersay_locale
